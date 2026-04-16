@@ -194,8 +194,8 @@
             }
             drawPart(images.face, { isFace: true });
             
-            let eyeFrameR = state.eyeR > 0.4 ? (state.isHappy ? 5 : 0) : 11;
-            let eyeFrameL = state.eyeL > 0.4 ? (state.isHappy ? 5 : 0) : 11;
+            let eyeFrameR = state.eyeR > 0.4 ? (state.isHappy ? 5 : 0) : (state.isHappy ? 10 : 11);
+            let eyeFrameL = state.eyeL > 0.4 ? (state.isHappy ? 5 : 0) : (state.isHappy ? 10 : 11);
             const ew = state.eyeSize;
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameL, isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameR, isEyes: true, flip: false });
