@@ -14,9 +14,16 @@
         .btn { color: #00F0FF; border: 1px solid #00F0FF; padding: 8px 10px; cursor: pointer; background: transparent; display: inline-block; margin-top: 10px; font-size: 11px; width: 100%; box-sizing: border-box; text-align: center; border-radius: 4px; transition: 0.2s; }
         .btn:hover { background: #00F0FF22; }
         .row { display: flex; gap: 5px; }
+        .dev-only { display: none; }
     </style>
 </head>
 <body>
+    <script>
+        const isDev = window.location.pathname.includes('dev.html');
+        if (isDev) {
+            document.write('<style>.dev-only { display: block; }</style>');
+        }
+    </script>
     <div class="hud">
         UNIT: ARCADE_ANGEL v15.1.0 (Updated: 2026-04-17 07:11:47)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
@@ -36,13 +43,15 @@
             <div class="btn" onclick="importProfile()">IMPORT</div>
         </div>
         <div class="btn" style="border-color: #FF5555; color: #FF5555; margin-top: 5px;" onclick="resetState()">RESET DEFAULTS</div>
-        <div class="label">COSTUME</div>
-        <div class="row" style="margin-bottom:10px;">
-            <div class="btn" onclick="setCostume('none')">NONE</div>
-            <div class="btn" onclick="setCostume('cyber')">CYBER</div>
-            <div class="btn" onclick="setCostume('gothic')">GOTHIC</div>
+        <div class="dev-only">
+            <div class="label">COSTUME</div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="btn" onclick="setCostume('none')">NONE</div>
+                <div class="btn" onclick="setCostume('cyber')">CYBER</div>
+                <div class="btn" onclick="setCostume('gothic')">GOTHIC</div>
+            </div>
+            <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
         </div>
-        <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
         <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 10px;" onclick="switchVersion()">SWITCH TO PROD/DEV VERSION</div>
     </div>
 
