@@ -43,6 +43,7 @@
             <div class="btn" onclick="setCostume('gothic')">GOTHIC</div>
         </div>
         <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
+        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 10px;" onclick="switchVersion()">SWITCH TO PROD/DEV VERSION</div>
     </div>
 
     <canvas id="stage" width="800" height="800"></canvas>
@@ -93,6 +94,10 @@
         }
 
         function setCostume(c) { state.costume = c; saveToLocal(); }
+        function switchVersion() {
+            const isDev = window.location.pathname.endsWith('dev.html');
+            window.location.href = isDev ? 'index.html' : 'dev.html';
+        }
         function resetState() {
             const defaults = { eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, skinTone: 0 };
             if (confirm("Reset to default settings?")) {
