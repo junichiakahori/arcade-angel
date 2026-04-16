@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live2D Simple Viewer</title>
+    <style>
+        body { margin: 0; background-color: #1a1a2e; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
+        canvas { box-shadow: 0 0 50px rgba(0,0,0,0.5); border-radius: 20px; }
+        .controls { position: absolute; bottom: 20px; left: 20px; color: white; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h3>Live2D Logic Check</h3>
+        <p>Mouse: Char follows cursor</p>
+        <p>Status: <span id="status">Loading...</span></p>
+    </div>
+
+    <!-- PixiJS & Live2D SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.1/browser/pixi.min.js"></script>
+    <script src="https://cubism.live2d.com/sdk-web/bin/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/dist/index.min.js"></script>
+
+    <!-- MediaPipe for Face Tracking -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+    <video id="webcam" style="display:none;" autoplay playsinline></video>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const videoElement = document.getElementById('webcam');
+        
+        const app = new PIXI.Application({
+            view: document.createElement('canvas'),
+            width: 800,
+            height: 800,
+            transparent: true,
+            antialias: true
+        });
+        document.body.appendChild(app.view);
+
+        const MODEL_PATH = 'https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/haru/haru_greeter_t03.model3.json'; 
+
+        async function init() {
+            try {
+                const model = await PIXI.live2d.Live2DModel.from(MODEL_PATH);
+                app.stage.addChild(model);
+                model.x = 400;
+                model.y = 400;
+                model.anchor.set(0.5, 0.5);
+                model.scale.set(0.15);
+
+                // --- Face Tracking Setup ---
+                const faceMesh = new FaceMesh({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`});
+                faceMesh.setOptions({
+                    maxNumFaces: 1,
+                    refineLandmarks: true,
+                    minDetectionConfidence: 0.5,
+                    minTrackingConfidence: 0.5
+                });
+
+                faceMesh.onResults((results) => {
+                    if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+                        const landmarks = results.multiFaceLandmarks[0];
+                        
+                        // 1. 顔の向き (簡易計算)
+                        const nose = landmarks[1];
+                        model.internalModel.coreModel.setParameterValueById('ParamAngleX', (nose.x - 0.5) * -60);
+                        model.internalModel.coreModel.setParameterValueById('ParamAngleY', (nose.y - 0.5) * -60);
+
+                        // 2. 瞬き (簡易計算: 目の上下の距離)
+                        const leftEyeUpper = landmarks[159].y;
+                        const leftEyeLower = landmarks[145].y;
+                        const eyeOpen = (leftEyeLower - leftEyeUpper) > 0.015 ? 1 : 0;
+                        
+                        model.internalModel.coreModel.setParameterValueById('ParamEyeOpenL', eyeOpen);
+                        model.internalModel.coreModel.setParameterValueById('ParamEyeOpenR', eyeOpen);
+                    }
+                });
+
+                const camera = new Camera(videoElement, {
+                    onFrame: async () => {
+                        await faceMesh.send({image: videoElement});
+                    },
+                    width: 640,
+                    height: 480
+                });
+                camera.start();
+
+                statusEl.innerText = 'Camera Tracking Active';
+            } catch (e) {
+                statusEl.innerText = 'Error loading components';
+                console.error(e);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
