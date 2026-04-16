@@ -35,6 +35,7 @@
             <div class="btn" onclick="exportProfile()">EXPORT</div>
             <div class="btn" onclick="importProfile()">IMPORT</div>
         </div>
+        <div class="btn" style="border-color: #FF5555; color: #FF5555; margin-top: 5px;" onclick="resetState()">RESET DEFAULTS</div>
         <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
     </div>
 
@@ -83,6 +84,14 @@
         function importProfile() {
             const text = prompt("PASTE CODE:");
             if (text) { try { applyProfile(JSON.parse(text)); saveToLocal(); } catch(e) { alert("FAIL"); } }
+        }
+
+        function resetState() {
+            const defaults = { eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, skinTone: 0 };
+            if (confirm("Reset to default settings?")) {
+                applyProfile(defaults);
+                saveToLocal();
+            }
         }
 
         function toggleSmile() {
