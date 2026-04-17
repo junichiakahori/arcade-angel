@@ -1,26 +1,16 @@
 {
-  "current_version": "v15.2.2",
-  "last_updated": "2026-04-17 12:41:00",
+  "current_version": "v15.3.0",
+  "last_updated": "2026-04-17 12:48:00",
   "history": [
+    {
+      "version": "v15.3.0",
+      "date": "2026-04-17 12:48:00",
+      "notes": "Final cleanup and logic optimization."
+    },
     {
       "version": "v15.2.2",
       "date": "2026-04-17 12:41:00",
-      "notes": "Unified versioning system and synchronized all timestamps."
-    },
-    {
-      "version": "v15.2.1",
-      "date": "2026-04-17 12:32:00",
-      "notes": "Added real-time mouth ratio debugging HUD."
-    },
-    {
-      "version": "v15.2.0",
-      "date": "2026-04-17 12:22:27",
-      "notes": "Full Vowel Lip-Sync (A-I-U-E-O) with ratio-based detection."
-    },
-    {
-      "version": "v15.1.5",
-      "date": "2026-04-17 11:55:00",
-      "notes": "Surgical cleanup of nose and eye artifacts."
+      "notes": "Unified versioning system."
     }
   ]
 }

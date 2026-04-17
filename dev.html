@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v15.2.2 (Updated: 2026-04-17 12:41:00)</title>
+    <title>Arcade Angel - Portable Puppet v15.3.0 (Updated: 2026-04-17 12:48:00)</title>
     <style>
     
     
@@ -31,7 +31,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v15.2.2 (Updated: 2026-04-17 12:41:00)<br>
+        UNIT: ARCADE_ANGEL v15.3.0 (Updated: 2026-04-17 12:48:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -269,8 +269,7 @@
             try {
                 const response = await fetch('assets.json?v=' + Date.now());
                 const assets = await response.json();
-                
-                // Update Version HUD with Real-time Debugging
+                // [CLEAN HUD] Real-time Version & Debug Display
                 fetch('version_history.json?v=' + Date.now())
                     .then(r => r.json())
                     .then(v_data => {
@@ -285,6 +284,8 @@
                             }, 50);
                         }
                     });
+                
+                
                 
                 // Initialize MediaPipe FaceMesh
                 const fm = new FaceMesh({ 
