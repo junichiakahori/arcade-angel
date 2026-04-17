@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.63",
-  "last_updated": "2026-04-17 19:48:00",
+  "current_version": "v0.15.64",
+  "last_updated": "2026-04-17 19:52:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.64",
+      "date": "2026-04-17 19:52:00",
+      "notes": "SUPREME ASYMMETRY (v0.15.64): Fully independent eye control restored with zero syntax errors. Each eye now accurately switches between moon-shaped smile assets and normal tracking frames based on its own state. Successfully merged: Independent Winks, Brows-Included Eyelashes, Scientific HUD, and Aesthetic Scaling Fixes."
+    },
     {
       "version": "v0.15.63",
       "date": "2026-04-17 19:48:00",
