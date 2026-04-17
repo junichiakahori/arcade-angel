@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.39",
-  "last_updated": "2026-04-17 18:00:00",
+  "current_version": "v0.15.40",
+  "last_updated": "2026-04-17 18:02:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.40",
+      "date": "2026-04-17 18:02:00",
+      "notes": "FINAL SYNTAX FIX: Removed the last remaining duplicate declarations in drawPart. Soft Virtual Layering is now active and stable."
+    },
     {
       "version": "v0.15.39",
       "date": "2026-04-17 18:00:00",
