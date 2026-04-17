@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.108",
-  "last_updated": "2026-04-18 08:00:00",
+  "current_version": "v0.15.109",
+  "last_updated": "2026-04-18 08:15:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.109",
+      "date": "2026-04-18 08:15:00",
+      "notes": "SOURCE INTEGRITY (v0.15.109): Sanitized dev.html by removing duplicate function calls and normalizing the execution flow. Fixed code corruption caused by improper string replacements during asset embedding."
+    },
     {
       "version": "v0.15.108",
       "date": "2026-04-18 08:00:00",
