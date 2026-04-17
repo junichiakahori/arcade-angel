@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.76</title>
+    <title>Arcade Angel - Portable Puppet v0.15.77</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.76 (2026-04-17 23:05:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.77 (2026-04-17 23:05:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -195,7 +195,7 @@
             
             const mainGrad = ctx.createLinearGradient(0, -135, 0, 60);
             mainGrad.addColorStop(0, '#FFFFFF');
-            mainGrad.addColorStop(1, '#D0E0FF');
+            mainGrad.addColorStop(1, '#E8E8E8');
             ctx.fillStyle = mainGrad;
             ctx.fill();
             
@@ -217,7 +217,7 @@
             ctx.restore();
 
 
-            ctx.strokeStyle = '#B0C8FF'; ctx.lineWidth = 4; ctx.stroke();
+            ctx.strokeStyle = '#EEEEEE'; ctx.lineWidth = 4; ctx.stroke();
             ctx.restore();
         }
 
