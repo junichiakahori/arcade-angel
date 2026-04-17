@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.81",
-  "last_updated": "2026-04-18 00:10:00",
+  "current_version": "v0.15.82",
+  "last_updated": "2026-04-18 00:15:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.82",
+      "date": "2026-04-18 00:15:00",
+      "notes": "FULL TRANSPARENCY (v0.15.82): Implemented high-precision magenta chroma-key filtering. Fox ear assets are now perfectly transparent, showing only the fluffy ears on top of the character hair."
+    },
     {
       "version": "v0.15.81",
       "date": "2026-04-18 00:10:00",
