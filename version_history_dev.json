@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.76",
-  "last_updated": "2026-04-17 23:25:00",
+  "current_version": "v0.15.77",
+  "last_updated": "2026-04-17 23:30:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.77",
+      "date": "2026-04-17 23:30:00",
+      "notes": "COLOR OPTIMIZATION (v0.15.77): Completely removed all blueish tints and strokes from the fox ears to achieve a pure white-and-grey aesthetic. This ensures the ears feel like natural extensions of the character without artificial coloring."
+    },
     {
       "version": "v0.15.76",
       "date": "2026-04-17 23:25:00",
