@@ -1,7 +1,12 @@
 {
-  "current_version": "v0.15.66",
-  "last_updated": "2026-04-17 20:25:00",
+  "current_version": "v0.15.68",
+  "last_updated": "2026-04-17 21:03:00",
   "history": [
+    {
+      "version": "v0.15.68",
+      "date": "2026-04-17 21:03:00",
+      "notes": "STABLE DEPLOYMENT (v0.15.68): Integrated real-time Breathing Animation and significantly improved Smile sensitivity (calibrated for mobile cameras). The puppet now feels more alive and responsive across all devices."
+    },
     {
       "version": "v0.15.66",
       "date": "2026-04-17 20:25:00",
