@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.51",
-  "last_updated": "2026-04-17 19:15:00",
+  "current_version": "v0.15.52",
+  "last_updated": "2026-04-17 19:16:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.52",
+      "date": "2026-04-17 19:16:00",
+      "notes": "SUPREME HAPPINESS: Implemented 'Eyelash Smile'. In Happy mode, the eyes are now restricted to the most narrow frame points and squashed by 45% vertically. This results in an expression where only the eyelashes are visible, reflecting a state of blissful, radiant joy."
+    },
     {
       "version": "v0.15.51",
       "date": "2026-04-17 19:15:00",
