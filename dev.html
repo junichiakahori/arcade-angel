@@ -18,15 +18,16 @@
         .dev-only { display: none; }
     </style>
 </head>
+
 <body>
     <script>
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.94 (2026-04-17 23:05:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.95 (2026-04-18 06:25:00)</div>
 
-    <div class="settings-panel"><div class="btn" style="background: #0088FF44; font-weight: bold;" onclick="switchVersion()">SWITCH VERSION (To Stable)</div>
-        <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
+    <div class="settings-panel">
+<div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
         <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112" oninput="updateState('eyeX', this.value)"></div>
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
         
@@ -57,20 +58,12 @@
             <div id="greetBtn" class="btn" style="background:#00FF8833;" onclick="greet()">GREETING (OHAYOU)</div>
             <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
         </div>
-    </div>
-        <div class="btn" style="border-color: #FF5555; color: #FF5555" onclick="resetState()">RESET DEFAULTS</div>
-        <div class="dev-only">
-            <div id="tenkoBtn" class="btn" style="border-color: #FFD700; color: #FFD700" onclick="toggleFoxMode()">TENKO MODE: OFF</div>
-            <div class="btn" onclick="setCostume('none')">COSTUME: NONE</div>
-            <div class="btn" onclick="setCostume('cyber')">COSTUME: CYBER</div>
-            <div class="btn" onclick="setCostume('gothic')">COSTUME: GOTHIC</div>
-            <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
-        </div>
-        
+        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px" onclick="switchVersion()">SWITCH VERSION (To Stable)</div>
     </div>
 
     <canvas id="stage" width="800" height="800"></canvas>
     <video id="webcam" autoplay playsinline style="display:none"></video>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
