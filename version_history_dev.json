@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.58",
-  "last_updated": "2026-04-17 19:33:00",
+  "current_version": "v0.15.59",
+  "last_updated": "2026-04-17 19:37:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.59",
+      "date": "2026-04-17 19:37:00",
+      "notes": "AESTHETIC EMERGENCY FIX: Scaled down the 'Supreme Smile' assets by 35% and lowered their position by 15px to prevent the 'gross' overlapping effect. Softened opacity to 0.9 for better integration with the character's face DNA."
+    },
     {
       "version": "v0.15.58",
       "date": "2026-04-17 19:33:00",
