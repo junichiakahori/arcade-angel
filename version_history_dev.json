@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.65",
-  "last_updated": "2026-04-17 19:56:00",
+  "current_version": "v0.15.66",
+  "last_updated": "2026-04-17 20:07:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.66",
+      "date": "2026-04-17 20:07:00",
+      "notes": "EYEBROW ADJUSTMENT (v0.15.66): Added dedicated 'BROW POS Y' and 'BROW TILT' sliders for the crescent moon smile expression. This allows fine-tuning the alignment of eyebrows independently from the eyes within the smile assets to achieve the perfect, cohesive Look."
+    },
     {
       "version": "v0.15.65",
       "date": "2026-04-17 19:56:00",
