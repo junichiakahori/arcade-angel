@@ -241,25 +241,23 @@
             
             
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFrame = 0;
             let detected = "CLOSED";
             
-            if (v > 0.04) {
-                const ratio = state.mouthRatio;
-                if (!state.rMin || ratio < state.rMin) state.rMin = ratio;
-                if (!state.rMax || ratio > state.rMax) state.rMax = ratio;
-
-                // Personalized Thresholds based on user data
-                if (ratio >= 0.30) { mFrame = 2; detected = "A"; }
-                else if (ratio >= 0.18) { mFrame = 1; detected = "E"; }
-                else if (ratio >= 0.10) { mFrame = 4; detected = "I"; }
-                else if (ratio >= 0.07) { mFrame = 6; detected = "U"; }
-                else { mFrame = 7; detected = "O"; }
-            } else {
+            // Direct V-mapping based on user-provided values
+            if (v >= 0.30) { mFrame = 2; detected = "A"; }
+            else if (v >= 0.20) { mFrame = 1; detected = "E"; }
+            else if (v >= 0.10) { mFrame = 4; detected = "I"; }
+            else if (v >= 0.06) { mFrame = 6; detected = "U"; }
+            else if (v >= 0.03) { mFrame = 7; detected = "O"; }
+            else {
                 mFrame = state.isHappy ? 3 : 0;
+                detected = "CLOSED";
             }
             state.detectedVowel = detected;
+    
     
      // Store for HUD
     
