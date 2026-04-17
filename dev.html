@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.73</title>
+    <title>Arcade Angel - Portable Puppet v0.15.74</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.73 (2026-04-17 22:58:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.74 (2026-04-17 23:05:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -165,23 +165,27 @@
 
         
         
-        function drawFoxEar(ctx, x, y, rot, flip) {
+        
+        function drawFoxEar(ctx, x, y, rot, flip, onlyBand = false) {
             const gs = state.globalScale;
             ctx.save();
             ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
             ctx.rotate(state.curRot * 0.82);
             
-            if (!flip) {
+            if (onlyBand) {
                 ctx.beginPath();
-                ctx.arc(0, (y - (state.pivotY || 600) + 100) * gs, 153 * gs, Math.PI * 1.15, Math.PI * 1.85);
-                ctx.strokeStyle = '#111';
-                ctx.lineWidth = 7 * gs;
+                ctx.arc(0, (y - (state.pivotY || 600) + 185) * gs, 158 * gs, Math.PI * 1.15, Math.PI * 1.85);
+                ctx.strokeStyle = "#111";
+                ctx.lineWidth = 8 * gs;
                 ctx.stroke();
+                ctx.restore();
+                return;
             }
 
             ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
-            ctx.rotate(rot + (flip ? 0.35 : -0.35)); 
+            ctx.rotate(rot + (flip ? 0.38 : -0.38)); 
             ctx.scale(gs * (flip ? -1 : 1), gs);
+
 
             ctx.beginPath();
             ctx.moveTo(-70, 60);
@@ -234,6 +238,7 @@
             }
             
                         
+            if (state.foxMode) { drawFoxEar(ctx, -155, -345, 0, false, true); }
             drawPart(images.face, { isFace: true });
 
             const isSmiling = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
@@ -272,6 +277,7 @@
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
             if (state.foxMode) { drawFoxEar(ctx, -150, -215, state.earL_rot + state.earTwitchL, false); drawFoxEar(ctx, 150, -215, -state.earR_rot - state.earTwitchR, true); }
+            if (state.foxMode) { drawFoxEar(ctx, -155, -345, state.earL_rot + state.earTwitchL, false, false); drawFoxEar(ctx, 155, -345, -state.earR_rot - state.earTwitchR, true, false); }
             const hud = document.querySelector('.hud');
             if (hud && v_data) {
                 const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
