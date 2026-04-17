@@ -24,7 +24,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.99 (2026-04-18 06:45:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.101 (2026-04-18 06:50:00)</div>
 
     <div class="settings-panel">
 <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -277,9 +277,9 @@
                     ctx.save(); ctx.globalAlpha = 0.95;
                     ctx.translate(400 + bx, 400 + by + pY * gs + state.bHeadY * gs); ctx.rotate(rot);
                     // Apply dedicated adjustments for Brows during smile
-                    ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + (state.browY || 0)) * gs);
+                    ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + 8 + (state.browY || 0)) * gs);
                     ctx.rotate(isLeft ? -(state.browTilt || 0) : (state.browTilt || 0));
-                    ctx.scale(state.eyeSize * gs * 0.88, state.eyeSize * gs * 0.88);
+                    ctx.scale(state.eyeSize * gs * 0.76, state.eyeSize * gs * 0.76);
                     ctx.drawImage(happyImg, -happyImg.width/2, -happyImg.height/2);
                     ctx.restore();
                 } else {
