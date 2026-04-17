@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.84",
-  "last_updated": "2026-04-18 00:25:00",
+  "current_version": "v0.15.85",
+  "last_updated": "2026-04-18 00:30:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.85",
+      "date": "2026-04-18 00:30:00",
+      "notes": "STABILITY REINFORCEMENT (v0.15.85): Performed a full-file syntax scrub. Removed all redundant code segments between functions to prevent parsing errors. Fit improved ears are fully operational."
+    },
     {
       "version": "v0.15.84",
       "date": "2026-04-18 00:25:00",
