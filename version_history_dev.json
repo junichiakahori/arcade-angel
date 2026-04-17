@@ -1,8 +1,48 @@
 {
-  "current_version": "v0.15.90",
-  "last_updated": "2026-04-18 05:55:00",
+  "current_version": "v0.15.99",
+  "last_updated": "2026-04-18 06:45:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.99",
+      "date": "2026-04-18 06:45:00",
+      "notes": "DOCUMENTATION SYNC (v0.15.99): Synchronized HUD, version_history, and TODO.md for high-fidelity project management."
+    },
+    {
+      "version": "v0.15.98",
+      "date": "2026-04-18 06:40:00",
+      "notes": "SMILE BEAUTIFICATION (v0.15.98): Adjusted happy eye scaling (0.65 -> 0.88) and mouth width (46%+) for more natural expressions. Eliminated floating eyebrow artifacts."
+    },
+    {
+      "version": "v0.15.97",
+      "date": "2026-04-18 06:35:00",
+      "notes": "SMILE CALCULATION FIX (v0.15.97): Removed redundant '/100' division in the smileDegree logic that caused the smile percentage to be stuck at 0%."
+    },
+    {
+      "version": "v0.15.96",
+      "date": "2026-04-18 06:30:00",
+      "notes": "UI PRECISION (v0.15.96): Applied Math.round() to all threshold and sensitivity display values to eliminate annoying decimals (e.g., 14.0 -> 14)."
+    },
+    {
+      "version": "v0.15.95",
+      "date": "2026-04-18 06:25:00",
+      "notes": "LAYOUT RECOVERY (v0.15.95): Restored the correct settings panel structure on the right sidebar. Moved the Switch Version button back to the sidebar's bottom as per user preference."
+    },
+    {
+      "version": "v0.15.94",
+      "date": "2026-04-18 06:20:00",
+      "notes": "BUTTON RECOVERY (v0.15.94): Systematic restoration of all control buttons (Costume, Greeting, etc.) that were accidentally deleted during regex operations."
+    },
+    {
+      "version": "v0.15.93",
+      "date": "2026-04-18 06:15:00",
+      "notes": "UI SYNC FIX (v0.15.93): Implemented bi-directional synchronization between sliders and numeric inputs for all thresholds and sensitivity settings."
+    },
+    {
+      "version": "v0.15.92",
+      "date": "2026-04-18 06:05:00",
+      "notes": "STABILITY PATCH (v0.15.92): Restored the Switch Version button to the top of the panel and fixed the greet() function's emotional state transitions."
+    },
     {
       "version": "v0.15.90",
       "date": "2026-04-18 05:55:00",
@@ -122,16 +162,6 @@
       "version": "v0.15.62",
       "date": "2026-04-17 19:44:00",
       "notes": "SUPREME MASTER SYNC (v0.15.62) - FINAL FIX: Resolved Python f-string escaping issues. Successfully deployed the complete package: Eyebrows included in Happy Smile, full Scientific HUD restored, Elegance Scaling applied, and dynamic smile synchronization verified. This is the definitive stable build."
-    },
-    {
-      "version": "v0.15.58",
-      "date": "2026-04-17 19:33:00",
-      "notes": "SUPREME RESTORATION: Successfully rebuilt the entire dev.html from scratch. Fixed syntax errors and fragmentation issues. Integrated Ultimate AI Smile assets with flawless dynamic synchronization. Eyelash-smile only triggers during high-degree smiling (>45%)."
-    },
-    {
-      "version": "v0.15.61",
-      "date": "2026-04-17 19:39:00",
-      "notes": "SYNTAX FIX: Cleaned up orphaned code fragments left by previous update attempt. HUD data remains scientific and full."
     },
     {
       "version": "v0.15.60",
