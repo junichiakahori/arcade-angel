@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.49</title>
+    <title>Arcade Angel - Portable Puppet v0.15.50</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -25,7 +25,7 @@
             document.write('<style>.dev-only { display: block; }</style>');
         }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.49 (Loading...)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.50 (Loading...)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -33,12 +33,12 @@
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
         <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
         <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="50" max="100" value="70"><input type="number" id="smileSens_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="450"><input type="number" id="pivotY_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="25"><input type="number" id="thresA_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18"><input type="number" id="thresE_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="10"><input type="number" id="thresI_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="6"><input type="number" id="thresO_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="2"><input type="number" id="thresU_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="600"><input type="number" id="pivotY_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="27"><input type="number" id="thresA_num" class="num-in" value="27"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18"><input type="number" id="thresE_num" class="num-in" value="18"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="14"><input type="number" id="thresI_num" class="num-in" value="14"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5"><input type="number" id="thresO_num" class="num-in" value="5"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="1"><input type="number" id="thresU_num" class="num-in" value="1"></div></div>
         <div id="smileBtn" class="btn" onclick="toggleSmile()">MODE: SMILE</div>
         <div class="row">
             <div class="btn" onclick="exportProfile()">EXPORT</div>
@@ -66,8 +66,8 @@
             eyeL: 1, eyeR: 1, mouthOpen: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: true, skinTone: 0, costume: 'none', isVoiceReady: false, 
-            thresA: 0.25, thresE: 0.18, thresI: 0.10, thresO: 0.06, thresU: 0.02, 
-            pivotY: 450, smileSens: 70, smileDegree: 0, smileRaw: 0, autoSmile: true
+            thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.01, 
+            pivotY: 600, smileSens: 70, smileDegree: 0, smileRaw: 0, autoSmile: true
         };
         const images = {};
         let audioCtx, analyser, dataArray, v_data;

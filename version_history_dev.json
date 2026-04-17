@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.48",
-  "last_updated": "2026-04-17 18:51:00",
+  "current_version": "v0.15.50",
+  "last_updated": "2026-04-17 19:10:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.50",
+      "date": "2026-04-17 19:10:00",
+      "notes": "GOLDEN DEFAULTS: Permanently set the character's vowel thresholds and pivot settings based on the user's high-fidelity calibration (A:27, E:18, I:14, O:5, U:1, Pivot:600)."
+    },
     {
       "version": "v0.15.48",
       "date": "2026-04-17 18:51:00",
