@@ -1,32 +1,17 @@
 {
-  "current_version": "v0.15.10",
-  "last_updated": "2026-04-17 13:05:00",
+  "current_version": "v0.15.18",
+  "last_updated": "2026-04-17 15:58:00",
   "status": "DEVELOPMENT",
   "history": [
     {
+      "version": "v0.15.18",
+      "date": "2026-04-17 15:58:00",
+      "notes": "ADVANCED DEV: Shoulder Lock, Low-Pivot tilting, and Full-Body test platform."
+    },
+    {
       "version": "v0.15.10",
       "date": "2026-04-17 13:05:00",
-      "notes": "Advanced Lip-sync engine with vowel-ratio-based detection (A-I-U-E-O)."
-    },
-    {
-      "version": "v0.15.10",
-      "date": "2026-04-17 12:41:00",
-      "notes": "Enabled real-time diagnostic HUD for mouth tracking values (V/Ratio)."
-    },
-    {
-      "version": "v0.15.10",
-      "date": "2026-04-17 11:55:00",
-      "notes": "Surgical pixel-level cleanup of nose and eye artifacts."
-    },
-    {
-      "version": "v0.15.10",
-      "date": "2026-04-17 11:30:00",
-      "notes": "Upgraded eye animation: Multi-stage smooth blinking and full closure mapping."
-    },
-    {
-      "version": "v0.14.0",
-      "date": "2026-04-17 08:00:00",
-      "notes": "Major asset restoration milestone. Project started formal versioning today."
+      "notes": "STABLE PROD: Finalized 5-vowel lip-sync thresholds and bust-up stability."
     }
   ]
 }
