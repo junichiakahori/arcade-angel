@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.64",
-  "last_updated": "2026-04-17 19:52:00",
+  "current_version": "v0.15.65",
+  "last_updated": "2026-04-17 19:56:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.65",
+      "date": "2026-04-17 19:56:00",
+      "notes": "BULLETPROOF STABILITY (v0.15.65): Abandoned Python f-strings for HTML generation to prevent recurring escaping errors. Re-verified all JS syntax and fixed the 'nm is undefined' typo. FULL FEATURE SET (Wink, Brows, HUD, Elegance) is now stabilized in a clean, non-fragmented build."
+    },
     {
       "version": "v0.15.64",
       "date": "2026-04-17 19:52:00",

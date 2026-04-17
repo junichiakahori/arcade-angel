@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.64</title>
+    <title>Arcade Angel - Portable Puppet v0.15.65</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.64 (2026-04-17 19:52:00)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.65 (2026-04-17 19:56:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -36,7 +36,7 @@
         <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18"><input type="number" id="thresE_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="14"><input type="number" id="thresI_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5"><input type="number" id="thresO_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="1"><input type="number" id="thresU_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="11"><input type="number" id="thresU_num" class="num-in"></div></div>
         <div id="smileBtn" class="btn" onclick="toggleSmile()">MODE: SMILE</div>
         <div class="row">
             <div class="btn" onclick="exportProfile()">EXPORT</div>
@@ -64,7 +64,7 @@
             eyeL: 1, eyeR: 1, mouthOpen: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: false, skinTone: 0, costume: 'none', isVoiceReady: false, 
-            thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.01, 
+            thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.11, 
             pivotY: 600, smileSens: 70, smileDegree: 0, smileRaw: 0, autoSmile: true
         };
         
@@ -147,7 +147,9 @@
         }
 
         function render() {
-            const ctx = document.getElementById('stage').getContext('2d');
+            const stage = document.getElementById('stage');
+            if (!stage) return;
+            const ctx = stage.getContext('2d');
             ctx.clearRect(0, 0, 800, 800);
             if (state.isVoiceReady) {
                 analyser.getByteFrequencyData(dataArray);
@@ -166,44 +168,27 @@
             
             drawPart(images.face, { isFace: true });
 
-            // --- INDEPENDENT SYNCED SMILE (v0.15.64) ---
             const isSmiling = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
-            const gs = state.globalScale;
-            const pY = state.pivotY || 600;
-            const bx = state.curX * gs * 0.15;
-            const by = state.curY * gs * 0.15;
-            const rot = state.curRot * 0.8;
+            const gs = state.globalScale, pY = state.pivotY || 600;
+            const bx = state.curX * gs * 0.15, by = state.curY * gs * 0.15, rot = state.curRot * 0.8;
             const getEyeFrame = (o) => (o > 0.8 ? 0 : o > 0.6 ? 1 : o > 0.4 ? 2 : o > 0.2 ? 3 : 15);
 
             const drawEye = (isLeft) => {
                 const openness = isLeft ? state.eyeL : state.eyeR;
                 const happyImg = isLeft ? images.eyeHappyL : images.eyeHappyR;
                 const useHappyAsset = isSmiling && openness < 0.3 && happyImg.complete;
-
                 if (useHappyAsset) {
-                    ctx.save();
-                    ctx.globalAlpha = 0.95;
-                    ctx.translate(400 + bx, 400 + by + pY * gs);
-                    ctx.rotate(rot);
+                    ctx.save(); ctx.globalAlpha = 0.95;
+                    ctx.translate(400 + bx, 400 + by + pY * gs); ctx.rotate(rot);
                     ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + 5) * gs);
                     ctx.scale(state.eyeSize * gs * 0.65, state.eyeSize * gs * 0.65);
                     ctx.drawImage(happyImg, -happyImg.width/2, -happyImg.height/2);
                     ctx.restore();
                 } else {
-                    drawPart(images.eyeUni, { 
-                        x: isLeft ? -state.eyeX : state.eyeX, 
-                        y: state.eyeY, 
-                        scaleX: state.eyeSize, 
-                        scaleY: state.eyeSize, 
-                        frame: getEyeFrame(openness), 
-                        isEyes: true, 
-                        flip: isLeft 
-                    });
+                    drawPart(images.eyeUni, { x: isLeft ? -state.eyeX : state.eyeX, y: state.eyeY, scaleX: state.eyeSize, scaleY: state.eyeSize, frame: getEyeFrame(openness), isEyes: true, flip: isLeft });
                 }
             };
-
-            drawEye(true);  // Left
-            drawEye(false); // Right
+            drawEye(true); drawEye(false);
 
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = isSmiling ? (0.43 + state.smileDegree * 0.04) : 0.41;
@@ -266,14 +251,14 @@
                 loadFromLocal();
                 ['thresA','thresE','thresI','thresO','thresU','pivotY','smileSens'].forEach(k => {
                     const s = document.getElementById(k), n = document.getElementById(k + '_num');
+                    const v = k.startsWith('thres') ? state[k]*100 : state[k];
+                    if (s) s.value = v; if (n) n.value = v;
                     if (s) s.oninput = (e) => syncUI(k, e.target.value);
                     if (n) n.oninput = (e) => syncUI(k, e.target.value);
-                    const v = k.startsWith('thres') ? state[k]*100 : state[k];
-                    if (s) s.value = v; if (n) nm.value = v;
                 });
                 animate();
             } catch (e) { console.error(e); }
-        })( );
+        })();
     </script>
 </body>
 </html>
