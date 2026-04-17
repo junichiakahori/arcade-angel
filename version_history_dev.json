@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.46",
-  "last_updated": "2026-04-17 18:40:00",
+  "current_version": "v0.15.47",
+  "last_updated": "2026-04-17 18:47:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.47",
+      "date": "2026-04-17 18:47:00",
+      "notes": "DEBUG REVOLUTION: Added 'Visual Debug View'. You can now see your own camera feed with FaceMesh points overlaid to verify if mouth tracking is accurate."
+    },
     {
       "version": "v0.15.46",
       "date": "2026-04-17 18:40:00",
