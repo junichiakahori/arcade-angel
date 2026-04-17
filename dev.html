@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.60</title>
+    <title>Arcade Angel - Portable Puppet v0.15.61</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.60 (2026-04-17 19:33:00)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.61 (2026-04-17 19:33:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -167,7 +167,7 @@
             drawPart(images.face, { isFace: true });
 
             
-            // --- ELEGANT SYNCED SMILE (v0.15.60) ---
+            // --- ELEGANT SYNCED SMILE (v0.15.61) ---
             const shouldShowHappyEyes = state.isHappy || (state.autoSmile && state.smileDegree > 0.5);
             
             if (shouldShowHappyEyes && images.eyeHappyL.complete && images.eyeHappyR.complete) {
@@ -229,10 +229,6 @@
                               `DET: <span style="color:#FF00FF">${state.detectedVowel}</span><br>` +
                               `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (RAW:${state.smileRaw.toFixed(2)}/SENS:${(state.smileSens/100).toFixed(2)})<br>` +
                               `EYES: ${shouldShowHappyEyes ? '<span style="color:#FF00FF">HAPPY ASSET</span>' : 'TRACKING'}`;
-            }
- (${v_data.last_updated})<br>` +
-                              `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (SENS:${(state.smileSens/100).toFixed(2)})<br>` +
-                              `EYES: ${shouldShowHappyEyes ? '<span style="color:#FF00FF">HAPPY</span>' : 'NORMAL'}`;
             }
         }
 

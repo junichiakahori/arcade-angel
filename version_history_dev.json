@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.60",
+  "current_version": "v0.15.61",
   "last_updated": "2026-04-17 19:39:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.61",
+      "date": "2026-04-17 19:39:00",
+      "notes": "SYNTAX FIX: Cleaned up orphaned code fragments left by previous update attempt. HUD data remains scientific and full."
+    },
     {
       "version": "v0.15.60",
       "date": "2026-04-17 19:39:00",
