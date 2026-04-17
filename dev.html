@@ -24,7 +24,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.95 (2026-04-18 06:25:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.96 (2026-04-18 06:30:00)</div>
 
     <div class="settings-panel">
 <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -110,8 +110,8 @@
                 const p = JSON.parse(raw);
                 Object.assign(state, p);
                 Object.keys(p).forEach(k => {
-                    const el = document.getElementById(k); if (el) el.value = (k.startsWith('thres') || k === 'smileSens') ? p[k]*100 : p[k];
-                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = (k.startsWith('thres') || k === 'smileSens') ? p[k]*100 : p[k];
+                    const el = document.getElementById(k); if (el) el.value = (k.startsWith('thres') || k === 'smileSens') ? Math.round(p[k]*100) : p[k];
+                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = (k.startsWith('thres') || k === 'smileSens') ? Math.round(p[k]*100) : p[k];
                 });
             }
         }
@@ -307,8 +307,8 @@
                 const check = (th) => total >= parseFloat(th) ? '<span style="color:#00FF00">MATCH</span>' : `<span style="color:#555">WAIT(${(parseFloat(th)).toFixed(2)})</span>`;
                 hud.innerHTML = `${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } ${v_data.current_version} (${v_data.last_updated})<br>` +
                               `<span style="color:#FFFF00">V:${state.voiceVol.toFixed(2)} | RATIO:${state.mouthOpen.toFixed(2)} | TOTAL: ${total}</span><br>` +
-                              `A:${check(state.thresA)}|E:${check(state.thresE)}|I:${check(state.thresI)}<br>` +
-                              `O:${check(state.thresO)}|U:${check(state.thresU)}<br>` +
+                              `A:${check(Math.round(state.thresA*100))}|E:${check(Math.round(state.thresE*100))}|I:${check(Math.round(state.thresI*100))}<br>` +
+                              `O:${check(Math.round(state.thresO*100))}|U:${check(Math.round(state.thresU*100))}<br>` +
                               `DET: <span style="color:#FF00FF">${state.detectedVowel}</span><br>` +
                               `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (RAW:${state.smileRaw.toFixed(2)}/SENS:${(state.smileSens/100).toFixed(2)})<br>` +
                               `EYES: INDEPENDENT (WINK-READY)`;
