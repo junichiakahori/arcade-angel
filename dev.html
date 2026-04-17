@@ -13,7 +13,7 @@
         input[type=range] { width: 100%; cursor: pointer; accent-color: #0088FF; }
         .btn { color: #00F0FF; border: 1px solid #00F0FF; padding: 8px 10px; cursor: pointer; background: transparent; display: inline-block; margin-top: 10px; font-size: 11px; width: 100%; box-sizing: border-box; text-align: center; border-radius: 4px; transition: 0.2s; }
         .btn:hover { background: #00F0FF22; }
-        .row { display: flex; gap: 5px; }
+        .row { display: flex; gap: 5px; align-items: center; } .num-in { width: 50px; background: #112; border: 1px solid #0088FF88; color: #00F0FF; font-size: 11px; padding: 2px; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -23,18 +23,19 @@
 
     <div class="settings-panel">
         <!-- Manual Overrides -->
-        <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79"></div>
-        <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112"></div>
-        <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76"></div>
-        <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123"></div>
-        <div class="control-group"><label>SKIN TONE</label><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0"></div>
+
+        <div class="control-group"><label>EYE POS Y</label><div class="row"><input type="range" id="eyeY" min="-300" max="100" value="-79"><input type="number" id="eyeY_num" class="num-in"></div></div>
+        <div class="control-group"><label>EYE DISTANCE</label><div class="row"><input type="range" id="eyeX" min="30" max="250" value="112"><input type="number" id="eyeX_num" class="num-in"></div></div>
+        <div class="control-group"><label>EYE SIZE</label><div class="row"><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76"><input type="number" id="eyeSize_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label>MOUTH POS Y</label><div class="row"><input type="range" id="mouthY" min="0" max="300" value="123"><input type="number" id="mouthY_num" class="num-in"></div></div>
+        <div class="control-group"><label>SKIN TONE</label><div class="row"><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0"><input type="number" id="skinTone_num" class="num-in" step="0.05"></div></div>
         <hr style="border:0; border-top:1px solid #0088FF44; margin:15px 0;">
         
         <!-- Vowel Thresholds -->
-        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><input type="range" id="thresA" min="0" max="80" value="30"></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><input type="range" id="thresE" min="0" max="80" value="19"></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><input type="range" id="thresI" min="0" max="80" value="13"></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES O/U (Pout)</label><input type="range" id="thresO" min="0" max="80" value="5"></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="30"><input type="number" id="thresA_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="19"><input type="number" id="thresE_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="13"><input type="number" id="thresI_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES O/U (Pout)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5"><input type="number" id="thresO_num" class="num-in" step="0.01"></div></div>
 
         <div id="smileBtn" class="btn">MODE: SMILE</div>
         <div class="row">
@@ -164,12 +165,24 @@
             if (!stage) return;
 
             // Bind UI
-            ['eyeY', 'eyeX', 'eyeSize', 'mouthY', 'skinTone'].forEach(id => {
-                document.getElementById(id).oninput = (e) => { state[id] = parseFloat(e.target.value); saveSettings(); };
-            });
-            ['thresA', 'thresE', 'thresI', 'thresO'].forEach(id => {
-                document.getElementById(id).oninput = (e) => { state[id] = parseFloat(e.target.value) / 100; saveSettings(); };
-            });
+
+            const bind = (id, k, multiplier = 1) => {
+                const sl = document.getElementById(id);
+                const nm = document.getElementById(id + '_num');
+                const update = (v) => {
+                    const val = parseFloat(v);
+                    state[k] = val / multiplier;
+                    sl.value = val;
+                    nm.value = val;
+                    saveSettings();
+                };
+                sl.oninput = (e) => update(e.target.value);
+                nm.oninput = (e) => update(e.target.value);
+                // Initial sync
+                nm.value = sl.value;
+            };
+            ['eyeY', 'eyeX', 'eyeSize', 'mouthY', 'skinTone'].forEach(id => bind(id, id));
+            ['thresA', 'thresE', 'thresI', 'thresO'].forEach(id => bind(id, id, 100));
             document.getElementById('smileBtn').onclick = () => {
                 state.isHappy = !state.isHappy;
                 document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
