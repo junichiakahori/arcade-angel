@@ -178,6 +178,7 @@
         
         
         
+        
         function drawFoxEar(ctx, x, y, rot, flip, onlyBand = false) {
             if (!images.foxEars || !images.foxEars.complete) return;
             const gs = state.globalScale;
@@ -201,19 +202,6 @@
                 ctx.drawImage(images.foxEars, 40, 40, 460, 650, -230, -500, 460, 650);
             } else {
                 ctx.drawImage(images.foxEars, 510, 40, 460, 650, -230, -500, 460, 650);
-            }
-            ctx.restore();
-        }
-
-
-            ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
-            ctx.rotate(rot);
-            ctx.scale(gs * 0.46, gs * 0.46);
-            
-            if (!flip) {
-                ctx.drawImage(images.foxEars, 100, 100, 420, 500, -210, -350, 420, 500);
-            } else {
-                ctx.drawImage(images.foxEars, 510, 100, 420, 500, -210, -350, 420, 500);
             }
             ctx.restore();
         }
