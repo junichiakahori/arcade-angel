@@ -58,7 +58,7 @@
             detectedVowel: "CLOSED"
         };
         const images = {};
-        let v_data = { current_version: "v0.15.10", last_updated: "2026-04-17" };
+        let v_data = { current_version: "v0.15.15", last_updated: "2026-04-17" };
 
         function saveSettings() {
             const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
@@ -128,22 +128,20 @@
             
             
             
+            
+            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.15)
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
             
-            // [ULTIMATE MAPPING] Refined with A-scaling
-            if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.9; } // A is 10% smaller for elegance
-            else if (v >= state.thresE) { mf = 1; det = "E"; }
-            else if (v >= state.thresI) { mf = 4; det = "I"; }
-            else if (v >= state.thresO) { mf = 6; det = "O"; }
-            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.5; }
+            if (v >= 0.22) { mf = 7; det = "A"; ms *= 0.9; }
+            else if (v >= 0.15) { mf = 1; det = "E"; }
+            else if (v >= 0.10) { mf = 4; det = "I"; }
+            else if (v >= 0.06) { mf = 6; det = "O"; }
+            else if (v >= 0.02) { mf = 6; det = "U"; ms *= 0.5; }
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
-    
             
-            if (state.forceFrame !== undefined && state.forceFrame !== null) {
-                mf = state.forceFrame; det = "FORCED:" + mf;
-            }
             state.detectedVowel = det;
+
             
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
     
