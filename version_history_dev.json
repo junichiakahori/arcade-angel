@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.24",
-  "last_updated": "2026-04-17 16:12:00",
+  "current_version": "v0.15.25",
+  "last_updated": "2026-04-17 16:15:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.25",
+      "date": "2026-04-17 16:15:00",
+      "notes": "EMERGENCY RESCUE: Rebuilt dev.html from scratch after regex accident. High-fidelity body and shoulder lock restored."
+    },
     {
       "version": "v0.15.24",
       "date": "2026-04-17 16:12:00",
