@@ -144,7 +144,7 @@
             let pY = state.pivotY || 600;
             let hX = state.curX * gs * 0.15, hY = state.curY * gs * 0.15;
             let smoothRot = state.curRot * 0.8;
-            ctx.translate(400 + hX, 400 + hY + pY * gs + bHeadY * gs); 
+            ctx.translate(400 + hX, 400 + hY + pY * gs + state.bHeadY * gs); 
             ctx.rotate(smoothRot);
             ctx.translate((options.x || 0) * gs, ((options.y || 0) - pY) * gs);
             ctx.scale((options.scaleX || 1) * gs * (options.flip ? -1 : 1), (options.scaleY || 1) * gs);
@@ -156,9 +156,7 @@
             const stage = document.getElementById('stage');
             if (!stage) return;
             const ctx = stage.getContext('2d');
-            const bVal = Math.sin(state.breathPhase) * 6 * state.breathScale;
-            const bBodyY = bVal;
-            const bHeadY = bVal * 0.5;
+
 
             ctx.clearRect(0, 0, 800, 800);
             if (state.isVoiceReady) {
@@ -170,7 +168,7 @@
             const bImg = state.costume === 'cyber' ? images.body_cyber : (state.costume === 'gothic' ? images.body_gothic : images.body_standard);
             if (bImg) {
                 ctx.save();
-                ctx.translate(400 + state.curX * state.globalScale * 0.3, 400 + state.curY * state.globalScale * 0.3 + 300 * state.globalScale + bBodyY * state.globalScale);
+                ctx.translate(400 + state.curX * state.globalScale * 0.3, 400 + state.curY * state.globalScale * 0.3 + 300 * state.globalScale + state.bBodyY * state.globalScale);
                 ctx.scale(state.globalScale * 1.2, state.globalScale * 1.2);
                 ctx.drawImage(bImg, -bImg.width/2, -bImg.height/2);
                 ctx.restore();
@@ -189,7 +187,7 @@
                 const useHappyAsset = isSmiling && openness < 0.3 && happyImg.complete;
                 if (useHappyAsset) {
                     ctx.save(); ctx.globalAlpha = 0.95;
-                    ctx.translate(400 + bx, 400 + by + pY * gs + bHeadY * gs); ctx.rotate(rot);
+                    ctx.translate(400 + bx, 400 + by + pY * gs + state.bHeadY * gs); ctx.rotate(rot);
                     // Apply dedicated adjustments for Brows during smile
                     ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + 5 + (state.browY || 0)) * gs);
                     ctx.rotate(isLeft ? -(state.browTilt || 0) : (state.browTilt || 0));
@@ -229,7 +227,7 @@
 
         function animate() {
             state.curX += (state.tgtX - state.curX) * 0.1; state.curY += (state.tgtY - state.curY) * 0.1;
-            state.curRot += (state.tgtRot - state.curRot) * 0.06; state.breathPhase += 0.03 * state.breathSpeed; render(); requestAnimationFrame(animate);
+            state.curRot += (state.tgtRot - state.curRot) * 0.06; state.breathPhase += 0.03 * state.breathSpeed; const bVal = Math.sin(state.breathPhase) * 6 * state.breathScale; state.bBodyY = bVal; state.bHeadY = bVal * 0.5; render(); requestAnimationFrame(animate);
         }
 
         (async function init() {
