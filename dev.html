@@ -129,14 +129,28 @@
             document.getElementById('startBtn').style.display = "none";
         }
 
+        
         async function processAlpha(img, type) {
             const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height;
             const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0);
             const data = ctx.getImageData(0, 0, img.width, img.height);
             for (let i = 0; i < data.data.length; i += 4) {
                 const r = data.data[i], g = data.data[i+1], b = data.data[i+2];
-                if (type === 'face' ? (g > 100 && g > r + 60 && g > b + 60) : (r > 220 && g > 220 && b > 220)) data.data[i+3] = 0;
+                let isAlpha = false;
+                if (type === 'face') {
+                    if (g > 100 && g > r + 60 && g > b + 60) isAlpha = true;
+                } else if (type === 'ears') {
+                    if (r > 200 && b > 200 && g < 120) isAlpha = true;
+                } else {
+                    if (r > 220 && g > 220 && b > 220) isAlpha = true;
+                }
+                if (isAlpha) data.data[i+3] = 0;
             }
+            ctx.putImageData(data, 0, 0);
+            const resImg = new Image(); resImg.src = canvas.toDataURL();
+            return new Promise(res => resImg.onload = () => res(resImg));
+        }
+
             ctx.putImageData(data, 0, 0);
             const r = new Image(); r.src = canvas.toDataURL();
             return new Promise(res => r.onload = () => res(r));
