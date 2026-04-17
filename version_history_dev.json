@@ -1,25 +1,25 @@
 {
-  "current_version": "v0.15.3",
+  "current_version": "v0.15.10",
   "last_updated": "2026-04-17 13:05:00",
   "status": "DEVELOPMENT",
   "history": [
     {
-      "version": "v0.15.3",
+      "version": "v0.15.10",
       "date": "2026-04-17 13:05:00",
       "notes": "Advanced Lip-sync engine with vowel-ratio-based detection (A-I-U-E-O)."
     },
     {
-      "version": "v0.15.2",
+      "version": "v0.15.10",
       "date": "2026-04-17 12:41:00",
       "notes": "Enabled real-time diagnostic HUD for mouth tracking values (V/Ratio)."
     },
     {
-      "version": "v0.15.1",
+      "version": "v0.15.10",
       "date": "2026-04-17 11:55:00",
       "notes": "Surgical pixel-level cleanup of nose and eye artifacts."
     },
     {
-      "version": "v0.15.0",
+      "version": "v0.15.10",
       "date": "2026-04-17 11:30:00",
       "notes": "Upgraded eye animation: Multi-stage smooth blinking and full closure mapping."
     },
