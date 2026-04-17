@@ -192,8 +192,11 @@
 
             
             if (onlyBand) {
+                ctx.rotate(state.curRot * -0.05); // Subtle counter-tilt for the band
                 ctx.scale(gs * 0.58, gs * 0.58);
-                ctx.drawImage(images.foxEars, -iw/2, -ih/2 + 40); 
+                // Crop only the arc area (roughly middle of the original image)
+                // Assuming iw=1024, ih=1024. Band is approx y=500 to 750, x=200 to 800.
+                ctx.drawImage(images.foxEars, 200, 500, 624, 250, -312, -100, 624, 250); 
                 ctx.restore();
                 return;
             }
