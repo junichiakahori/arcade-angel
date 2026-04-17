@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.114",
-  "last_updated": "2026-04-18 08:50:00",
+  "current_version": "v0.15.115",
+  "last_updated": "2026-04-18 09:00:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.115",
+      "date": "2026-04-18 09:00:00",
+      "notes": "CORE FIX (v0.15.115): Restored 'RESET DEFAULTS' button functionality. Added a complete state-to-UI synchronization loop that updates all 16 sliders immediately when defaults are restored, ensuring internal logic and visual controls are always in sync."
+    },
     {
       "version": "v0.15.114",
       "date": "2026-04-18 08:50:00",
