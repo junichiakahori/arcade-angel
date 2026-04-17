@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.26",
-  "last_updated": "2026-04-17 16:17:00",
+  "current_version": "v0.15.27",
+  "last_updated": "2026-04-17 16:19:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.27",
+      "date": "2026-04-17 16:19:00",
+      "notes": "UI RESTORATION: Re-implemented advanced threshold sliders with numeric inputs and state persistence in dev.html."
+    },
     {
       "version": "v0.15.26",
       "date": "2026-04-17 16:17:00",

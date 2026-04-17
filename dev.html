@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.26</title>
+    <title>Arcade Angel - Portable Puppet v0.15.27</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -11,6 +11,7 @@
         .control-group { margin-bottom: 12px; }
         label { display: block; margin-bottom: 4px; opacity: 0.8; font-weight: bold; }
         input[type=range] { width: 100%; cursor: pointer; accent-color: #0088FF; }
+        .num-in { background: #050515; border: 1px solid #0088FF88; color: #00F0FF; width: 45px; text-align: center; border-radius: 4px; font-size: 13px; font-family: 'Outfit', sans-serif; }
         .btn { color: #00F0FF; border: 1px solid #00F0FF; padding: 8px 10px; cursor: pointer; background: transparent; display: inline-block; margin-top: 10px; font-size: 11px; width: 100%; box-sizing: border-box; text-align: center; border-radius: 4px; transition: 0.2s; }
         .btn:hover { background: #00F0FF22; }
         .row { display: flex; gap: 5px; }
@@ -25,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.26 (Updated: 2026-04-17 13:05:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.27 (Updated: 2026-04-17 13:05:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -35,7 +36,13 @@
         <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112" oninput="updateState('eyeX', this.value)"></div>
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
         <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
-        <div class="control-group"><label>SKIN TONE</label><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0" oninput="updateState('skinTone', this.value)"></div>
+        
+        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="22"><input type="number" id="thresA_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="15"><input type="number" id="thresE_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="10"><input type="number" id="thresI_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="6"><input type="number" id="thresO_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="2"><input type="number" id="thresU_num" class="num-in"></div></div>
+
         
         <div id="smileBtn" class="btn" onclick="toggleSmile()">MODE: SMILE</div>
         <div class="row">
@@ -66,21 +73,17 @@
             curX: 0, curY: 0, curRot: 0, tgtX: 0, tgtY: 0, tgtRot: 0,
             eyeL: 1, eyeR: 1, mouthOpen: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.75,
-            isHappy: true, skinTone: 0, costume: 'none', isVoiceReady: false
+            isHappy: true, skinTone: 0, costume: 'none', isVoiceReady: false, thresA: 0.22, thresE: 0.15, thresI: 0.10, thresO: 0.06, thresU: 0.02
         };
 
         const images = {};
         let audioCtx, analyser, dataArray;
 
-        function updateState(k, v) { state[k] = parseFloat(v); saveToLocal(); }
-        function saveToLocal() {
-            const profile = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone };
+        function updateState(k, v) { state[k] = parseFloat(v); // sync handled }
+        ;
             localStorage.setItem('arcade_angel_profile', JSON.stringify(profile));
         }
-        function loadFromLocal() {
-            const raw = localStorage.getItem('arcade_angel_profile');
-            if (raw) applyProfile(JSON.parse(raw));
-        }
+        
         function applyProfile(p) {
             for (let k in p) {
                 if (state.hasOwnProperty(k)) {
@@ -99,10 +102,10 @@
 
         function importProfile() {
             const text = prompt("PASTE CODE:");
-            if (text) { try { applyProfile(JSON.parse(text)); saveToLocal(); } catch(e) { alert("FAIL"); } }
+            if (text) { try { applyProfile(JSON.parse(text)); // sync handled } catch(e) { alert("FAIL"); } }
         }
 
-        function setCostume(c) { state.costume = c; saveToLocal(); }
+        function setCostume(c) { state.costume = c; // sync handled }
         function switchVersion() {
             const isDev = window.location.pathname.endsWith('dev.html');
             window.location.href = isDev ? 'index.html' : 'dev.html';
@@ -111,14 +114,14 @@
             const defaults = { eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, skinTone: 0 };
             if (confirm("Reset to default settings?")) {
                 applyProfile(defaults);
-                saveToLocal();
+                // sync handled
             }
         }
 
         function toggleSmile() {
             state.isHappy = !state.isHappy;
             document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
-            saveToLocal();
+            // sync handled
         }
         window.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') toggleSmile(); });
 
@@ -238,11 +241,11 @@
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
-            if (v >= 0.22) { mf = 7; det = "A"; ms *= 0.9; }
-            else if (v >= 0.15) { mf = 1; det = "E"; }
-            else if (v >= 0.10) { mf = 4; det = "I"; }
-            else if (v >= 0.06) { mf = 6; det = "O"; }
-            else if (v >= 0.02) { mf = 6; det = "U"; ms *= 0.5; }
+            if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.9; }
+            else if (v >= state.thresE) { mf = 1; det = "E"; }
+            else if (v >= state.thresI) { mf = 4; det = "I"; }
+            else if (v >= state.thresO) { mf = 6; det = "O"; }
+            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.5; }
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
@@ -328,7 +331,47 @@
             } catch (error) {
                 console.error("Initialization failed:", error);
             }
-        })();
+        
+        // --- ADVANCED UI BINDING (v0.15.27) ---
+        function syncUI(key, val) {
+            state[key] = parseFloat(val);
+            if (key.startsWith('thres')) state[key] /= 100;
+            const sl = document.getElementById(key); if (sl) sl.value = val;
+            const nm = document.getElementById(key + '_num'); if (nm) nm.value = val;
+            saveToLocal();
+        }
+        
+        ['thresA', 'thresE', 'thresI', 'thresO', 'thresU'].forEach(k => {
+            const sl = document.getElementById(k);
+            const nm = document.getElementById(k + '_num');
+            if (sl) sl.oninput = (e) => syncUI(k, e.target.value);
+            if (nm) nm.oninput = (e) => syncUI(k, e.target.value);
+            // Init display
+            const initVal = state[k] * 100;
+            if (sl) sl.value = initVal;
+            if (nm) nm.value = initVal;
+        });
+
+        function saveToLocal() {
+            const p = { 
+                eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone,
+                thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU
+            };
+            localStorage.setItem('arcade_angel_dev_profile', JSON.stringify(p));
+        }
+        function loadFromLocal() {
+            const raw = localStorage.getItem('arcade_angel_dev_profile');
+            if (raw) {
+                const p = JSON.parse(raw);
+                Object.assign(state, p);
+                Object.keys(p).forEach(k => {
+                    const el = document.getElementById(k); if (el) el.value = k.startsWith('thres') ? p[k]*100 : p[k];
+                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = k.startsWith('thres') ? p[k]*100 : p[k];
+                });
+            }
+        }
+        loadFromLocal();
+})();
     </script>
 </body>
 </html>
