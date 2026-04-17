@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.107",
-  "last_updated": "2026-04-18 07:55:00",
+  "current_version": "v0.15.108",
+  "last_updated": "2026-04-18 08:00:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.108",
+      "date": "2026-04-18 08:00:00",
+      "notes": "ZERO-HANG PORTABILITY (v0.15.108): Stripped all network-dependent logic that caused startup hangs. Render loop now prioritizes immediate drawing of embedded assets over all other initialization, ensuring the puppet is visible even in offline/restricted local environments."
+    },
     {
       "version": "v0.15.107",
       "date": "2026-04-18 07:55:00",
