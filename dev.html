@@ -180,6 +180,7 @@
         
         
         
+        
         function drawFoxEar(ctx, x, y, rot, flip, onlyBand = false) {
             if (!images.foxEars || !images.foxEars.complete) return;
             const gs = state.globalScale;
@@ -187,8 +188,8 @@
             ctx.save();
             ctx.filter = 'hue-rotate(-15deg) saturate(0.88) brightness(1.05) contrast(1.08)';
             ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
-            ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
             ctx.rotate(state.curRot * 0.82);
+
             
             if (onlyBand) {
                 ctx.scale(gs * 0.58, gs * 0.58);
