@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.88",
-  "last_updated": "2026-04-18 00:50:00",
+  "current_version": "v0.15.90",
+  "last_updated": "2026-04-18 05:55:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.90",
+      "date": "2026-04-18 05:55:00",
+      "notes": "VOCAL GREETING (v0.15.90): Integrated a pre-recorded vocal greeting. Added a Greeting button that plays \"Ohayou gozaimasu!\" while performing real-time lip-sync and emotional switching to a happy state."
+    },
     {
       "version": "v0.15.88",
       "date": "2026-04-18 00:50:00",
