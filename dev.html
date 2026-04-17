@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.53</title>
+    <title>Arcade Angel - Portable Puppet v0.15.54</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -25,7 +25,7 @@
             document.write('<style>.dev-only { display: block; }</style>');
         }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.53 (Loading...)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.54 (Loading...)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -143,6 +143,7 @@
         }
 
         
+        
         function drawHappyEye(ctx, x, y, gs, flip) {
             ctx.save();
             ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 450) * gs);
@@ -150,27 +151,42 @@
             ctx.translate(x * gs, (y - (state.pivotY || 450)) * gs);
             ctx.scale(gs * (flip ? -1 : 1), gs);
             
-            // --- HIGH-FIDELITY CUSTOM SMILE EYE (v0.15.53) ---
-            // Instead of a sprite, we draw a beautiful curved vector eyelash
+            const w = 110 * state.eyeSize;
+            const h = 35 * state.eyeSize;
+            const tint = '#121225'; // Match the actual dark lash color
+
+            // --- PASS 1: DOUBLE EYELID (Thinner, lighter line above) ---
             ctx.beginPath();
-            ctx.lineWidth = 12 * state.eyeSize;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#222'; // Dark eyelash color
-            
-            // Curve points for a beautiful ^ shape
-            const w = 100 * state.eyeSize;
-            const h = 30 * state.eyeSize;
-            ctx.moveTo(-w/2, h/4);
-            ctx.quadraticCurveTo(0, -h, w/2, h/4); 
+            ctx.lineWidth = 2 * state.eyeSize;
+            ctx.strokeStyle = 'rgba(18, 18, 37, 0.4)';
+            ctx.moveTo(-w/2, -h/2);
+            ctx.quadraticCurveTo(0, -h * 1.5, w/2, -h/2);
             ctx.stroke();
-            
-            // Subtle shadow for depth
-            ctx.strokeStyle = 'rgba(255, 175, 145, 0.4)';
-            ctx.lineWidth = 4 * state.eyeSize;
+
+            // --- PASS 2: MAIN EYELASH (Thick, curved) ---
+            ctx.beginPath();
+            ctx.lineWidth = 14 * state.eyeSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = tint;
+            ctx.moveTo(-w/2.2, h/4);
+            ctx.quadraticCurveTo(0, -h, w/2.2, h/4); 
+            ctx.stroke();
+
+            // --- PASS 3: THE FLICK (Outer lash flourish) ---
+            ctx.beginPath();
+            ctx.lineWidth = 8 * state.eyeSize;
+            ctx.moveTo(w/2.2, h/4);
+            ctx.lineTo(w/1.8, h/2); // Flick downwards/outwards
+            ctx.stroke();
+
+            // --- PASS 4: SOFT BLITTING (Depth effect) ---
+            ctx.strokeStyle = 'rgba(255, 175, 145, 0.3)';
+            ctx.lineWidth = 3 * state.eyeSize;
             ctx.stroke();
             
             ctx.restore();
         }
+
 
         function render() {
             const ctx = document.getElementById('stage').getContext('2d');
