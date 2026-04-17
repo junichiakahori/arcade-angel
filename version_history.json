@@ -1,7 +1,12 @@
 {
-  "current_version": "v0.15.10",
-  "last_updated": "2026-04-17 13:05:00",
+  "current_version": "v0.15.66",
+  "last_updated": "2026-04-17 20:25:00",
   "history": [
+    {
+      "version": "v0.15.66",
+      "date": "2026-04-17 20:25:00",
+      "notes": "STABLE DEPLOYMENT (v0.15.66): Backported high-fidelity features from dev: Independent winks, crescent smile assets with eyebrow adjustments, Scientific HUD, and Deep Pivot shoulder-lock. Costume switching remains dev-only, but core engine is now fully upgraded."
+    },
     {
       "version": "v0.15.10",
       "date": "2026-04-17 13:05:00",
