@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.59",
-  "last_updated": "2026-04-17 19:37:00",
+  "current_version": "v0.15.60",
+  "last_updated": "2026-04-17 19:39:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.60",
+      "date": "2026-04-17 19:39:00",
+      "notes": "HUD RESTORATION: Re-implemented the Scientific Debug HUD as requested. Restored RAW SMILE ratio, vowel match indicators (A/E/I/O/U), and input volume analysis. This provides the necessary data for fine-tuning thresholds and sensitivity."
+    },
     {
       "version": "v0.15.59",
       "date": "2026-04-17 19:37:00",
