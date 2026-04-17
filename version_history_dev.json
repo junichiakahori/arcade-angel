@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.67",
-  "last_updated": "2026-04-17 20:47:00",
+  "current_version": "v0.15.68",
+  "last_updated": "2026-04-17 20:53:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.68",
+      "date": "2026-04-17 20:53:00",
+      "notes": "LIFE RHYTHM (v0.15.68): Implemented real-time Sine-wave Breathing animation. Body and shoulders now move with a deep, natural rhythm, and the head follows with a subtle mechanical lag to enhance organic feeling. Includes sliders for Brewth Speed and Scale."
+    },
     {
       "version": "v0.15.67",
       "date": "2026-04-17 20:47:00",

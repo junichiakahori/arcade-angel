@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.67</title>
+    <title>Arcade Angel - Portable Puppet v0.15.68</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.67 (2026-04-17 20:47:00)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.68 (2026-04-17 20:53:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -32,6 +32,9 @@
         
         <div class="control-group"><label style="color:#00FF88">BROW POS Y (Happy)</label><div class="row"><input type="range" id="browY" min="-50" max="50" value="5"><input type="number" id="browY_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#00FF88">BROW TILT (Happy)</label><div class="row"><input type="range" id="browTilt" min="-0.5" max="0.5" step="0.01" value="0"><input type="number" id="browTilt_num" class="num-in"></div></div>
+            
+        <div class="control-group"><label style="color:#00AAFF">BREATH SPEED</label><div class="row"><input type="range" id="breathSpeed" min="0" max="3" step="0.1" value="1.0"></div></div>
+        <div class="control-group"><label style="color:#00AAFF">BREATH SCALE</label><div class="row"><input type="range" id="breathScale" min="0" max="5" step="0.1" value="1.0"></div></div>
             <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
         <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="30" max="90" value="58"><input type="number" id="smileSens_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="600"><input type="number" id="pivotY_num" class="num-in"></div></div>
@@ -68,7 +71,7 @@
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: false, skinTone: 0, costume: 'none', isVoiceReady: false, 
             thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.11, 
-            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0
+            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0, breathPhase: 0, breathSpeed: 1.0, breathScale: 1.0
         };
         
         const images = {
@@ -141,7 +144,7 @@
             let pY = state.pivotY || 600;
             let hX = state.curX * gs * 0.15, hY = state.curY * gs * 0.15;
             let smoothRot = state.curRot * 0.8;
-            ctx.translate(400 + hX, 400 + hY + pY * gs); 
+            ctx.translate(400 + hX, 400 + hY + pY * gs + bHeadY * gs); 
             ctx.rotate(smoothRot);
             ctx.translate((options.x || 0) * gs, ((options.y || 0) - pY) * gs);
             ctx.scale((options.scaleX || 1) * gs * (options.flip ? -1 : 1), (options.scaleY || 1) * gs);
@@ -153,6 +156,10 @@
             const stage = document.getElementById('stage');
             if (!stage) return;
             const ctx = stage.getContext('2d');
+            const bVal = Math.sin(state.breathPhase) * 6 * state.breathScale;
+            const bBodyY = bVal;
+            const bHeadY = bVal * 0.5;
+
             ctx.clearRect(0, 0, 800, 800);
             if (state.isVoiceReady) {
                 analyser.getByteFrequencyData(dataArray);
@@ -163,7 +170,7 @@
             const bImg = state.costume === 'cyber' ? images.body_cyber : (state.costume === 'gothic' ? images.body_gothic : images.body_standard);
             if (bImg) {
                 ctx.save();
-                ctx.translate(400 + state.curX * state.globalScale * 0.3, 400 + state.curY * state.globalScale * 0.3 + 300 * state.globalScale);
+                ctx.translate(400 + state.curX * state.globalScale * 0.3, 400 + state.curY * state.globalScale * 0.3 + 300 * state.globalScale + bBodyY * state.globalScale);
                 ctx.scale(state.globalScale * 1.2, state.globalScale * 1.2);
                 ctx.drawImage(bImg, -bImg.width/2, -bImg.height/2);
                 ctx.restore();
@@ -182,7 +189,7 @@
                 const useHappyAsset = isSmiling && openness < 0.3 && happyImg.complete;
                 if (useHappyAsset) {
                     ctx.save(); ctx.globalAlpha = 0.95;
-                    ctx.translate(400 + bx, 400 + by + pY * gs); ctx.rotate(rot);
+                    ctx.translate(400 + bx, 400 + by + pY * gs + bHeadY * gs); ctx.rotate(rot);
                     // Apply dedicated adjustments for Brows during smile
                     ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + 5 + (state.browY || 0)) * gs);
                     ctx.rotate(isLeft ? -(state.browTilt || 0) : (state.browTilt || 0));
@@ -222,7 +229,7 @@
 
         function animate() {
             state.curX += (state.tgtX - state.curX) * 0.1; state.curY += (state.tgtY - state.curY) * 0.1;
-            state.curRot += (state.tgtRot - state.curRot) * 0.06; render(); requestAnimationFrame(animate);
+            state.curRot += (state.tgtRot - state.curRot) * 0.06; state.breathPhase += 0.03 * state.breathSpeed; render(); requestAnimationFrame(animate);
         }
 
         (async function init() {
@@ -254,7 +261,7 @@
                     images[k] = await processAlpha(i, k === 'face' ? 'face' : 'part');
                 }
                 loadFromLocal();
-                ['thresA','thresE','thresI','thresO','thresU','pivotY','smileSens','browY','browTilt'].forEach(k => {
+                ['thresA','thresE','thresI','thresO','thresU','pivotY','smileSens','browY','browTilt','breathSpeed','breathScale'].forEach(k => {
                     const s = document.getElementById(k), n = document.getElementById(k + '_num');
                     const v = k.startsWith('thres') ? state[k]*100 : state[k];
                     if (s) s.value = v; if (n) n.value = v;
