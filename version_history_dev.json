@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.77",
-  "last_updated": "2026-04-17 23:30:00",
+  "current_version": "v0.15.78",
+  "last_updated": "2026-04-17 23:40:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.78",
+      "date": "2026-04-17 23:40:00",
+      "notes": "VERMILION TIPS (v0.15.78): Added vibrant red (Vermilion) gradients to the tips of the fox ears. This highlights the character's status as a divine Tenko and provides a striking visual contrast to the silver hair."
+    },
     {
       "version": "v0.15.77",
       "date": "2026-04-17 23:30:00",
