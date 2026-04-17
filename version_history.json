@@ -1,7 +1,17 @@
 {
-  "current_version": "v15.2.0",
-  "last_updated": "2026-04-17 12:22:27",
+  "current_version": "v15.2.2",
+  "last_updated": "2026-04-17 12:41:00",
   "history": [
+    {
+      "version": "v15.2.2",
+      "date": "2026-04-17 12:41:00",
+      "notes": "Unified versioning system and synchronized all timestamps."
+    },
+    {
+      "version": "v15.2.1",
+      "date": "2026-04-17 12:32:00",
+      "notes": "Added real-time mouth ratio debugging HUD."
+    },
     {
       "version": "v15.2.0",
       "date": "2026-04-17 12:22:27",
@@ -10,17 +20,7 @@
     {
       "version": "v15.1.5",
       "date": "2026-04-17 11:55:00",
-      "notes": "Surgical cleanup of nose and eye artifacts. Flawless skin restored."
-    },
-    {
-      "version": "v15.1.0",
-      "date": "2026-04-17 11:30:00",
-      "notes": "Upgraded blinking to multi-stage smooth transition with full closure."
-    },
-    {
-      "version": "v15.0.0",
-      "date": "2026-04-17 07:11:47",
-      "notes": "Initial base version with external asset JSON support."
+      "notes": "Surgical cleanup of nose and eye artifacts."
     }
   ]
 }
