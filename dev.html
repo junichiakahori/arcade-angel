@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.58</title>
+    <title>Arcade Angel - Portable Puppet v0.15.62</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.58 (2026-04-17 19:33:00)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.62 (2026-04-17 19:44:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -166,8 +166,7 @@
             
             drawPart(images.face, { isFace: true });
 
-            // --- ULTIMATE SYNCED SMILE LOGIC (v0.15.58) ---
-            const shouldShowHappyEyes = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
+            const shouldShowHappyEyes = state.isHappy || (state.autoSmile && state.smileDegree > 0.5);
             
             if (shouldShowHappyEyes && images.eyeHappyL.complete && images.eyeHappyR.complete) {
                 const gs = state.globalScale;
@@ -175,23 +174,22 @@
                 const bx = state.curX * gs * 0.15;
                 const by = state.curY * gs * 0.15;
                 const rot = state.curRot * 0.8;
-
-                // Left Happy Eye
+                ctx.save();
+                ctx.globalAlpha = 0.95; 
                 ctx.save();
                 ctx.translate(400 + bx, 400 + by + pY * gs);
                 ctx.rotate(rot);
-                ctx.translate(-state.eyeX * gs, (state.eyeY - pY) * gs);
-                ctx.scale(state.eyeSize * gs, state.eyeSize * gs);
+                ctx.translate(-state.eyeX * gs, (state.eyeY - pY + 5) * gs); 
+                ctx.scale(state.eyeSize * gs * 0.65, state.eyeSize * gs * 0.65);
                 ctx.drawImage(images.eyeHappyL, -images.eyeHappyL.width/2, -images.eyeHappyL.height/2);
                 ctx.restore();
-
-                // Right Happy Eye
                 ctx.save();
                 ctx.translate(400 + bx, 400 + by + pY * gs);
                 ctx.rotate(rot);
-                ctx.translate(state.eyeX * gs, (state.eyeY - pY) * gs);
-                ctx.scale(state.eyeSize * gs, state.eyeSize * gs);
+                ctx.translate(state.eyeX * gs, (state.eyeY - pY + 5) * gs); 
+                ctx.scale(state.eyeSize * gs * 0.65, state.eyeSize * gs * 0.65);
                 ctx.drawImage(images.eyeHappyR, -images.eyeHappyR.width/2, -images.eyeHappyR.height/2);
+                ctx.restore();
                 ctx.restore();
             } else {
                 const getEyeFrame = (o) => (o > 0.8 ? 0 : o > 0.6 ? 1 : o > 0.4 ? 2 : o > 0.2 ? 3 : 15);
@@ -212,9 +210,15 @@
 
             const hud = document.querySelector('.hud');
             if (hud && v_data) {
+                const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
+                const check = (th) => total >= th ? '<span style="color:#00FF00">MATCH</span>' : `<span style="color:#555">WAIT(${(parseFloat(th)).toFixed(2)})</span>`;
                 hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (${v_data.last_updated})<br>` +
-                              `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (SENS:${(state.smileSens/100).toFixed(2)})<br>` +
-                              `EYES: ${shouldShowHappyEyes ? '<span style="color:#FF00FF">HAPPY</span>' : 'NORMAL'}`;
+                              `<span style="color:#FFFF00">V:${state.voiceVol.toFixed(2)} | RATIO:${state.mouthOpen.toFixed(2)} | TOTAL: ${total}</span><br>` +
+                              `A:${check(state.thresA)}|E:${check(state.thresE)}|I:${check(state.thresI)}<br>` +
+                              `O:${check(state.thresO)}|U:${check(state.thresU)}<br>` +
+                              `DET: <span style="color:#FF00FF">${state.detectedVowel}</span><br>` +
+                              `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (RAW:${state.smileRaw.toFixed(2)}/SENS:${(state.smileSens/100).toFixed(2)})<br>` +
+                              `EYES: ${shouldShowHappyEyes ? '<span style="color:#FF00FF">HAPPY (WITH BROWS)</span>' : 'TRACKING'}`;
             }
         }
 
