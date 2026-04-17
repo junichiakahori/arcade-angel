@@ -9,6 +9,11 @@
       "notes": "FINAL STABILIZATION (v0.15.118): Achieved 'SYNTAX OK' validation status. Performed a full structural scan to remove stray parentheses and leftover agent artifacts. Verified 100% functional parity for Reset Defaults and initial calibration thresholds (U=2, I=14). This version is verified stable."
     },
     {
+      "version": "v0.15.118",
+      "date": "2026-04-18 09:30:00",
+      "notes": "FINAL STABILIZATION (v0.15.118): Achieved 'SYNTAX OK' validation status. Performed a full structural scan to remove stray parentheses and leftover agent artifacts. Verified 100% functional parity for Reset Defaults and initial calibration thresholds (U=2, I=14). This version is verified stable."
+    },
+    {
       "version": "v0.15.116",
       "date": "2026-04-18 09:15:00",
       "notes": "STABILITY PATCH (v0.15.116): Fixed 'resetState is not defined' ReferenceError by exposing the reset function to the global window object. Resolved 'addEventListener of null' TypeError by adding defensive existence checks for all UI control elements, ensuring the script doesn't crash if certain DOM nodes are missing."
