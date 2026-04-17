@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.113",
-  "last_updated": "2026-04-18 08:45:00",
+  "current_version": "v0.15.114",
+  "last_updated": "2026-04-18 08:50:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.114",
+      "date": "2026-04-18 08:50:00",
+      "notes": "FORMATTING FIX (v0.15.114): Standardized THRES I's initial value to 14 (integer) instead of 14.0 (float) for UI consistency and cleaner data handling."
+    },
     {
       "version": "v0.15.113",
       "date": "2026-04-18 08:45:00",
