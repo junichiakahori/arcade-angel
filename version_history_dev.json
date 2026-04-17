@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.47",
-  "last_updated": "2026-04-17 18:47:00",
+  "current_version": "v0.15.48",
+  "last_updated": "2026-04-17 18:51:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.48",
+      "date": "2026-04-17 18:51:00",
+      "notes": "CRITICAL UI FIX: Corrected multiplication bug in slider initialization that was breaking 'SMILE SENS' and 'PIVOT Y'. Removed Debug View button as requested."
+    },
     {
       "version": "v0.15.47",
       "date": "2026-04-17 18:47:00",
