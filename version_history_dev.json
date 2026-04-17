@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.105",
-  "last_updated": "2026-04-18 07:30:00",
+  "current_version": "v0.15.106",
+  "last_updated": "2026-04-18 07:45:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.106",
+      "date": "2026-04-18 07:45:00",
+      "notes": "LOOP RESILIENCE (v0.15.106): Decoupled the animation/render loop from the camera initialization. This fixes the issue where the application would hang at 'Initializing...' if the browser blocked or delayed camera access."
+    },
     {
       "version": "v0.15.105",
       "date": "2026-04-18 07:30:00",
