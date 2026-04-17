@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.41",
-  "last_updated": "2026-04-17 18:04:00",
+  "current_version": "v0.15.42",
+  "last_updated": "2026-04-17 18:12:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.42",
+      "date": "2026-04-17 18:12:00",
+      "notes": "EMOTIONAL UPDATE: Implemented real-time Smile Detection (FaceMesh). Character now auto-switches to 'Happy' state when you smile physically. Added 'Smile Degree' visualization to HUD."
+    },
     {
       "version": "v0.15.41",
       "date": "2026-04-17 18:04:00",

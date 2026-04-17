@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.41</title>
+    <title>Arcade Angel - Portable Puppet v0.15.42</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.41 (Updated: 2026-04-17 18:04:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.42 (Updated: 2026-04-17 18:12:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -245,7 +245,7 @@
             
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
+            let mf = 0, det = "CLOSED", ms = state.isHappy ? (0.48 + state.smileDegree * 0.05) : 0.45;
             if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.82; }
             else if (v >= state.thresE) { mf = 1; det = "E"; }
             else if (v >= state.thresI) { mf = 4; det = "I"; }
@@ -255,11 +255,12 @@
             state.detectedVowel = det; // --- FINAL LINK: Update debug display ---
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.41) ---
+            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.42) ---
             const hud = document.querySelector('.hud');
             if (hud && typeof v_data !== 'undefined' && v_data.current_version) {
                 let v_val = state.voiceVol.toFixed(2);
                 let r_val = state.mouthOpen.toFixed(2);
+                const sPct = Math.round(state.smileDegree * 100);
                 hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
                               `VOICE: <span id="vStatus">${state.isVoiceReady ? 'LIVE' : 'OFFLINE'}</span><br>` +
                               `<span style="color:#00F0FF">V: ${v_val} / RATIO: ${r_val}</span><br>` +
@@ -289,7 +290,8 @@
                         v_data = data; // Store globally
                         const hud = document.querySelector('.hud');
                         if (hud) {
-                            hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
+                            const sPct = Math.round(state.smileDegree * 100);
+                hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
                                           `VOICE: <span id="vStatus">OFFLINE</span><br>` +
                                           `[H] KEY: SMILE TOGGLE`;
                         }
@@ -323,6 +325,20 @@
                         state.tgtX = (lm[1].x - 0.5) * 400;
                         state.tgtY = (lm[1].y - 0.5) * 400;
                         state.tgtRot = Math.atan2(lm[152].x - lm[10].x, lm[152].y - lm[10].y) * -1;
+
+                        // --- RADIANT SMILE DETECTION (v0.15.42) ---
+                        // Distance between lip corners
+                        const mouthWidth = Math.abs(lm[61].x - lm[291].x);
+                        const eyeDist = Math.abs(lm[33].x - lm[263].x);
+                        // Smile score based on width relative to eyes
+                        const smileRatio = mouthWidth / eyeDist;
+                        state.smileDegree = Math.max(0, Math.min(1, (smileRatio - 0.7) / 0.2));
+                        
+                        // Auto-switch to Happy mode if smiling detected
+                        if (state.autoSmile) {
+                            state.isHappy = state.smileDegree > 0.4;
+                        }
+
                     }
                 });
 
@@ -353,7 +369,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.41) ---
+        // --- ADVANCED UI BINDING (v0.15.42) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;
