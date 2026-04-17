@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet [DEV]</title>
+    <title>Arcade Angel - Tuner [DEV]</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -10,34 +10,28 @@
         .settings-panel { position: absolute; top: 20px; right: 20px; z-index: 101; font-size: 11px; background: #050515DD; padding: 15px; border-radius: 8px; border: 1px solid #0088FF88; color: #00F0FF; width: 220px; pointer-events: auto; max-height: 90vh; overflow-y: auto; }
         .control-group { margin-bottom: 12px; }
         label { display: block; margin-bottom: 4px; opacity: 0.8; font-weight: bold; }
-        input[type=range] { width: 100%; cursor: pointer; accent-color: #0088FF; }
+        input[type=range] { flex-grow: 1; cursor: pointer; accent-color: #0088FF; }
+        .num-in { width: 45px; background: #112; border: 1px solid #0088FF88; color: #00F0FF; font-size: 11px; padding: 2px; border-radius: 3px; text-align: center; }
         .btn { color: #00F0FF; border: 1px solid #00F0FF; padding: 8px 10px; cursor: pointer; background: transparent; display: inline-block; margin-top: 10px; font-size: 11px; width: 100%; box-sizing: border-box; text-align: center; border-radius: 4px; transition: 0.2s; }
         .btn:hover { background: #00F0FF22; }
-        .row { display: flex; gap: 5px; align-items: center; } .num-in { width: 50px; background: #112; border: 1px solid #0088FF88; color: #00F0FF; font-size: 11px; padding: 2px; border-radius: 3px; }
+        .row { display: flex; gap: 8px; align-items: center; }
     </style>
 </head>
 <body>
-    <div class="hud" id="hud">
-        LOADING...
-    </div>
+    <div class="hud" id="hud">LOADING CORE...</div>
 
     <div class="settings-panel">
-        <!-- Manual Overrides -->
-
         <div class="control-group"><label>EYE POS Y</label><div class="row"><input type="range" id="eyeY" min="-300" max="100" value="-79"><input type="number" id="eyeY_num" class="num-in"></div></div>
         <div class="control-group"><label>EYE DISTANCE</label><div class="row"><input type="range" id="eyeX" min="30" max="250" value="112"><input type="number" id="eyeX_num" class="num-in"></div></div>
         <div class="control-group"><label>EYE SIZE</label><div class="row"><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76"><input type="number" id="eyeSize_num" class="num-in" step="0.01"></div></div>
         <div class="control-group"><label>MOUTH POS Y</label><div class="row"><input type="range" id="mouthY" min="0" max="300" value="123"><input type="number" id="mouthY_num" class="num-in"></div></div>
         <div class="control-group"><label>SKIN TONE</label><div class="row"><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0"><input type="number" id="skinTone_num" class="num-in" step="0.05"></div></div>
         <hr style="border:0; border-top:1px solid #0088FF44; margin:15px 0;">
-        
-        <!-- Vowel Thresholds -->
-        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="30"><input type="number" id="thresA_num" class="num-in" step="0.01"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="19"><input type="number" id="thresE_num" class="num-in" step="0.01"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="13"><input type="number" id="thresI_num" class="num-in" step="0.01"></div></div>
-        
-        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="8"><input type="number" id="thresO_num" class="num-in" step="0.01"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="2"><input type="number" id="thresU_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="30"><input type="number" id="thresA_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="19"><input type="number" id="thresE_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="13"><input type="number" id="thresI_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="8"><input type="number" id="thresO_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="3"><input type="number" id="thresU_num" class="num-in"></div></div>
 
         <div id="smileBtn" class="btn">MODE: SMILE</div>
         <div class="row">
@@ -45,8 +39,7 @@
             <div class="btn" id="importBtn">IMPORT</div>
         </div>
         <div class="btn" id="resetBtn" style="border-color: #FF5555; color: #FF5555; margin-top: 5px;">RESET DEFAULTS</div>
-        
-        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 20px;" onclick="location.href='index.html'">SWITCH TO STABLE VERSION</div>
+        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 20px;" onclick="location.href='index.html'">SWITCH TO STABLE</div>
     </div>
 
     <canvas id="stage" width="800" height="800"></canvas>
@@ -58,13 +51,12 @@
     <script>
         const state = {
             curX: 0, curY: 0, curRot: 0, tgtX: 0, tgtY: 0, tgtRot: 0,
-            eyeL: 1, eyeR: 1, mouthOpen: 0, mouthRatio: 0, voiceVol: 0,
+            eyeL: 1, eyeR: 1, mouthOpen: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.75,
-            isHappy: true, skinTone: 0, costume: 'none',
-            thresA: 0.30, thresE: 0.19, thresI: 0.13, thresO: 0.08, thresU: 0.02,
-            detectedVowel: "CLOSED", rMin: 1.0, rMax: 0.0
+            isHappy: true, skinTone: 0,
+            thresA: 0.30, thresE: 0.19, thresI: 0.13, thresO: 0.08, thresU: 0.03,
+            detectedVowel: "CLOSED"
         };
-
         const images = {};
         let v_data = { current_version: "v0.15.3", last_updated: "2026-04-17" };
 
@@ -73,21 +65,16 @@
             localStorage.setItem('arcade_angel_dev_settings', JSON.stringify(p));
         }
 
-        
         function loadSettings() {
             const raw = localStorage.getItem('arcade_angel_dev_settings');
             if (raw) {
                 const p = JSON.parse(raw);
                 Object.assign(state, p);
                 Object.keys(p).forEach(k => {
-                    const sl = document.getElementById(k);
-                    const nm = document.getElementById(k + '_num');
                     const val = k.startsWith('thres') ? p[k]*100 : p[k];
-                    if (sl) sl.value = val;
-                    if (nm) nm.value = val;
+                    const sl = document.getElementById(k); if (sl) sl.value = val;
+                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = val;
                 });
-            }
-        });
             }
         }
 
@@ -107,61 +94,48 @@
 
         function drawPart(img, options = {}) {
             if (!img || !img.complete) return;
-            const canvas = document.getElementById('stage');
-            const ctx = canvas.getContext('2d');
+            const ctx = document.getElementById('stage').getContext('2d');
             const gs = state.globalScale;
             let sw, sh, sx, sy;
-
             if (options.isEyes) { sw = 210; sh = 165; sx = (options.frame % 4) * 256 + 23; sy = Math.floor(options.frame / 4) * 256 + 45; }
             else if (options.isMouth) { const cw = img.width/3, ch = img.height/3; sw = 210; sh = 120; sx = (options.frame % 3) * cw + (cw-sw)/2; sy = Math.floor(options.frame/3) * ch + (ch-sh)/2; }
             else { sw = img.width; sh = img.height; sx = 0; sy = 0; }
-
             ctx.save();
             ctx.translate(400 + state.curX * gs, 400 + state.curY * gs);
             ctx.rotate(state.curRot);
             ctx.translate((options.x || 0) * gs, (options.y || 0) * gs);
             ctx.scale((options.flip ? -1 : 1) * (options.scaleX || 1) * gs, (options.scaleY || 1) * gs);
-            
             if (options.isFace && state.skinTone > 0) {
                 const off = document.createElement('canvas'); off.width = sw; off.height = sh;
                 const octx = off.getContext('2d'); octx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
                 octx.globalCompositeOperation = 'multiply'; octx.fillStyle = `rgba(255, 175, 145, ${state.skinTone})`; 
                 octx.fillRect(0, 0, sw, sh); octx.globalCompositeOperation = 'destination-in';
                 octx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh); ctx.drawImage(off, -sw/2, -sh/2);
-            } else {
-                ctx.drawImage(img, sx, sy, sw, sh, -sw/2, -sh/2, sw, sh);
-            }
+            } else { ctx.drawImage(img, sx, sy, sw, sh, -sw/2, -sh/2, sw, sh); }
             ctx.restore();
         }
 
         function render() {
-            const canvas = document.getElementById('stage');
-            const ctx = canvas.getContext('2d');
+            const ctx = document.getElementById('stage').getContext('2d');
             ctx.clearRect(0, 0, 800, 800);
-
             drawPart(images.face, { isFace: true });
-
-            const getEyeFr = (op, hp) => {
+            const getE = (op, hp) => {
                 if (hp) { if (op > 0.8) return 4; if (op > 0.5) return 5; if (op > 0.2) return 6; return 15; }
                 else { if (op > 0.8) return 0; if (op > 0.6) return 1; if (op > 0.4) return 2; if (op > 0.2) return 3; return 15; }
             };
-            drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFr(state.eyeL, state.isHappy), isEyes: true, flip: true });
-            drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFr(state.eyeR, state.isHappy), isEyes: true, flip: false });
-
-            
+            drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeL, state.isHappy), isEyes: true, flip: true });
+            drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeR, state.isHappy), isEyes: true, flip: false });
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mFr = 0; let det = "CLOSED";
-            if (v >= state.thresA) { mFr = 2; det = "A"; }
-            else if (v >= state.thresE) { mFr = 1; det = "E"; }
-            else if (v >= state.thresI) { mFr = 4; det = "I"; }
-            else if (v >= state.thresO) { mFr = 7; det = "O"; }
-            else if (v >= state.thresU) { mFr = 6; det = "U"; }
-            else { mFr = state.isHappy ? 3 : 0; det = "CLOSED"; }
+            let mf = 0, det = "CLOSED";
+            if (v >= state.thresA) { mf = 2; det = "A"; }
+            else if (v >= state.thresE) { mf = 1; det = "E"; }
+            else if (v >= state.thresI) { mf = 4; det = "I"; }
+            else if (v >= state.thresO) { mf = 7; det = "O"; }
+            else if (v >= state.thresU) { mf = 6; det = "U"; }
+            else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             state.detectedVowel = det;
-    
-
-            let mSc = state.isHappy ? 0.48 : 0.45;
-            drawPart(images.mouthUni, { y: state.mouthY, scaleX:mSc, scaleY:mSc, frame: mFr, isMouth: true });
+            let ms = state.isHappy ? 0.48 : 0.45;
+            drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
         }
 
         function animate() {
@@ -172,46 +146,24 @@
         }
 
         async function init() {
-            const stage = document.getElementById('stage');
-            if (!stage) return;
-
-            // Bind UI
-
-            const bind = (id, k, multiplier = 1) => {
-                const sl = document.getElementById(id);
-                const nm = document.getElementById(id + '_num');
-                const update = (v) => {
-                    const val = parseFloat(v);
-                    state[k] = val / multiplier;
-                    sl.value = val;
-                    nm.value = val;
-                    saveSettings();
-                };
-                sl.oninput = (e) => update(e.target.value);
-                nm.oninput = (e) => update(e.target.value);
-                // Initial sync
-                nm.value = sl.value;
+            const bind = (id, k, mul = 1) => {
+                const sl = document.getElementById(id), nm = document.getElementById(id + '_num');
+                const up = (v) => { const val = parseFloat(v); state[k] = val / mul; sl.value = val; nm.value = val; saveSettings(); };
+                if (sl) sl.oninput = (e) => up(e.target.value);
+                if (nm) nm.oninput = (e) => up(e.target.value);
             };
             ['eyeY', 'eyeX', 'eyeSize', 'mouthY', 'skinTone'].forEach(id => bind(id, id));
             ['thresA', 'thresE', 'thresI', 'thresO', 'thresU'].forEach(id => bind(id, id, 100));
-            document.getElementById('smileBtn').onclick = () => {
-                state.isHappy = !state.isHappy;
-                document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
-            };
-            document.getElementById('resetBtn').onclick = () => {
-                if (confirm("Reset?")) { localStorage.removeItem('arcade_angel_dev_settings'); location.reload(); }
-            };
+            document.getElementById('smileBtn').onclick = () => { state.isHappy = !state.isHappy; document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL"; };
+            document.getElementById('resetBtn').onclick = () => { if (confirm("Reset?")) { localStorage.removeItem('arcade_angel_dev_settings'); location.reload(); } };
+            document.getElementById('exportBtn').onclick = () => { const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone }; navigator.clipboard.writeText(JSON.stringify(p)); alert("COPIED"); };
+            document.getElementById('importBtn').onclick = () => { const t = prompt("PASTE:"); if (t) { try { const p = JSON.parse(t); Object.assign(state, p); saveSettings(); location.reload(); } catch(e) { alert("FAIL"); } } };
 
-            // Version HUD
             setInterval(() => {
-                const hud = document.getElementById('hud');
-                const v_val = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
-                hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
-                                `V: ${v_val} | VOWEL: <b>${state.detectedVowel}</b><br>` +
-                                `[H] KEY: SMILE TOGGLE`;
+                const h = document.getElementById('hud');
+                if (h) h.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version}<br>V: ${Math.max(state.mouthOpen, state.voiceVol).toFixed(2)} | VOWEL: <b>${state.detectedVowel}</b><br>[H] KEY: SMILE TOGGLE`;
             }, 50);
 
-            // Fetch Data
             try {
                 const [assets, h_data] = await Promise.all([
                     fetch('assets.json?v=' + Date.now()).then(r => r.json()),
@@ -219,11 +171,10 @@
                 ]);
                 v_data = h_data;
                 for (let k in assets) {
-                    const img = new Image(); img.src = assets[k];
-                    await new Promise(res => img.onload = res);
-                    images[k] = await processAlpha(img, k === 'face');
+                    const i = new Image(); i.src = assets[k];
+                    await new Promise(res => i.onload = res);
+                    images[k] = await processAlpha(i, k === 'face');
                 }
-                
                 const fm = new FaceMesh({ locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}` });
                 fm.setOptions({ maxNumFaces: 1, refineLandmarks: true, minDetectionConfidence: 0.8, minTrackingConfidence: 0.8 });
                 fm.onResults(res => {
@@ -236,13 +187,10 @@
                         state.tgtRot = Math.atan2(lm[152].x - lm[10].x, lm[152].y - lm[10].y) * -1;
                     }
                 });
-                const cam = new Camera(document.getElementById('webcam'), { onFrame: async () => await fm.send({ image: document.getElementById('webcam') }), width: 640, height: 480 });
-                cam.start();
+                new Camera(document.getElementById('webcam'), { onFrame: async () => await fm.send({ image: document.getElementById('webcam') }), width: 640, height: 480 }).start();
                 loadSettings();
                 animate();
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { alert("BOOT ERROR: " + e); }
         }
         init();
     </script>
