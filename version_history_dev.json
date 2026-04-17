@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.62",
-  "last_updated": "2026-04-17 19:44:00",
+  "current_version": "v0.15.63",
+  "last_updated": "2026-04-17 19:48:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.63",
+      "date": "2026-04-17 19:48:00",
+      "notes": "INDEPENDENT EYE CONTROL: Decoupled the Left and Right eyes during a smile. Each eye now independently switches to the moon-shaped crescent asset only when it's closed while the character is in a 'Smiling' state. This enables independent winking, asymmetrical smiles, and more lifelike facial performances."
+    },
     {
       "version": "v0.15.62",
       "date": "2026-04-17 19:44:00",
