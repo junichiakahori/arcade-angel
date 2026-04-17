@@ -126,14 +126,16 @@
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeL, state.isHappy), isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeR, state.isHappy), isEyes: true, flip: false });
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
             
-            if (v >= state.thresA) { mf = 2; det = "A"; }
-            else if (v >= state.thresE) { mf = 1; det = "E"; }
-            else if (v >= state.thresI) { mf = 4; det = "I"; }
-            else if (v >= state.thresO) { mf = 6; det = "O"; } 
-            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.75; } 
+            // [ULTIMATE MAPPING] User-Picked Frames
+            if (v >= state.thresA) { mf = 7; det = "A"; } // A is now 7
+            else if (v >= state.thresE) { mf = 1; det = "E"; } // E is 1
+            else if (v >= state.thresI) { mf = 4; det = "I"; } // I is 4
+            else if (v >= state.thresO) { mf = 6; det = "O"; } // O is 6
+            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.5; } // U is 6 but 50% SMALLER
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             
             if (state.forceFrame !== undefined && state.forceFrame !== null) {
@@ -142,6 +144,7 @@
             state.detectedVowel = det;
             
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
+    
     
         }
 
