@@ -273,24 +273,23 @@
             try {
                 const response = await fetch('assets.json?v=' + Date.now());
                 const assets = await response.json();
-                // [CLEAN HUD] Real-time Version & Debug Display
+                // [RESTORED HUD] Real-time Version, Ratio, and Vowel Detection
                 fetch('version_history_dev.json?v=' + Date.now())
                     .then(r => r.json())
                     .then(v_data => {
                         const hud = document.querySelector('.hud');
                         if (hud) {
                             setInterval(() => {
-                                
-                                const v = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
-                                const ratio = state.mouthRatio.toFixed(2);
+                                const v_val = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
+                                const r_val = state.mouthRatio ? state.mouthRatio.toFixed(2) : "0.00";
                                 const vowel = state.detectedVowel || "None";
                                 hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
-                                              `V: ${v} | Ratio: ${ratio} | VOWEL: <b>${vowel}</b><br>` +
+                                              `V: ${v_val} | Ratio: ${r_val} | VOWEL: <b>${vowel}</b><br>` +
                                               `[H] KEY: SMILE TOGGLE`;
-    
                             }, 50);
                         }
                     });
+                
                 
                 
                 
