@@ -24,7 +24,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.97 (2026-04-18 06:35:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.98 (2026-04-18 06:45:00)</div>
 
     <div class="settings-panel">
 <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -277,9 +277,9 @@
                     ctx.save(); ctx.globalAlpha = 0.95;
                     ctx.translate(400 + bx, 400 + by + pY * gs + state.bHeadY * gs); ctx.rotate(rot);
                     // Apply dedicated adjustments for Brows during smile
-                    ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + 5 + (state.browY || 0)) * gs);
+                    ctx.translate((isLeft ? -state.eyeX : state.eyeX) * gs, (state.eyeY - pY + (state.browY || 0)) * gs);
                     ctx.rotate(isLeft ? -(state.browTilt || 0) : (state.browTilt || 0));
-                    ctx.scale(state.eyeSize * gs * 0.65, state.eyeSize * gs * 0.65);
+                    ctx.scale(state.eyeSize * gs * 0.88, state.eyeSize * gs * 0.88);
                     ctx.drawImage(happyImg, -happyImg.width/2, -happyImg.height/2);
                     ctx.restore();
                 } else {
@@ -289,7 +289,7 @@
             drawEye(true); drawEye(false);
 
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mf = 0, det = "CLOSED", ms = isSmiling ? (0.43 + state.smileDegree * 0.04) : 0.41;
+            let mf = 0, det = "CLOSED", ms = isSmiling ? (0.46 + state.smileDegree * 0.08) : 0.41;
             if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.82; }
             else if (v >= state.thresE) { mf = 1; det = "E"; }
             else if (v >= state.thresI) { mf = 4; det = "I"; }
