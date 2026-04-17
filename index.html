@@ -230,12 +230,19 @@
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameL, isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameR, isEyes: true, flip: false });
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mouthCol = v > 0.3 ? 2 : (v > 0.1 ? 1 : 0);
-            let mouthRow = state.isHappy ? 1 : 0;
-            let mFrame = mouthRow * 3 + mouthCol;
-            let mScale = state.isHappy ? 0.48 : 0.45;
-            drawPart(images.mouthUni, { y: state.mouthY, scaleX:mScale, scaleY:mScale, frame: mFrame, isMouth: true });
+            let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
+            
+            if (v >= 0.22) { mf = 7; det = "A"; ms *= 0.9; }
+            else if (v >= 0.15) { mf = 1; det = "E"; }
+            else if (v >= 0.10) { mf = 4; det = "I"; }
+            else if (v >= 0.06) { mf = 6; det = "O"; }
+            else if (v >= 0.02) { mf = 6; det = "U"; ms *= 0.5; }
+            else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
+            
+            drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
+
         }
 
         function animate() {

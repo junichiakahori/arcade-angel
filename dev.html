@@ -58,7 +58,7 @@
             detectedVowel: "CLOSED"
         };
         const images = {};
-        let v_data = { current_version: "v0.15.15", last_updated: "2026-04-17" };
+        let v_data = { current_version: "v0.15.10", last_updated: "2026-04-17" };
 
         function saveSettings() {
             const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
@@ -129,7 +129,8 @@
             
             
             
-            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.15)
+            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.10)
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
             
@@ -140,10 +141,8 @@
             else if (v >= 0.02) { mf = 6; det = "U"; ms *= 0.5; }
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             
-            state.detectedVowel = det;
-
-            
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
+
     
     
         }
