@@ -177,6 +177,7 @@
         
         
         
+        
         function drawFoxEar(ctx, x, y, rot, flip, onlyBand = false) {
             if (!images.foxEars || !images.foxEars.complete) return;
             const gs = state.globalScale;
@@ -186,11 +187,24 @@
             ctx.rotate(state.curRot * 0.82);
             
             if (onlyBand) {
-                ctx.scale(gs * 0.46, gs * 0.46);
-                ctx.drawImage(images.foxEars, -iw/2, -ih/2 + 25); 
+                ctx.scale(gs * 0.58, gs * 0.58);
+                ctx.drawImage(images.foxEars, -iw/2, -ih/2 + 40); 
                 ctx.restore();
                 return;
             }
+
+            ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
+            ctx.rotate(rot + (flip ? 0.25 : -0.25));
+            ctx.scale(gs * 0.58, gs * 0.58);
+            
+            if (!flip) {
+                ctx.drawImage(images.foxEars, 40, 40, 460, 650, -230, -500, 460, 650);
+            } else {
+                ctx.drawImage(images.foxEars, 510, 40, 460, 650, -230, -500, 460, 650);
+            }
+            ctx.restore();
+        }
+
 
             ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
             ctx.rotate(rot);
@@ -228,7 +242,7 @@
             }
             
                         
-            if (state.foxMode) { drawFoxEar(ctx, -160, -335, 0, false, true); }
+            if (state.foxMode) { drawFoxEar(ctx, -160, -315, 0, false, true); }
             drawPart(images.face, { isFace: true });
 
             const isSmiling = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
@@ -267,7 +281,7 @@
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
             
-            if (state.foxMode) { drawFoxEar(ctx, -160, -335, state.earL_rot + state.earTwitchL, false, false); drawFoxEar(ctx, 160, -335, -state.earR_rot - state.earTwitchR, true, false); }
+            if (state.foxMode) { drawFoxEar(ctx, -160, -315, state.earL_rot + state.earTwitchL, false, false); drawFoxEar(ctx, 160, -315, -state.earR_rot - state.earTwitchR, true, false); }
             const hud = document.querySelector('.hud');
             if (hud && v_data) {
                 const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
