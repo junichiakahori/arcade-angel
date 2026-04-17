@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.55",
-  "last_updated": "2026-04-17 19:24:00",
+  "current_version": "v0.15.57",
+  "last_updated": "2026-04-17 19:28:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.57",
+      "date": "2026-04-17 19:28:00",
+      "notes": "DYNAMIC SYNCHRONIZATION: Linked the 'Ultimate Smile' eyes tighter to the physical smile degree. The moon-shaped eye assets now only trigger when a genuine smile is detected (SMILE > 50%), preventing the character from having 'permanent happy eyes' while talking normally."
+    },
     {
       "version": "v0.15.55",
       "date": "2026-04-17 19:24:00",

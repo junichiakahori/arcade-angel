@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.56</title>
+    <title>Arcade Angel - Portable Puppet v0.15.57</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -25,7 +25,7 @@
             document.write('<style>.dev-only { display: block; }</style>');
         }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.56 (Loading...)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.57 (Loading...)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -222,7 +222,7 @@
                         const eyeDist = Math.abs(lm[33].x - lm[263].x);
                         state.smileRaw = mouthWidth / eyeDist;
                         state.smileDegree = Math.max(0, Math.min(1, (state.smileRaw - (state.smileSens/100)) / 0.2));
-                        if (state.autoSmile) state.isHappy = state.smileDegree > 0.3;
+                        if (state.autoSmile) state.isHappy = state.smileDegree > 0.5;
                     }
                 });
                 const cam = new Camera(document.getElementById('webcam'), { onFrame: async () => await fm.send({ image: document.getElementById('webcam') }), width: 640, height: 480 });
