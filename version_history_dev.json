@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.35",
-  "last_updated": "2026-04-17 17:42:00",
+  "current_version": "v0.15.36",
+  "last_updated": "2026-04-17 17:47:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.36",
+      "date": "2026-04-17 17:47:00",
+      "notes": "FIX: Removed duplicate 'const' declarations in drawPart that caused SyntaxErrors. Shoulders now locked and code is stable."
+    },
     {
       "version": "v0.15.35",
       "date": "2026-04-17 17:42:00",
