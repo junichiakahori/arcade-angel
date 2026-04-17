@@ -1,10 +1,10 @@
 {
-  "current_version": "v0.15.32",
+  "current_version": "v0.15.33",
   "last_updated": "2026-04-17 16:34:00",
   "status": "DEVELOPMENT",
   "history": [
     {
-      "version": "v0.15.32",
+      "version": "v0.15.33",
       "date": "2026-04-17 16:34:00",
       "notes": "FIX: Linked internal vowel detection to state.detectedVowel for real-time HUD reporting."
     },
