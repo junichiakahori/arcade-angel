@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.111",
-  "last_updated": "2026-04-18 08:35:00",
+  "current_version": "v0.15.112",
+  "last_updated": "2026-04-18 08:40:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.112",
+      "date": "2026-04-18 08:40:00",
+      "notes": "ABSOLUTE DEDUPLICATION (v0.15.112): Resolved persistent 'hud' redeclaration errors by performing a full-file line scan and stripping all redundant variable definitions. Verified only one 'hud' constant exists in the global/render scope."
+    },
     {
       "version": "v0.15.111",
       "date": "2026-04-18 08:35:00",
