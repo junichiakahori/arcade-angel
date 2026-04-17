@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.82",
-  "last_updated": "2026-04-18 00:15:00",
+  "current_version": "v0.15.83",
+  "last_updated": "2026-04-18 00:18:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.83",
+      "date": "2026-04-18 00:18:00",
+      "notes": "SYNTAX RECOVERY (v0.15.83): Cleaned up corrupted JS code in the processAlpha function area. Stability restored."
+    },
     {
       "version": "v0.15.82",
       "date": "2026-04-18 00:15:00",
