@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.37",
-  "last_updated": "2026-04-17 17:49:00",
+  "current_version": "v0.15.38",
+  "last_updated": "2026-04-17 17:53:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.38",
+      "date": "2026-04-17 17:53:00",
+      "notes": "URGENT REPAIR: ABANDONED layer-splitting (too experimental/gory). Replaced with ultra-stable torso multipliers and deep pivot for a unified, elegant shoulder lock."
+    },
     {
       "version": "v0.15.37",
       "date": "2026-04-17 17:49:00",
