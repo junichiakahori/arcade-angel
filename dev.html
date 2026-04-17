@@ -58,7 +58,7 @@
             detectedVowel: "CLOSED"
         };
         const images = {};
-        let v_data = { current_version: "v0.15.22", last_updated: "2026-04-17" };
+        let v_data = { current_version: "v0.15.23", last_updated: "2026-04-17" };
 
         function saveSettings() {
             const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
@@ -102,7 +102,7 @@
             else { sw = img.width; sh = img.height; sx = 0; sy = 0; }
             
             ctx.save();
-            // --- SHOULDER LOCK LOGIC (v0.15.21) ---
+            // --- SHOULDER LOCK LOGIC (v0.15.23) ---
             let hX = state.curX * gs * 0.8;
             let hY = state.curY * gs * 0.8;
             // 1. Pivot point moved to the bottom of the image (450px offset)
@@ -137,7 +137,7 @@
             
             
             
-            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.21)
+            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.23)
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;

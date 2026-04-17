@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.22",
-  "last_updated": "2026-04-17 16:08:00",
+  "current_version": "v0.15.23",
+  "last_updated": "2026-04-17 16:10:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.23",
+      "date": "2026-04-17 16:10:00",
+      "notes": "FIX: Physically separated Prod/Dev history files to ensure index.html stays at v0.15.10."
+    },
     {
       "version": "v0.15.22",
       "date": "2026-04-17 16:08:00",

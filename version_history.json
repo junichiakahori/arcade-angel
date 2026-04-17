@@ -1,27 +1,11 @@
 {
-  "current_version": "v0.15.22",
-  "last_updated": "2026-04-17 16:08:00",
-  "status": "DEVELOPMENT",
+  "current_version": "v0.15.10",
+  "last_updated": "2026-04-17 13:05:00",
   "history": [
-    {
-      "version": "v0.15.22",
-      "date": "2026-04-17 16:08:00",
-      "notes": "FIX: Restored last_updated timestamp to Dev HUD and added it to Project Charter."
-    },
-    {
-      "version": "v0.15.21",
-      "date": "2026-04-17 16:07:00",
-      "notes": "EXPERIMENTAL: Re-implemented Shoulder Lock logic in dev.html with ultra-low pivot (450px) for maximum torso stability."
-    },
-    {
-      "version": "v0.15.20",
-      "date": "2026-04-17 15:58:00",
-      "notes": "ADVANCED DEV: Shoulder Lock, Low-Pivot tilting, and Full-Body test platform."
-    },
     {
       "version": "v0.15.10",
       "date": "2026-04-17 13:05:00",
-      "notes": "STABLE PROD: Finalized 5-vowel lip-sync thresholds and bust-up stability."
+      "notes": "STABLE PRODUCTION RELEASE: Finalized 5-vowel lip-sync and eye stabilization."
     }
   ]
 }
