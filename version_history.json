@@ -1,17 +1,17 @@
 {
-  "current_version": "v1.5.0",
+  "current_version": "v0.15.3",
   "last_updated": "2026-04-17 13:05:00",
-  "status": "STABLE",
+  "status": "BETA-STABLE",
   "history": [
     {
-      "version": "v1.5.0",
+      "version": "v0.15.3",
       "date": "2026-04-17 13:05:00",
-      "notes": "Grand restoration & stable facial assets release."
+      "notes": "Stable beta release with surgical cleanup."
     },
     {
-      "version": "v1.0.0",
+      "version": "v0.15.0",
       "date": "2026-04-15 00:00:00",
-      "notes": "Legacy origin."
+      "notes": "Asset cleanup phase start."
     }
   ]
 }
