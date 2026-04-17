@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.70",
-  "last_updated": "2026-04-17 22:35:00",
+  "current_version": "v0.15.71",
+  "last_updated": "2026-04-17 22:45:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.71",
+      "date": "2026-04-17 22:45:00",
+      "notes": "TOP-LAYER EAR RENDERING (v0.15.71): Moved fox ears to the top-most rendering layer to prevent them from being hidden by the character's voluminous hair. Adjusted X/Y coordinates for better visibility and increased inner-ear contrast."
+    },
     {
       "version": "v0.15.70",
       "date": "2026-04-17 22:35:00",
