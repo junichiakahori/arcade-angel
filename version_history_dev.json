@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.23",
-  "last_updated": "2026-04-17 16:10:00",
+  "current_version": "v0.15.24",
+  "last_updated": "2026-04-17 16:12:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.24",
+      "date": "2026-04-17 16:12:00",
+      "notes": "STRICT FIX: Final restoration of Dev HUD timestamp and robust data-binding."
+    },
     {
       "version": "v0.15.23",
       "date": "2026-04-17 16:10:00",

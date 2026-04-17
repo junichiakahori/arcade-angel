@@ -58,7 +58,7 @@
             detectedVowel: "CLOSED"
         };
         const images = {};
-        let v_data = { current_version: "v0.15.23", last_updated: "2026-04-17" };
+        let v_data = { current_version: "v0.15.24", last_updated: "2026-04-17" };
 
         function saveSettings() {
             const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
@@ -102,7 +102,7 @@
             else { sw = img.width; sh = img.height; sx = 0; sy = 0; }
             
             ctx.save();
-            // --- SHOULDER LOCK LOGIC (v0.15.23) ---
+            // --- SHOULDER LOCK LOGIC (v0.15.24) ---
             let hX = state.curX * gs * 0.8;
             let hY = state.curY * gs * 0.8;
             // 1. Pivot point moved to the bottom of the image (450px offset)
@@ -137,7 +137,7 @@
             
             
             
-            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.23)
+            // ULTIMATE 5-VOWEL LIPSYNC ENGINE (v0.15.24)
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
@@ -194,15 +194,19 @@
             try {
                 const [assets, h_data] = await Promise.all([
                     fetch('assets.json?v=' + Date.now()).then(r => r.json()),
-                    fetch('version_history_dev.json?v=' + Date.now()).then(r => r.json()).catch(() => v_data)
-                ]);
-                v_data = h_data;
-                for (let k in assets) {
-                    const i = new Image(); i.src = assets[k];
-                    await new Promise(res => i.onload = res);
-                    images[k] = await processAlpha(i, k === 'face');
-                }
-                const fm = new FaceMesh({ locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}` });
+                    
+                // [STRICT DEV HUD] Fetch from DEV history
+                fetch('version_history_dev.json?v=' + Date.now())
+                    .then(r => r.json())
+                    .then(v_data => {
+                        const hud = document.querySelector('.hud');
+                        if (hud) {
+                            hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
+                                          `VOICE: <span id="vStatus">OFFLINE</span><br>` +
+                                          `[H] KEY: SMILE TOGGLE`;
+                        }
+                    });
+
                 fm.setOptions({ maxNumFaces: 1, refineLandmarks: true, minDetectionConfidence: 0.8, minTrackingConfidence: 0.8 });
                 fm.onResults(res => {
                     if (res.multiFaceLandmarks && res.multiFaceLandmarks[0]) {
