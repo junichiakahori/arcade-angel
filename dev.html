@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.92</title>
+    <title>Arcade Angel - Portable Puppet v0.15.93</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.92 (2026-04-17 23:05:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.93 (2026-04-17 23:05:00)</div>
 
     <div class="settings-panel">
         <div class="btn" style="background: #0088FF44; font-weight: bold;" onclick="switchVersion()">SWITCH VERSION (To Stable)</div>
@@ -31,19 +31,19 @@
         <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112" oninput="updateState('eyeX', this.value)"></div>
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
         
-        <div class="control-group"><label style="color:#00FF88">BROW POS Y (Happy)</label><div class="row"><input type="range" id="browY" min="-50" max="50" value="5"><input type="number" id="browY_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#00FF88">BROW TILT (Happy)</label><div class="row"><input type="range" id="browTilt" min="-0.5" max="0.5" step="0.01" value="0"><input type="number" id="browTilt_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#00FF88">BROW POS Y (Happy)</label><div class="row"><input type="range" id="browY" min="-50" max="50" value="5" oninput="syncUI('browY', this.value)"><input type="number" id="browY_num" class="num-in" oninput="syncUI('browY', this.value)"></div></div>
+        <div class="control-group"><label style="color:#00FF88">BROW TILT (Happy)</label><div class="row"><input type="range" id="browTilt" min="-0.5" max="0.5" step="0.01" value="0" oninput="syncUI('browTilt', this.value)"><input type="number" id="browTilt_num" class="num-in" oninput="syncUI('browTilt', this.value)"></div></div>
             
-        <div class="control-group"><label style="color:#00AAFF">BREATH SPEED</label><div class="row"><input type="range" id="breathSpeed" min="0" max="3" step="0.1" value="1.0"></div></div>
-        <div class="control-group"><label style="color:#00AAFF">BREATH SCALE</label><div class="row"><input type="range" id="breathScale" min="0" max="5" step="0.1" value="1.0"></div></div>
+        <div class="control-group"><label style="color:#00AAFF">BREATH SPEED</label><div class="row"><input type="range" id="breathSpeed" min="0" max="3" step="0.1" value="1.0" oninput="syncUI('breathSpeed', this.value)"></div></div>
+        <div class="control-group"><label style="color:#00AAFF">BREATH SCALE</label><div class="row"><input type="range" id="breathScale" min="0" max="5" step="0.1" value="1.0" oninput="syncUI('breathScale', this.value)"></div></div>
             <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
-        <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="30" max="90" value="58"><input type="number" id="smileSens_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="600"><input type="number" id="pivotY_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="27"><input type="number" id="thresA_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18"><input type="number" id="thresE_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="14"><input type="number" id="thresI_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5"><input type="number" id="thresO_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="11"><input type="number" id="thresU_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="30" max="90" value="58" oninput="syncUI('smileSens', this.value)"><input type="number" id="smileSens_num" class="num-in" oninput="syncUI('smileSens', this.value)"></div></div>
+        <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="600" oninput="syncUI('pivotY', this.value)"><input type="number" id="pivotY_num" class="num-in" oninput="syncUI('pivotY', this.value)"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="27" oninput="syncUI('thresA', this.value)"><input type="number" id="thresA_num" class="num-in" oninput="syncUI('thresA', this.value)"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18" oninput="syncUI('thresE', this.value)"><input type="number" id="thresE_num" class="num-in" oninput="syncUI('thresE', this.value)"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="14" oninput="syncUI('thresI', this.value)"><input type="number" id="thresI_num" class="num-in" oninput="syncUI('thresI', this.value)"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5" oninput="syncUI('thresO', this.value)"><input type="number" id="thresO_num" class="num-in" oninput="syncUI('thresO', this.value)"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="11" oninput="syncUI('thresU', this.value)"><input type="number" id="thresU_num" class="num-in" oninput="syncUI('thresU', this.value)"></div></div>
         <div id="smileBtn" class="btn" onclick="toggleSmile()">MODE: SMILE</div>
         <div class="row">
             <div class="btn" onclick="exportProfile()">EXPORT</div>
@@ -73,7 +73,7 @@
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: false, skinTone: 0, costume: 'none', isVoiceReady: false, 
             thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.11, 
-            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0, breathPhase: 0, breathSpeed: 1.0, breathScale: 1.0, foxMode: false, earL_rot: 0, earR_rot: 0, earTwitchL: 0, earTwitchR: 0, earPhase: 0
+            pivotY: 600, smileSens: 0.58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0, breathPhase: 0, breathSpeed: 1.0, breathScale: 1.0, foxMode: false, earL_rot: 0, earR_rot: 0, earTwitchL: 0, earTwitchR: 0, earPhase: 0
         };
         
         const images = {
@@ -108,13 +108,13 @@
                 const p = JSON.parse(raw);
                 Object.assign(state, p);
                 Object.keys(p).forEach(k => {
-                    const el = document.getElementById(k); if (el) el.value = k.startsWith('thres') ? p[k]*100 : p[k];
-                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = k.startsWith('thres') ? p[k]*100 : p[k];
+                    const el = document.getElementById(k); if (el) el.value = (k.startsWith('thres') || k === 'smileSens') ? p[k]*100 : p[k];
+                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = (k.startsWith('thres') || k === 'smileSens') ? p[k]*100 : p[k];
                 });
             }
         }
         function syncUI(key, val) {
-            if (key.startsWith('thres')) state[key] = parseFloat(val) / 100; else state[key] = parseFloat(val);
+            if (key.startsWith('thres') || key === 'smileSens') state[key] = parseFloat(val) / 100; else state[key] = parseFloat(val);
             const sl = document.getElementById(key); if (sl) sl.value = val;
             const nm = document.getElementById(key + '_num'); if (nm) nm.value = val;
             saveToLocal();
