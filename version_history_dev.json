@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.42",
-  "last_updated": "2026-04-17 18:12:00",
+  "current_version": "v0.15.43",
+  "last_updated": "2026-04-17 18:22:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.43",
+      "date": "2026-04-17 18:22:00",
+      "notes": "PERSONALIZATION: Added 'SMILE SENS' slider. Users can now calibrate how much they need to smile physically to trigger the puppet's happy mode."
+    },
     {
       "version": "v0.15.42",
       "date": "2026-04-17 18:12:00",

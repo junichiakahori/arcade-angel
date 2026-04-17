@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.42</title>
+    <title>Arcade Angel - Portable Puppet v0.15.43</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.42 (Updated: 2026-04-17 18:12:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.43 (Updated: 2026-04-17 18:22:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -37,6 +37,7 @@
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
         <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
         
+        <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="50" max="100" value="70"><input type="number" id="smileSens_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="450"><input type="number" id="pivotY_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="22"><input type="number" id="thresA_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="15"><input type="number" id="thresE_num" class="num-in"></div></div>
@@ -255,7 +256,7 @@
             state.detectedVowel = det; // --- FINAL LINK: Update debug display ---
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.42) ---
+            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.43) ---
             const hud = document.querySelector('.hud');
             if (hud && typeof v_data !== 'undefined' && v_data.current_version) {
                 let v_val = state.voiceVol.toFixed(2);
@@ -326,17 +327,17 @@
                         state.tgtY = (lm[1].y - 0.5) * 400;
                         state.tgtRot = Math.atan2(lm[152].x - lm[10].x, lm[152].y - lm[10].y) * -1;
 
-                        // --- RADIANT SMILE DETECTION (v0.15.42) ---
+                        // --- RADIANT SMILE DETECTION (v0.15.43) ---
                         // Distance between lip corners
                         const mouthWidth = Math.abs(lm[61].x - lm[291].x);
                         const eyeDist = Math.abs(lm[33].x - lm[263].x);
                         // Smile score based on width relative to eyes
                         const smileRatio = mouthWidth / eyeDist;
-                        state.smileDegree = Math.max(0, Math.min(1, (smileRatio - 0.7) / 0.2));
+                        state.smileDegree = Math.max(0, Math.min(1, (smileRatio - (state.smileSens/100)) / 0.2));
                         
                         // Auto-switch to Happy mode if smiling detected
                         if (state.autoSmile) {
-                            state.isHappy = state.smileDegree > 0.4;
+                            state.isHappy = state.smileDegree > 0.3;
                         }
 
                     }
@@ -369,7 +370,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.42) ---
+        // --- ADVANCED UI BINDING (v0.15.43) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;
@@ -378,7 +379,7 @@
             saveToLocal();
         }
         
-        ['thresA', 'thresE', 'thresI', 'thresO', 'thresU', 'pivotY'].forEach(k => {
+        ['thresA', 'thresE', 'thresI', 'thresO', 'thresU', 'pivotY', 'smileSens'].forEach(k => {
             const sl = document.getElementById(k);
             const nm = document.getElementById(k + '_num');
             if (sl) sl.oninput = (e) => syncUI(k, e.target.value);
@@ -392,7 +393,7 @@
         function saveToLocal() {
             const p = { 
                 eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone,
-                thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU, pivotY: state.pivotY
+                thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU, pivotY: state.pivotY, smileSens: state.smileSens
             };
             localStorage.setItem('arcade_angel_dev_profile', JSON.stringify(p));
         }
