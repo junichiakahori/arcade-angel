@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.112",
-  "last_updated": "2026-04-18 08:40:00",
+  "current_version": "v0.15.113",
+  "last_updated": "2026-04-18 08:45:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.113",
+      "date": "2026-04-18 08:45:00",
+      "notes": "CALIBRATION TWEAK (v0.15.113): Adjusted THRES U initial value from 11 to 2 to improve default mouth shape mapping for 'U' sounds, making the puppet's speech more expressive out of the box."
+    },
     {
       "version": "v0.15.112",
       "date": "2026-04-18 08:40:00",
