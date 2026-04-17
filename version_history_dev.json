@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.78",
-  "last_updated": "2026-04-17 23:40:00",
+  "current_version": "v0.15.81",
+  "last_updated": "2026-04-18 00:10:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.81",
+      "date": "2026-04-18 00:10:00",
+      "notes": "CRITICAL FIX & ILLUSTRATION RE-SYMBIO (v0.15.81): Successfully resolved code corruption and asset loading failures. Fox ears are now powered by the high-detail AI illustration with perfect chroma-key transparency."
+    },
     {
       "version": "v0.15.78",
       "date": "2026-04-17 23:40:00",
