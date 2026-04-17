@@ -166,21 +166,37 @@
         
         
         
+        
         function drawFoxEar(ctx, x, y, rot, flip, onlyBand = false) {
+            if (!images.foxEars || !images.foxEars.complete) return;
             const gs = state.globalScale;
+            const iw = images.foxEars.width, ih = images.foxEars.height;
             ctx.save();
             ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
             ctx.rotate(state.curRot * 0.82);
             
             if (onlyBand) {
-                ctx.beginPath();
-                ctx.arc(0, (y - (state.pivotY || 600) + 185) * gs, 158 * gs, Math.PI * 1.15, Math.PI * 1.85);
-                ctx.strokeStyle = "#111";
-                ctx.lineWidth = 8 * gs;
-                ctx.stroke();
+                ctx.scale(gs * 0.46, gs * 0.46);
+                ctx.drawImage(images.foxEars, -iw/2, -ih/2 + 25); 
                 ctx.restore();
                 return;
             }
+
+            ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
+            ctx.rotate(rot);
+            ctx.scale(gs * 0.46, gs * 0.46);
+            
+            if (!flip) {
+                // Part of the image corresponding to Left Ear
+                ctx.drawImage(images.foxEars, 100, 100, 420, 500, -210, -350, 420, 500);
+            } else {
+                // Part of the image corresponding to Right Ear
+                ctx.drawImage(images.foxEars, 510, 100, 420, 500, -210, -350, 420, 500);
+            }
+            
+            ctx.restore();
+        }
+
 
             ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
             ctx.rotate(rot + (flip ? 0.38 : -0.38)); 
@@ -244,7 +260,7 @@
             }
             
                         
-            if (state.foxMode) { drawFoxEar(ctx, -155, -345, 0, false, true); }
+            if (state.foxMode) { drawFoxEar(ctx, -160, -335, 0, false, true); }
             drawPart(images.face, { isFace: true });
 
             const isSmiling = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
@@ -283,7 +299,7 @@
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
             
-            if (state.foxMode) { drawFoxEar(ctx, -155, -345, state.earL_rot + state.earTwitchL, false, false); drawFoxEar(ctx, 155, -345, -state.earR_rot - state.earTwitchR, true, false); }
+            if (state.foxMode) { drawFoxEar(ctx, -160, -335, state.earL_rot + state.earTwitchL, false, false); drawFoxEar(ctx, 160, -335, -state.earR_rot - state.earTwitchR, true, false); }
             const hud = document.querySelector('.hud');
             if (hud && v_data) {
                 const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
