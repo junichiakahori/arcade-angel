@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.66</title>
+    <title>Arcade Angel - Portable Puppet v0.15.67</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.66 (2026-04-17 20:07:00)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.67 (2026-04-17 20:47:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -33,7 +33,7 @@
         <div class="control-group"><label style="color:#00FF88">BROW POS Y (Happy)</label><div class="row"><input type="range" id="browY" min="-50" max="50" value="5"><input type="number" id="browY_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#00FF88">BROW TILT (Happy)</label><div class="row"><input type="range" id="browTilt" min="-0.5" max="0.5" step="0.01" value="0"><input type="number" id="browTilt_num" class="num-in"></div></div>
             <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
-        <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="50" max="100" value="70"><input type="number" id="smileSens_num" class="num-in"></div></div>
+        <div class="control-group"><label style="color:#FFAA00">SMILE SENS (Auto-Happy)</label><div class="row"><input type="range" id="smileSens" min="30" max="90" value="58"><input type="number" id="smileSens_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#00FF88">ROT PIVOT Y (Depth)</label><div class="row"><input type="range" id="pivotY" min="0" max="600" value="600"><input type="number" id="pivotY_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="27"><input type="number" id="thresA_num" class="num-in"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="18"><input type="number" id="thresE_num" class="num-in"></div></div>
@@ -68,7 +68,7 @@
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: false, skinTone: 0, costume: 'none', isVoiceReady: false, 
             thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.11, 
-            pivotY: 600, smileSens: 70, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0
+            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0
         };
         
         const images = {

@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.66",
-  "last_updated": "2026-04-17 20:07:00",
+  "current_version": "v0.15.67",
+  "last_updated": "2026-04-17 20:47:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.67",
+      "date": "2026-04-17 20:47:00",
+      "notes": "SMILE CALIBRATION (v0.15.67): Adjusted default SMILE SENS from 70 to 58 based on mobile Safari telemetry (0.55 neutral / 0.75 smile). This ensures responsive emotional switching on front-facing cameras with different focal lengths."
+    },
     {
       "version": "v0.15.66",
       "date": "2026-04-17 20:07:00",
