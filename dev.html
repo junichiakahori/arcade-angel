@@ -35,7 +35,9 @@
         <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="30"><input type="number" id="thresA_num" class="num-in" step="0.01"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="19"><input type="number" id="thresE_num" class="num-in" step="0.01"></div></div>
         <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="13"><input type="number" id="thresI_num" class="num-in" step="0.01"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES O/U (Pout)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="5"><input type="number" id="thresO_num" class="num-in" step="0.01"></div></div>
+        
+        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="8"><input type="number" id="thresO_num" class="num-in" step="0.01"></div></div>
+        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="2"><input type="number" id="thresU_num" class="num-in" step="0.01"></div></div>
 
         <div id="smileBtn" class="btn">MODE: SMILE</div>
         <div class="row">
@@ -59,7 +61,7 @@
             eyeL: 1, eyeR: 1, mouthOpen: 0, mouthRatio: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.75,
             isHappy: true, skinTone: 0, costume: 'none',
-            thresA: 0.30, thresE: 0.19, thresI: 0.13, thresO: 0.05,
+            thresA: 0.30, thresE: 0.19, thresI: 0.13, thresO: 0.08, thresU: 0.02,
             detectedVowel: "CLOSED", rMin: 1.0, rMax: 0.0
         };
 
@@ -67,7 +69,7 @@
         let v_data = { current_version: "v0.15.3", last_updated: "2026-04-17" };
 
         function saveSettings() {
-            const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO };
+            const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
             localStorage.setItem('arcade_angel_dev_settings', JSON.stringify(p));
         }
 
@@ -140,14 +142,17 @@
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFr(state.eyeL, state.isHappy), isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFr(state.eyeR, state.isHappy), isEyes: true, flip: false });
 
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFr = 0; let det = "CLOSED";
             if (v >= state.thresA) { mFr = 2; det = "A"; }
             else if (v >= state.thresE) { mFr = 1; det = "E"; }
             else if (v >= state.thresI) { mFr = 4; det = "I"; }
-            else if (v >= state.thresO) { mFr = 6; det = "O/U"; }
+            else if (v >= state.thresO) { mFr = 7; det = "O"; }
+            else if (v >= state.thresU) { mFr = 6; det = "U"; }
             else { mFr = state.isHappy ? 3 : 0; det = "CLOSED"; }
             state.detectedVowel = det;
+    
 
             let mSc = state.isHappy ? 0.48 : 0.45;
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:mSc, scaleY:mSc, frame: mFr, isMouth: true });
@@ -182,7 +187,7 @@
                 nm.value = sl.value;
             };
             ['eyeY', 'eyeX', 'eyeSize', 'mouthY', 'skinTone'].forEach(id => bind(id, id));
-            ['thresA', 'thresE', 'thresI', 'thresO'].forEach(id => bind(id, id, 100));
+            ['thresA', 'thresE', 'thresI', 'thresO', 'thresU'].forEach(id => bind(id, id, 100));
             document.getElementById('smileBtn').onclick = () => {
                 state.isHappy = !state.isHappy;
                 document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
