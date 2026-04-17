@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.102",
-  "last_updated": "2026-04-18 07:00:00",
+  "current_version": "v0.15.104",
+  "last_updated": "2026-04-18 07:20:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.104",
+      "date": "2026-04-18 07:20:00",
+      "notes": "STABILITY PATCH (v0.15.104): Wrapped all network fetches in try-catch blocks to prevent script failure when running via file:// protocol. Added detailed local server instructions to the start overlay."
+    },
     {
       "version": "v0.15.102",
       "date": "2026-04-18 07:00:00",
