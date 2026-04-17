@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.72</title>
+    <title>Arcade Angel - Portable Puppet v0.15.73</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.72 (2026-04-17 22:48:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.73 (2026-04-17 22:58:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -164,46 +164,53 @@
 
 
         
+        
         function drawFoxEar(ctx, x, y, rot, flip) {
             const gs = state.globalScale;
             ctx.save();
             ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
             ctx.rotate(state.curRot * 0.82);
+            
+            if (!flip) {
+                ctx.beginPath();
+                ctx.arc(0, (y - (state.pivotY || 600) + 100) * gs, 153 * gs, Math.PI * 1.15, Math.PI * 1.85);
+                ctx.strokeStyle = '#111';
+                ctx.lineWidth = 7 * gs;
+                ctx.stroke();
+            }
+
             ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
-            ctx.rotate(rot); 
+            ctx.rotate(rot + (flip ? 0.35 : -0.35)); 
             ctx.scale(gs * (flip ? -1 : 1), gs);
 
             ctx.beginPath();
-            ctx.moveTo(-60, 80);
-            ctx.bezierCurveTo(-65, -100, -20, -140, 10, -150);
-            ctx.bezierCurveTo(40, -140, 70, -80, 60, 80);
+            ctx.moveTo(-70, 60);
+            ctx.bezierCurveTo(-85, -80, -35, -120, 20, -135);
+            ctx.bezierCurveTo(65, -125, 95, -60, 85, 60);
             ctx.closePath();
             
-            const mainGrad = ctx.createLinearGradient(0, -150, 0, 80);
+            const mainGrad = ctx.createLinearGradient(0, -135, 0, 60);
             mainGrad.addColorStop(0, '#FFFFFF');
-            mainGrad.addColorStop(0.7, '#F0F5FF');
             mainGrad.addColorStop(1, '#D0E0FF');
             ctx.fillStyle = mainGrad;
             ctx.fill();
             
             ctx.save();
             ctx.beginPath();
-            ctx.moveTo(-35, 60);
-            ctx.quadraticCurveTo(-35, -50, 0, -100);
-            ctx.quadraticCurveTo(35, -50, 35, 60);
+            ctx.moveTo(-45, 40); ctx.quadraticCurveTo(0, -95, 45, 40);
             ctx.clip();
-            ctx.fillStyle = 'rgba(255, 180, 220, 0.4)';
+            ctx.fillStyle = 'rgba(255, 185, 225, 0.6)';
             ctx.fill();
-            
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.lineWidth = 5;
-            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#FFF'; ctx.lineWidth = 6;
             for(let i=0; i<3; i++) {
-                ctx.beginPath();
-                ctx.moveTo(-25 + i * 20, 80);
-                ctx.quadraticCurveTo(-15 + i * 15, 0, 15 + i * 10, -70);
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(-35 + i*35, 70); ctx.quadraticCurveTo(0, -20, i*15, -65); ctx.stroke();
             }
+            ctx.restore();
+
+            ctx.strokeStyle = '#B0C8FF'; ctx.lineWidth = 4; ctx.stroke();
+            ctx.restore();
+        }
+
             ctx.restore();
 
             ctx.strokeStyle = '#D0E0FF';
@@ -273,7 +280,7 @@
             state.detectedVowel = det;
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            if (state.foxMode) { drawFoxEar(ctx, -110, -230, state.earL_rot + state.earTwitchL, false); drawFoxEar(ctx, 110, -230, -state.earR_rot - state.earTwitchR, true); }
+            if (state.foxMode) { drawFoxEar(ctx, -150, -215, state.earL_rot + state.earTwitchL, false); drawFoxEar(ctx, 150, -215, -state.earR_rot - state.earTwitchR, true); }
             const hud = document.querySelector('.hud');
             if (hud && v_data) {
                 const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
