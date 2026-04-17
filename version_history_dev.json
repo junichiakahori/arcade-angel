@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.54",
-  "last_updated": "2026-04-17 19:22:00",
+  "current_version": "v0.15.55",
+  "last_updated": "2026-04-17 19:24:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.55",
+      "date": "2026-04-17 19:24:00",
+      "notes": "PIXEL WARP REVOLUTION: Replaced vector smile eyes with a dynamic 'Pixel Strip Warp' on the original closed-eye asset (Frame 15). This ensures that every eyelash detail, color, and texture is 100% faithful to the character, while achieving the desired crescent smile shape."
+    },
     {
       "version": "v0.15.54",
       "date": "2026-04-17 19:22:00",
