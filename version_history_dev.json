@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.87",
-  "last_updated": "2026-04-18 00:40:00",
+  "current_version": "v0.15.88",
+  "last_updated": "2026-04-18 00:50:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.88",
+      "date": "2026-04-18 00:50:00",
+      "notes": "CLEAN LAYERING (v0.15.88): Implemented precise cropping for the headband layer. Removed phantom ear artifacts appearing at the bottom of the screen by isolating the structural arc of the asset."
+    },
     {
       "version": "v0.15.87",
       "date": "2026-04-18 00:40:00",
