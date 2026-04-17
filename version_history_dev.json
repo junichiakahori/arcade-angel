@@ -6,12 +6,32 @@
     {
       "version": "v0.15.3",
       "date": "2026-04-17 13:05:00",
-      "notes": "Advanced Lip-sync engine and beauty patches."
+      "notes": "Advanced Lip-sync engine with vowel-ratio-based detection (A-I-U-E-O)."
+    },
+    {
+      "version": "v0.15.2",
+      "date": "2026-04-17 12:41:00",
+      "notes": "Enabled real-time diagnostic HUD for mouth tracking values (V/Ratio)."
+    },
+    {
+      "version": "v0.15.1",
+      "date": "2026-04-17 11:55:00",
+      "notes": "Surgical pixel-level cleanup of nose and eye artifacts. Natural skin restoration."
     },
     {
       "version": "v0.15.0",
-      "date": "2026-04-17 13:05:00",
-      "notes": "Baseline."
+      "date": "2026-04-17 11:30:00",
+      "notes": "Upgraded eye animation: Multi-stage smooth blinking and full closure mapping."
+    },
+    {
+      "version": "v0.14.0",
+      "date": "2026-04-17 08:00:00",
+      "notes": "Emergency restoration of corrupted textures from embedded Base64 sources."
+    },
+    {
+      "version": "v0.10.0",
+      "date": "2026-04-15 00:00:00",
+      "notes": "Legacy Project Origin: Migration to external assets.json architecture."
     }
   ]
 }
