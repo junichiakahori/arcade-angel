@@ -214,8 +214,24 @@
             }
             drawPart(images.face, { isFace: true });
             
-            let eyeFrameR = state.eyeR > 0.4 ? (state.isHappy ? 5 : 0) : (state.isHappy ? 10 : 11);
-            let eyeFrameL = state.eyeL > 0.4 ? (state.isHappy ? 5 : 0) : (state.isHappy ? 10 : 11);
+            
+            const getEyeFrame = (openness, happy) => {
+                if (happy) {
+                    if (openness > 0.8) return 4; // Smile Open
+                    if (openness > 0.5) return 5; // Smile Mid
+                    if (openness > 0.2) return 6; // Smile Narrow
+                    return 15; // Fully Closed
+                } else {
+                    if (openness > 0.8) return 0; // Open
+                    if (openness > 0.6) return 1; // Slight Close
+                    if (openness > 0.4) return 2; // Mid Close
+                    if (openness > 0.2) return 3; // Narrow
+                    return 15; // Fully Closed
+                }
+            };
+            let eyeFrameL = getEyeFrame(state.eyeL, state.isHappy);
+            let eyeFrameR = getEyeFrame(state.eyeR, state.isHappy);
+    
             const ew = state.eyeSize;
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameL, isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameR, isEyes: true, flip: false });
@@ -254,9 +270,14 @@
                 fm.onResults((res) => {
                     if (res.multiFaceLandmarks && res.multiFaceLandmarks[0]) {
                         const lm = res.multiFaceLandmarks[0];
-                        state.eyeL = Math.abs(lm[159].y - lm[145].y) > 0.012 ? 1 : 0;
-                        state.eyeR = Math.abs(lm[386].y - lm[374].y) > 0.012 ? 1 : 0;
-                        state.mouthOpen = Math.abs(lm[13].y - lm[14].y) * 5;
+                        
+                        const openL = Math.abs(lm[159].y - lm[145].y);
+                        const openR = Math.abs(lm[386].y - lm[374].y);
+                        // Normalize: 0.008 (closed) to 0.022 (open)
+                        state.eyeL = Math.max(0, Math.min(1, (openL - 0.008) / 0.014));
+                        
+    
+                        
                         state.tgtX = (lm[1].x - 0.5) * 400;
                         state.tgtY = (lm[1].y - 0.5) * 400;
                         state.tgtRot = Math.atan2(lm[152].x - lm[10].x, lm[152].y - lm[10].y) * -1;
