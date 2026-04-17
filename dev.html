@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.40</title>
+    <title>Arcade Angel - Portable Puppet v0.15.41</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.40 (Updated: 2026-04-17 18:02:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.41 (Updated: 2026-04-17 18:04:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -158,56 +158,7 @@
             const ctx = document.getElementById('stage').getContext('2d');
             const gs = state.globalScale;
 
-            if (options.isFace) {
-                // --- SOFT VIRTUAL LAYER SPLITTING (v0.15.40) ---
-                const neckPivot = state.pivotY || 450;
-                const bx = state.curX * gs * 0.1;
-                const by = state.curY * gs * 0.1;
-
-                // Function to draw masked parts locally
-                const drawMaskedLayer = (isHead) => {
-                    const tempC = document.createElement('canvas');
-                    tempC.width = img.width; tempC.height = img.height;
-                    const tctx = tempC.getContext('2d');
-                    
-                    // a) Draw the full image
-                    tctx.drawImage(img, 0, 0);
-                    
-                    // b) Create a smooth gradient mask
-                    tctx.globalCompositeOperation = 'destination-in';
-                    const grad = tctx.createLinearGradient(0, neckPivot - 50, 0, neckPivot + 50);
-                    if (isHead) {
-                        grad.addColorStop(0, 'rgba(0,0,0,1)');
-                        grad.addColorStop(1, 'rgba(0,0,0,0)');
-                    } else {
-                        grad.addColorStop(0, 'rgba(0,0,0,0)');
-                        grad.addColorStop(1, 'rgba(0,0,0,1)');
-                    }
-                    tctx.fillStyle = grad;
-                    tctx.fillRect(0, 0, img.width, img.height);
-                    return tempC;
-                };
-
-                // PASS 1: DRAW THE SHOULDERS (FIXED HORIZONTAL)
-                const torso = drawMaskedLayer(false);
-                ctx.save();
-                ctx.translate(400 + bx, 400 + by);
-                ctx.scale(gs, gs);
-                ctx.drawImage(torso, -img.width/2, -img.height/2);
-                ctx.restore();
-
-                // PASS 2: DRAW THE HEAD (ROTATING AT PIVOT)
-                const head = drawMaskedLayer(true);
-                ctx.save();
-                ctx.translate(400 + bx, 400 + by + neckPivot * gs);
-                ctx.rotate(state.curRot);
-                ctx.translate(0, -neckPivot * gs);
-                ctx.scale(gs, gs);
-                ctx.drawImage(head, -img.width/2, -img.height/2);
-                ctx.restore();
-                
-                return; // Face drawing complete
-            }
+            
 
 
             
@@ -304,7 +255,7 @@
             state.detectedVowel = det; // --- FINAL LINK: Update debug display ---
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.40) ---
+            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.41) ---
             const hud = document.querySelector('.hud');
             if (hud && typeof v_data !== 'undefined' && v_data.current_version) {
                 let v_val = state.voiceVol.toFixed(2);
@@ -323,7 +274,7 @@
 
         function animate() {
             state.curX += (state.tgtX - state.curX) * 0.1; state.curY += (state.tgtY - state.curY) * 0.1;
-            state.curRot += (state.tgtRot - state.curRot) * 0.08; render(); requestAnimationFrame(animate);
+            state.curRot += (state.tgtRot - state.curRot) * 0.06; render(); requestAnimationFrame(animate);
         }
 
 
@@ -402,7 +353,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.40) ---
+        // --- ADVANCED UI BINDING (v0.15.41) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;
