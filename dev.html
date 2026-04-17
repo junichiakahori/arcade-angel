@@ -119,6 +119,25 @@
         function toggleSmile() { state.isHappy = !state.isHappy; document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL"; saveToLocal(); }
         window.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') toggleSmile(); });
 
+        
+        let greetingSource = null;
+        async function greet() {
+            if (!state.isVoiceReady) await initVoice();
+            if (audioCtx.state === 'suspended') await audioCtx.resume();
+            
+            const audio = new Audio('assets/ohayou.m4a');
+            const source = audioCtx.createMediaElementSource(audio);
+            source.connect(analyser); 
+            source.connect(audioCtx.destination); 
+            
+            state.isHappy = true;
+            audio.play();
+            audio.onended = () => { 
+                state.isHappy = false; 
+                source.disconnect();
+            };
+        }
+
         async function initVoice() {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
