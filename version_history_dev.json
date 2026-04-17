@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.71",
-  "last_updated": "2026-04-17 22:45:00",
+  "current_version": "v0.15.72",
+  "last_updated": "2026-04-17 22:48:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.72",
+      "date": "2026-04-17 22:48:00",
+      "notes": "EAR POLISH: FLUFFY EDITION (v0.15.72): Redesigned fox ears with bezier curves for a natural, authentic shape. Added interior fur tufts and layered gradients to match high-quality kitsunemimi references."
+    },
     {
       "version": "v0.15.71",
       "date": "2026-04-17 22:45:00",
