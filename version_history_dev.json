@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.85",
-  "last_updated": "2026-04-18 00:30:00",
+  "current_version": "v0.15.86",
+  "last_updated": "2026-04-18 00:35:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.86",
+      "date": "2026-04-18 00:35:00",
+      "notes": "COLOR MATCHING (v0.15.86): Applied real-time CSS filters to the ear rendering. Shifted hue towards cool silver, reduced saturation, and tuned contrast to perfectly synchronize the fox ears with the hair texture."
+    },
     {
       "version": "v0.15.85",
       "date": "2026-04-18 00:30:00",
