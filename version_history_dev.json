@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.29",
-  "last_updated": "2026-04-17 16:24:00",
+  "current_version": "v0.15.30",
+  "last_updated": "2026-04-17 16:26:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.30",
+      "date": "2026-04-17 16:26:00",
+      "notes": "HUD UPGRADE: Restored real-time diagnostic values (Volume, Ratio, Detected Vowel) to the Dev HUD for precision tuning."
+    },
     {
       "version": "v0.15.29",
       "date": "2026-04-17 16:24:00",

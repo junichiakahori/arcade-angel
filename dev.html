@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.29</title>
+    <title>Arcade Angel - Portable Puppet v0.15.30</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.29 (Updated: 2026-04-17 16:24:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.30 (Updated: 2026-04-17 16:26:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -247,6 +247,17 @@
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
+            // --- DIAGNOSTIC HUD UPDATE (v0.15.30) ---
+            const hud = document.querySelector('.hud');
+            if (hud && v_data) {
+                let v_val = state.voiceVol.toFixed(2);
+                let r_val = state.mouthOpen.toFixed(2);
+                hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
+                              `VOICE: <span id="vStatus">${state.isVoiceReady ? 'LIVE' : 'OFFLINE'}</span><br>` +
+                              `<span style="color:#00F0FF">V: ${v_val} / RATIO: ${r_val}</span><br>` +
+                              `<span style="color:#FF00FF">DETECTED: ${state.detectedVowel || 'NONE'}</span><br>` +
+                              `[H] KEY: SMILE TOGGLE`;
+            }
 
         }
 
@@ -330,7 +341,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.29) ---
+        // --- ADVANCED UI BINDING (v0.15.30) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;
