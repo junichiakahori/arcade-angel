@@ -2,15 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet (Updated: 2026-04-17 11:16:23)</title>
+    <title>Arcade Angel - Portable Puppet (Updated: 2026-04-17 07:11:47)</title>
     <style>
-    :root {
-        --z-base: 1;
-        --z-hud: 500;
-        --z-panel: 1000;
-        --z-modal: 5000;
-        --z-system: 10000;
-    }
+    
     
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,26 +20,18 @@
     </style>
 </head>
 <body>
-    <div id="timestamp" style="position:fixed; top:0; left:50%; transform:translateX(-50%); background:yellow; color:black; font-weight:bold; padding:5px 20px; z-index: var(--z-system); border:2px solid black; border-bottom-left-radius:10px; border-bottom-right-radius:10px; font-family:sans-serif; font-size:16px;">
-        PATCHED VERSION - LAST UPDATE: 2026-04-17 11:16:23
-    </div>
+    
     
     <script>
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) {
             document.write('<style>
-    :root {
-        --z-base: 1;
-        --z-hud: 500;
-        --z-panel: 1000;
-        --z-modal: 5000;
-        --z-system: 10000;
-    }
+    
     .dev-only { display: block; }</style>');
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v15.1.0 (Updated: 2026-04-17 11:16:23)<br>
+        UNIT: ARCADE_ANGEL v15.1.0 (Updated: 2026-04-17 07:11:47)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
