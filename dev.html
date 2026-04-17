@@ -2,44 +2,57 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Tuner [DEV]</title>
+    <title>Arcade Angel - Portable Puppet v0.15.26</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
         .hud { position: absolute; top: 20px; left: 20px; text-shadow: 0 0 10px #00F0FF; z-index: 100; font-size: 14px; background: #101030AA; padding: 15px; border-radius: 8px; border: 1px solid #00F0FF44; pointer-events: none; }
-        .settings-panel { position: absolute; top: 20px; right: 20px; z-index: 101; font-size: 11px; background: #050515DD; padding: 15px; border-radius: 8px; border: 1px solid #0088FF88; color: #00F0FF; width: 220px; pointer-events: auto; max-height: 90vh; overflow-y: auto; }
+        .settings-panel { position: absolute; top: 20px; right: 20px; z-index: 100; font-size: 11px; background: #050515DD; padding: 15px; border-radius: 8px; border: 1px solid #0088FF88; color: #00F0FF; width: 220px; pointer-events: auto; max-height: 90vh; overflow-y: auto; }
         .control-group { margin-bottom: 12px; }
         label { display: block; margin-bottom: 4px; opacity: 0.8; font-weight: bold; }
-        input[type=range] { flex-grow: 1; cursor: pointer; accent-color: #0088FF; }
-        .num-in { width: 45px; background: #112; border: 1px solid #0088FF88; color: #00F0FF; font-size: 11px; padding: 2px; border-radius: 3px; text-align: center; }
+        input[type=range] { width: 100%; cursor: pointer; accent-color: #0088FF; }
         .btn { color: #00F0FF; border: 1px solid #00F0FF; padding: 8px 10px; cursor: pointer; background: transparent; display: inline-block; margin-top: 10px; font-size: 11px; width: 100%; box-sizing: border-box; text-align: center; border-radius: 4px; transition: 0.2s; }
         .btn:hover { background: #00F0FF22; }
-        .row { display: flex; gap: 8px; align-items: center; }
+        .row { display: flex; gap: 5px; }
+        .dev-only { display: none; }
     </style>
 </head>
 <body>
-    <div class="hud" id="hud">LOADING CORE...</div>
+    <script>
+        const isDev = window.location.pathname.includes('dev.html');
+        if (isDev) {
+            document.write('<style>.dev-only { display: block; }</style>');
+        }
+    </script>
+    <div class="hud">
+        UNIT: ARCADE_ANGEL v0.15.26 (Updated: 2026-04-17 13:05:00)<br>
+        VOICE: <span id="vStatus">OFFLINE</span><br>
+        [H] KEY: SMILE TOGGLE
+    </div>
 
     <div class="settings-panel">
-        <div class="control-group"><label>EYE POS Y</label><div class="row"><input type="range" id="eyeY" min="-300" max="100" value="-79"><input type="number" id="eyeY_num" class="num-in"></div></div>
-        <div class="control-group"><label>EYE DISTANCE</label><div class="row"><input type="range" id="eyeX" min="30" max="250" value="112"><input type="number" id="eyeX_num" class="num-in"></div></div>
-        <div class="control-group"><label>EYE SIZE</label><div class="row"><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76"><input type="number" id="eyeSize_num" class="num-in" step="0.01"></div></div>
-        <div class="control-group"><label>MOUTH POS Y</label><div class="row"><input type="range" id="mouthY" min="0" max="300" value="123"><input type="number" id="mouthY_num" class="num-in"></div></div>
-        <div class="control-group"><label>SKIN TONE</label><div class="row"><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0"><input type="number" id="skinTone_num" class="num-in" step="0.05"></div></div>
-        <hr style="border:0; border-top:1px solid #0088FF44; margin:15px 0;">
-        <div class="control-group"><label style="color:#FF00FF">THRES A (Wide)</label><div class="row"><input type="range" id="thresA" min="0" max="80" value="22"><input type="number" id="thresA_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES E (Mid)</label><div class="row"><input type="range" id="thresE" min="0" max="80" value="15"><input type="number" id="thresE_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES I (Narrow)</label><div class="row"><input type="range" id="thresI" min="0" max="80" value="10"><input type="number" id="thresI_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES O (Med-Round)</label><div class="row"><input type="range" id="thresO" min="0" max="80" value="6"><input type="number" id="thresO_num" class="num-in"></div></div>
-        <div class="control-group"><label style="color:#FF00FF">THRES U (Small-Round)</label><div class="row"><input type="range" id="thresU" min="0" max="80" value="2"><input type="number" id="thresU_num" class="num-in"></div></div>
-
-        <div id="smileBtn" class="btn">MODE: SMILE</div>
+        <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
+        <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112" oninput="updateState('eyeX', this.value)"></div>
+        <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
+        <div class="control-group"><label>MOUTH POS Y</label><input type="range" id="mouthY" min="0" max="300" value="123" oninput="updateState('mouthY', this.value)"></div>
+        <div class="control-group"><label>SKIN TONE</label><input type="range" id="skinTone" min="0" max="1" step="0.05" value="0" oninput="updateState('skinTone', this.value)"></div>
+        
+        <div id="smileBtn" class="btn" onclick="toggleSmile()">MODE: SMILE</div>
         <div class="row">
-            <div class="btn" id="exportBtn">EXPORT</div>
-            <div class="btn" id="importBtn">IMPORT</div>
+            <div class="btn" onclick="exportProfile()">EXPORT</div>
+            <div class="btn" onclick="importProfile()">IMPORT</div>
         </div>
-        <div class="btn" id="resetBtn" style="border-color: #FF5555; color: #FF5555; margin-top: 5px;">RESET DEFAULTS</div>
-        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 20px;" onclick="location.href='index.html'">SWITCH TO STABLE</div>
+        <div class="btn" style="border-color: #FF5555; color: #FF5555; margin-top: 5px;" onclick="resetState()">RESET DEFAULTS</div>
+        <div class="dev-only">
+            <div class="label">COSTUME</div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="btn" onclick="setCostume('none')">NONE</div>
+                <div class="btn" onclick="setCostume('cyber')">CYBER</div>
+                <div class="btn" onclick="setCostume('gothic')">GOTHIC</div>
+            </div>
+            <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
+        </div>
+        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px; margin-top: 10px;" onclick="switchVersion()">SWITCH TO PROD/DEV VERSION</div>
     </div>
 
     <canvas id="stage" width="800" height="800"></canvas>
@@ -53,39 +66,85 @@
             curX: 0, curY: 0, curRot: 0, tgtX: 0, tgtY: 0, tgtRot: 0,
             eyeL: 1, eyeR: 1, mouthOpen: 0, voiceVol: 0,
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.75,
-            isHappy: true, skinTone: 0,
-            thresA: 0.22, thresE: 0.15, thresI: 0.10, thresO: 0.06, thresU: 0.02,
-            detectedVowel: "CLOSED"
+            isHappy: true, skinTone: 0, costume: 'none', isVoiceReady: false
         };
+
         const images = {};
-        let v_data = { current_version: "v0.15.25", last_updated: "2026-04-17" };
+        let audioCtx, analyser, dataArray;
 
-        function saveSettings() {
-            const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone, thresA: state.thresA, thresE: state.thresE, thresI: state.thresI, thresO: state.thresO, thresU: state.thresU };
-            localStorage.setItem('arcade_angel_dev_settings', JSON.stringify(p));
+        function updateState(k, v) { state[k] = parseFloat(v); saveToLocal(); }
+        function saveToLocal() {
+            const profile = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone };
+            localStorage.setItem('arcade_angel_profile', JSON.stringify(profile));
         }
-
-        function loadSettings() {
-            const raw = localStorage.getItem('arcade_angel_dev_settings');
-            if (raw) {
-                const p = JSON.parse(raw);
-                Object.assign(state, p);
-                Object.keys(p).forEach(k => {
-                    const val = k.startsWith('thres') ? p[k]*100 : p[k];
-                    const sl = document.getElementById(k); if (sl) sl.value = val;
-                    const nm = document.getElementById(k + '_num'); if (nm) nm.value = val;
-                });
+        function loadFromLocal() {
+            const raw = localStorage.getItem('arcade_angel_profile');
+            if (raw) applyProfile(JSON.parse(raw));
+        }
+        function applyProfile(p) {
+            for (let k in p) {
+                if (state.hasOwnProperty(k)) {
+                    state[k] = p[k];
+                    const el = document.getElementById(k);
+                    if (el) el.value = p[k];
+                }
             }
         }
 
-        async function processAlpha(img, isFace) {
-            const canvas = document.createElement('canvas'); canvas.width = img.width; canvas.height = img.height;
+        function exportProfile() {
+            const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone };
+            navigator.clipboard.writeText(JSON.stringify(p));
+            alert("PROFILE COPIED");
+        }
+
+        function importProfile() {
+            const text = prompt("PASTE CODE:");
+            if (text) { try { applyProfile(JSON.parse(text)); saveToLocal(); } catch(e) { alert("FAIL"); } }
+        }
+
+        function setCostume(c) { state.costume = c; saveToLocal(); }
+        function switchVersion() {
+            const isDev = window.location.pathname.endsWith('dev.html');
+            window.location.href = isDev ? 'index.html' : 'dev.html';
+        }
+        function resetState() {
+            const defaults = { eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, skinTone: 0 };
+            if (confirm("Reset to default settings?")) {
+                applyProfile(defaults);
+                saveToLocal();
+            }
+        }
+
+        function toggleSmile() {
+            state.isHappy = !state.isHappy;
+            document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
+            saveToLocal();
+        }
+        window.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') toggleSmile(); });
+
+        async function initVoice() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const source = audioCtx.createMediaStreamSource(stream);
+            analyser = audioCtx.createAnalyser(); analyser.fftSize = 256;
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            source.connect(analyser); state.isVoiceReady = true;
+            document.getElementById('vStatus').innerText = "LIVE";
+            document.getElementById('startBtn').style.display = "none";
+        }
+
+        async function processAlpha(img, type) {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width; canvas.height = img.height;
             const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0);
             const data = ctx.getImageData(0, 0, img.width, img.height);
             for (let i = 0; i < data.data.length; i += 4) {
                 const r = data.data[i], g = data.data[i+1], b = data.data[i+2];
-                if (isFace && g > 100 && g > r + 60 && g > b + 60) data.data[i+3] = 0;
-                else if (!isFace && r > 220 && g > 220 && b > 220) data.data[i+3] = 0;
+                if (type === 'face') {
+                    if (g > 100 && g > r + 60 && g > b + 60) data.data[i+3] = 0;
+                } else {
+                    if (r > 220 && g > 220 && b > 220) data.data[i+3] = 0;
+                }
             }
             ctx.putImageData(data, 0, 0);
             const r = new Image(); r.src = canvas.toDataURL();
@@ -96,18 +155,22 @@
             if (!img || !img.complete) return;
             const ctx = document.getElementById('stage').getContext('2d');
             const gs = state.globalScale;
-            if (!img || !img.complete) return;
-            const ctx = document.getElementById('stage').getContext('2d');
-            const gs = state.globalScale;
-            if (!img || !img.complete) return;
-            const ctx = document.getElementById('stage').getContext('2d');
-            const gs = state.globalScale;
             let sw, sh, sx, sy;
-            if (options.isEyes) { sw = 210; sh = 165; sx = (options.frame % 4) * 256 + 23; sy = Math.floor(options.frame / 4) * 256 + 45; }
-            else if (options.isMouth) { const cw = img.width/3, ch = img.height/3; sw = 210; sh = 120; sx = (options.frame % 3) * cw + (cw-sw)/2; sy = Math.floor(options.frame/3) * ch + (ch-sh)/2; }
-            else { sw = img.width; sh = img.height; sx = 0; sy = 0; }
-            
-            
+
+            if (options.isEyes) {
+                sw = 210; sh = 165;
+                sx = (options.frame % 4) * 256 + 23;
+                sy = Math.floor(options.frame / 4) * 256 + 45;
+            } else if (options.isMouth) {
+                const cellW = img.width / 3;
+                const cellH = img.height / 3;
+                sw = 210; sh = 120;
+                sx = (options.frame % 3) * cellW + (cellW - sw)/2;
+                sy = Math.floor(options.frame / 3) * cellH + (cellH - sh)/2;
+            } else {
+                sw = img.width; sh = img.height; sx = 0; sy = 0;
+            }
+
             
             ctx.save();
             let hX = state.curX * gs * 0.8;
@@ -115,7 +178,8 @@
             ctx.translate(400 + hX, 400 + hY + 450 * gs); 
             ctx.rotate(state.curRot);
             ctx.translate((options.x || 0) * gs, ((options.y || 0) - 450) * gs);
-            ctx.scale((options.flip ? -1 : 1) * (options.scaleX || 1) * gs, (options.scaleY || 1) * gs);
+            const flip = options.flip ? -1 : 1;
+            ctx.scale((options.scaleX || 1) * gs * flip, (options.scaleY || 1) * gs);
 
             
             if (options.isFace && state.skinTone > 0) {
@@ -138,7 +202,7 @@
                 let sum = 0; for (let r = 0; r < dataArray.length; r++) sum += dataArray[r];
                 state.voiceVol = (sum / dataArray.length) / 50;
             }
-            const bImg = state.costume === 'cyber' ? images.body_cyber : (state.costume === 'gothic' ? images.body_gothic : null);
+            const bImg = state.costume === 'standard' ? images.body_standard : (state.costume === 'cyber' ? images.body_cyber : (state.costume === 'gothic' ? images.body_gothic : null));
             if (bImg) {
                 ctx.save();
                 ctx.translate(400 + state.curX * state.globalScale * 0.3, 400 + state.curY * state.globalScale * 0.3 + 300 * state.globalScale);
@@ -196,7 +260,6 @@
                 const response = await fetch('assets.json?v=' + Date.now());
                 const assets = await response.json();
                 // [CLEAN HUD] Dynamic Version Display
-                
                 fetch('version_history_dev.json?v=' + Date.now())
                     .then(r => r.json())
                     .then(v_data => {
@@ -207,7 +270,6 @@
                                           `[H] KEY: SMILE TOGGLE`;
                         }
                     });
-                     
                 
                 
                 // Initialize MediaPipe FaceMesh

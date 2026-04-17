@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.25",
-  "last_updated": "2026-04-17 16:15:00",
+  "current_version": "v0.15.26",
+  "last_updated": "2026-04-17 16:17:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.26",
+      "date": "2026-04-17 16:17:00",
+      "notes": "TOTAL RECONSTRUCTION: Rebuilt dev.html from the stable index.html core. Verified shoulder-lock and timestamp logic."
+    },
     {
       "version": "v0.15.25",
       "date": "2026-04-17 16:15:00",
