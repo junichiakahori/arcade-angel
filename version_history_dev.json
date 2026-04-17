@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.73",
-  "last_updated": "2026-04-17 22:58:00",
+  "current_version": "v0.15.75",
+  "last_updated": "2026-04-17 23:10:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.75",
+      "date": "2026-04-17 23:10:00",
+      "notes": "CLEAN RENDERING (v0.15.75): Removed redundant rendering calls that caused double-ear artifacts. Headband and ears are now perfectly layered and positioned."
+    },
     {
       "version": "v0.15.73",
       "date": "2026-04-17 22:58:00",
