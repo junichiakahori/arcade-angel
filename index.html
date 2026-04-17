@@ -248,6 +248,17 @@
             try {
                 const response = await fetch('assets.json?v=' + Date.now());
                 const assets = await response.json();
+                // Update Version HUD from JSON
+                fetch('version_history.json?v=' + Date.now())
+                    .then(r => r.json())
+                    .then(v => {
+                        const hud = document.querySelector('.hud');
+                        if (hud) {
+                            // Target: UNIT: ARCADE_ANGEL v15.1.0 (Updated: 2026-04-17 11:40:23)
+                            const pattern = /UNIT: ARCADE_ANGEL v[\d.]+ \(Updated: [\d\-: ]+\)/;
+                            hud.innerHTML = hud.innerHTML.replace(pattern, `UNIT: ARCADE_ANGEL ${v.current_version} (Updated: ${v.last_updated})`);
+                        }
+                    });
                 
                 // Initialize MediaPipe FaceMesh
                 const fm = new FaceMesh({ 

@@ -1,0 +1,26 @@
+{
+  "current_version": "v15.2.0",
+  "last_updated": "2026-04-17 12:22:27",
+  "history": [
+    {
+      "version": "v15.2.0",
+      "date": "2026-04-17 12:22:27",
+      "notes": "Full Vowel Lip-Sync (A-I-U-E-O) with ratio-based detection."
+    },
+    {
+      "version": "v15.1.5",
+      "date": "2026-04-17 11:55:00",
+      "notes": "Surgical cleanup of nose and eye artifacts. Flawless skin restored."
+    },
+    {
+      "version": "v15.1.0",
+      "date": "2026-04-17 11:30:00",
+      "notes": "Upgraded blinking to multi-stage smooth transition with full closure."
+    },
+    {
+      "version": "v15.0.0",
+      "date": "2026-04-17 07:11:47",
+      "notes": "Initial base version with external asset JSON support."
+    }
+  ]
+}
