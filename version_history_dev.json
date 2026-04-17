@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.104",
-  "last_updated": "2026-04-18 07:20:00",
+  "current_version": "v0.15.105",
+  "last_updated": "2026-04-18 07:30:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.105",
+      "date": "2026-04-18 07:30:00",
+      "notes": "HUD & VISIBILITY FIXED (v0.15.105): Corrected a bug where HUD text was displayed as raw code. Moved HUD updates to the render loop. Re-prioritized render initiation to ensure Tenko-chan and Arcade Angel appear even if network fetches fail."
+    },
     {
       "version": "v0.15.104",
       "date": "2026-04-18 07:20:00",
