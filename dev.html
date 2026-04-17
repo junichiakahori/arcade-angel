@@ -250,16 +250,21 @@
             let mFrame = 0;
             let detected = "CLOSED";
             
-            // [GOLDEN MAPPING] Based on User's Final Calibration
-            if (v >= 0.30) { mFrame = 2; detected = "A"; }
-            else if (v >= 0.19) { mFrame = 1; detected = "E"; }
-            else if (v >= 0.13) { mFrame = 4; detected = "I"; }
-            else if (v >= 0.05) { mFrame = 7; detected = "O/U"; } 
+            
+            let v = Math.max(state.mouthOpen, state.voiceVol);
+            let mFrame = 0;
+            let detected = "CLOSED";
+            
+            if (v >= state.thresA) { mFrame = 2; detected = "A"; }
+            else if (v >= state.thresE) { mFrame = 1; detected = "E"; }
+            else if (v >= state.thresI) { mFrame = 4; detected = "I"; }
+            else if (v >= state.thresO) { mFrame = 7; detected = "O/U"; } 
             else {
                 mFrame = state.isHappy ? 3 : 0;
                 detected = "CLOSED";
             }
             state.detectedVowel = detected;
+    
     
     
     
