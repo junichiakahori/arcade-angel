@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.36",
-  "last_updated": "2026-04-17 17:47:00",
+  "current_version": "v0.15.37",
+  "last_updated": "2026-04-17 17:49:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.37",
+      "date": "2026-04-17 17:49:00",
+      "notes": "CRITICAL RECOVERY: Corrected the over-deletion of 'gs' and 'ctx' variables in drawPart. Rendering loop is now restored."
+    },
     {
       "version": "v0.15.36",
       "date": "2026-04-17 17:47:00",
