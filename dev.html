@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.27</title>
+    <title>Arcade Angel - Portable Puppet v0.15.28</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.27 (Updated: 2026-04-17 13:05:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.28 (Updated: 2026-04-17 13:05:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -241,7 +241,7 @@
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
-            if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.9; }
+            if (v >= state.thresA) { mf = 7; det = "A"; ms *= 0.82; }
             else if (v >= state.thresE) { mf = 1; det = "E"; }
             else if (v >= state.thresI) { mf = 4; det = "I"; }
             else if (v >= state.thresO) { mf = 6; det = "O"; }
@@ -332,7 +332,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.27) ---
+        // --- ADVANCED UI BINDING (v0.15.28) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;

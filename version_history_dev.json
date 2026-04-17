@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.27",
-  "last_updated": "2026-04-17 16:19:00",
+  "current_version": "v0.15.28",
+  "last_updated": "2026-04-17 16:21:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.28",
+      "date": "2026-04-17 16:21:00",
+      "notes": "STYLE REFINEMENT: Reduced 'A' vowel scale to 0.82 for a more elegant and 'modest' expression."
+    },
     {
       "version": "v0.15.27",
       "date": "2026-04-17 16:19:00",
