@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.43</title>
+    <title>Arcade Angel - Portable Puppet v0.15.44</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.43 (Updated: 2026-04-17 18:22:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.44 (Updated: 2026-04-17 18:30:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -256,7 +256,7 @@
             state.detectedVowel = det; // --- FINAL LINK: Update debug display ---
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.43) ---
+            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.44) ---
             const hud = document.querySelector('.hud');
             if (hud && typeof v_data !== 'undefined' && v_data.current_version) {
                 let v_val = state.voiceVol.toFixed(2);
@@ -327,7 +327,7 @@
                         state.tgtY = (lm[1].y - 0.5) * 400;
                         state.tgtRot = Math.atan2(lm[152].x - lm[10].x, lm[152].y - lm[10].y) * -1;
 
-                        // --- RADIANT SMILE DETECTION (v0.15.43) ---
+                        // --- RADIANT SMILE DETECTION (v0.15.44) ---
                         // Distance between lip corners
                         const mouthWidth = Math.abs(lm[61].x - lm[291].x);
                         const eyeDist = Math.abs(lm[33].x - lm[263].x);
@@ -370,7 +370,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.43) ---
+        // --- ADVANCED UI BINDING (v0.15.44) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;

@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.43",
-  "last_updated": "2026-04-17 18:22:00",
+  "current_version": "v0.15.44",
+  "last_updated": "2026-04-17 18:30:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.44",
+      "date": "2026-04-17 18:30:00",
+      "notes": "DEBUG REVOLUTION: Replaced standard HUD with a 'Comparison Monitor'. Now visualizes exactly why a vowel is detected or missed based on input vs threshold comparison."
+    },
     {
       "version": "v0.15.43",
       "date": "2026-04-17 18:22:00",
