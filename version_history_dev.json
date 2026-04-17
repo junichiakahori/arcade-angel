@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.75",
-  "last_updated": "2026-04-17 23:10:00",
+  "current_version": "v0.15.76",
+  "last_updated": "2026-04-17 23:25:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.76",
+      "date": "2026-04-17 23:25:00",
+      "notes": "SOFT FUR RENDERING (v0.15.76): Replaced vector-stroke fur lines with soft radial gradients and shadow-blurred ellipses. This creates a natural, fluffy texture that blends seamlessly with the characters anime aesthetic."
+    },
     {
       "version": "v0.15.75",
       "date": "2026-04-17 23:10:00",
