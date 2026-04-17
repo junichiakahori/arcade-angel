@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.68",
-  "last_updated": "2026-04-17 20:53:00",
+  "current_version": "v0.15.70",
+  "last_updated": "2026-04-17 22:35:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.70",
+      "date": "2026-04-17 22:35:00",
+      "notes": "DIVINE AWAKENING (v0.15.70): Implemented 'TENKO MODE' (Celestial Fox). Features dynamic vector-drawn Fox Ears with procedural physics (sway and twitch). Updated HUD branding to reflect the character's divine status as Tenko."
+    },
     {
       "version": "v0.15.68",
       "date": "2026-04-17 20:53:00",

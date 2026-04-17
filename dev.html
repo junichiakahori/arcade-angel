@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.68</title>
+    <title>Arcade Angel - Portable Puppet v0.15.70</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,7 +23,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.68 (2026-04-17 20:53:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.70 (2026-04-17 22:35:00)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -50,6 +50,7 @@
         </div>
         <div class="btn" style="border-color: #FF5555; color: #FF5555" onclick="resetState()">RESET DEFAULTS</div>
         <div class="dev-only">
+            <div id="tenkoBtn" class="btn" style="border-color: #FFD700; color: #FFD700" onclick="toggleFoxMode()">TENKO MODE: OFF</div>
             <div class="btn" onclick="setCostume('none')">COSTUME: NONE</div>
             <div class="btn" onclick="setCostume('cyber')">COSTUME: CYBER</div>
             <div class="btn" onclick="setCostume('gothic')">COSTUME: GOTHIC</div>
@@ -71,7 +72,7 @@
             eyeX: 112, eyeY: -79, eyeSize: 0.76, mouthY: 123, globalScale: 0.78,
             isHappy: false, skinTone: 0, costume: 'none', isVoiceReady: false, 
             thresA: 0.27, thresE: 0.18, thresI: 0.14, thresO: 0.05, thresU: 0.11, 
-            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0, breathPhase: 0, breathSpeed: 1.0, breathScale: 1.0
+            pivotY: 600, smileSens: 58, smileDegree: 0, smileRaw: 0, autoSmile: true, browY: 5, browTilt: 0.0, breathPhase: 0, breathSpeed: 1.0, breathScale: 1.0, foxMode: false, earL_rot: 0, earR_rot: 0, earTwitchL: 0, earTwitchR: 0, earPhase: 0
         };
         
         const images = {
@@ -84,6 +85,15 @@
         let audioCtx, analyser, dataArray, v_data;
 
         function updateState(k, v) { state[k] = parseFloat(v); syncUI(k, v); }
+        
+        function toggleFoxMode() {
+            state.foxMode = !state.foxMode;
+            const btn = document.getElementById('tenkoBtn');
+            btn.innerText = state.foxMode ? "TENKO MODE: ON" : "TENKO MODE: OFF";
+            btn.style.background = state.foxMode ? "rgba(255, 215, 0, 0.2)" : "transparent";
+            saveToLocal();
+        }
+
         function saveToLocal() {
             const p = {};
             ['eyeX','eyeY','eyeSize','mouthY','skinTone','browY','browTilt','thresA','thresE','thresI','thresO','thresU','pivotY','smileSens'].forEach(k => p[k] = state[k]);
@@ -152,6 +162,39 @@
             ctx.restore();
         }
 
+
+        function drawFoxEar(ctx, x, y, rot, flip) {
+            const gs = state.globalScale;
+            ctx.save();
+            ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 600) * gs + state.bHeadY * gs);
+            ctx.rotate(state.curRot * 0.82);
+            ctx.translate(x * gs, (y - (state.pivotY || 600)) * gs);
+            ctx.rotate(rot); 
+            ctx.scale(gs * (flip ? -1 : 1), gs);
+
+            ctx.beginPath();
+            ctx.moveTo(-40, 60);
+            ctx.quadraticCurveTo(-45, -80, 0, -110);
+            ctx.quadraticCurveTo(45, -80, 40, 60);
+            const grad = ctx.createLinearGradient(0, -100, 0, 60);
+            grad.addColorStop(0, '#FFFFFF');
+            grad.addColorStop(1, '#E0F0FF');
+            ctx.fillStyle = grad;
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(-20, 40);
+            ctx.quadraticCurveTo(-20, -50, 0, -80);
+            ctx.quadraticCurveTo(20, -50, 20, 40);
+            ctx.fillStyle = 'rgba(100, 200, 255, 0.3)'; 
+            ctx.fill();
+            
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+        }
+
         function render() {
             const stage = document.getElementById('stage');
             if (!stage) return;
@@ -174,6 +217,7 @@
                 ctx.restore();
             }
             
+                        if (state.foxMode) { drawFoxEar(ctx, -95, -185, state.earL_rot + state.earTwitchL, false); drawFoxEar(ctx, 95, -185, -state.earR_rot - state.earTwitchR, true); }
             drawPart(images.face, { isFace: true });
 
             const isSmiling = state.isHappy || (state.autoSmile && state.smileDegree > 0.45);
@@ -215,7 +259,7 @@
             if (hud && v_data) {
                 const total = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
                 const check = (th) => total >= parseFloat(th) ? '<span style="color:#00FF00">MATCH</span>' : `<span style="color:#555">WAIT(${(parseFloat(th)).toFixed(2)})</span>`;
-                hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (${v_data.last_updated})<br>` +
+                hud.innerHTML = `${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } ${v_data.current_version} (${v_data.last_updated})<br>` +
                               `<span style="color:#FFFF00">V:${state.voiceVol.toFixed(2)} | RATIO:${state.mouthOpen.toFixed(2)} | TOTAL: ${total}</span><br>` +
                               `A:${check(state.thresA)}|E:${check(state.thresE)}|I:${check(state.thresI)}<br>` +
                               `O:${check(state.thresO)}|U:${check(state.thresU)}<br>` +
@@ -227,7 +271,19 @@
 
         function animate() {
             state.curX += (state.tgtX - state.curX) * 0.1; state.curY += (state.tgtY - state.curY) * 0.1;
-            state.curRot += (state.tgtRot - state.curRot) * 0.06; state.breathPhase += 0.03 * state.breathSpeed; const bVal = Math.sin(state.breathPhase) * 6 * state.breathScale; state.bBodyY = bVal; state.bHeadY = bVal * 0.5; render(); requestAnimationFrame(animate);
+            state.curRot += (state.tgtRot - state.curRot) * 0.06; state.breathPhase += 0.03 * state.breathSpeed; const bVal = Math.sin(state.breathPhase) * 6 * state.breathScale; state.bBodyY = bVal; state.bHeadY = bVal * 0.5; 
+            if (state.foxMode) {
+                const targetRot = -state.curRot * 0.3;
+                state.earL_rot += (targetRot - state.earL_rot) * 0.1;
+                state.earR_rot += (targetRot - state.earR_rot) * 0.1;
+                state.earPhase += 0.02;
+                if (Math.sin(state.earPhase * 2.5) > 0.98) state.earTwitchL = Math.sin(state.earPhase * 30) * 0.15;
+                else state.earTwitchL *= 0.85;
+                if (Math.cos(state.earPhase * 1.8) > 0.98) state.earTwitchR = Math.sin(state.earPhase * 35) * 0.15;
+                else state.earTwitchR *= 0.85;
+            }
+
+            render(); requestAnimationFrame(animate);
         }
 
         (async function init() {
