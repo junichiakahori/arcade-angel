@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.72",
-  "last_updated": "2026-04-17 22:48:00",
+  "current_version": "v0.15.73",
+  "last_updated": "2026-04-17 22:58:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.73",
+      "date": "2026-04-17 22:58:00",
+      "notes": "HEADBAND MODE (v0.15.73): Shifted design from biological ears to a Fox Ear Headband (Katyuusha). Added a structural band arc and wider, angled ear placements for a more natural accessory look."
+    },
     {
       "version": "v0.15.72",
       "date": "2026-04-17 22:48:00",
