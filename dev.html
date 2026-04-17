@@ -151,11 +151,6 @@
             return new Promise(res => resImg.onload = () => res(resImg));
         }
 
-            ctx.putImageData(data, 0, 0);
-            const r = new Image(); r.src = canvas.toDataURL();
-            return new Promise(res => r.onload = () => res(r));
-        }
-
         function drawPart(img, options = {}) {
             if (!img || !img.complete) return;
             const ctx = document.getElementById('stage').getContext('2d');
