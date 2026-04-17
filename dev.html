@@ -243,21 +243,22 @@
             
             
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFrame = 0;
             let detected = "CLOSED";
             
-            // Refined V-mapping
+            // Simplified V-mapping (O and U merged)
             if (v >= 0.25) { mFrame = 2; detected = "A"; }
             else if (v >= 0.16) { mFrame = 1; detected = "E"; }
             else if (v >= 0.10) { mFrame = 4; detected = "I"; }
-            else if (v >= 0.06) { mFrame = 7; detected = "O"; }
-            else if (v >= 0.02) { mFrame = 6; detected = "U"; }
+            else if (v >= 0.02) { mFrame = 7; detected = "O/U"; } // Use frame 7 (O) for both
             else {
                 mFrame = state.isHappy ? 3 : 0;
                 detected = "CLOSED";
             }
             state.detectedVowel = detected;
+    
     
     
     
