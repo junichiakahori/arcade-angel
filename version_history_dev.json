@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.115",
-  "last_updated": "2026-04-18 09:00:00",
+  "current_version": "v0.15.116",
+  "last_updated": "2026-04-18 09:15:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.116",
+      "date": "2026-04-18 09:15:00",
+      "notes": "STABILITY PATCH (v0.15.116): Fixed 'resetState is not defined' ReferenceError by exposing the reset function to the global window object. Resolved 'addEventListener of null' TypeError by adding defensive existence checks for all UI control elements, ensuring the script doesn't crash if certain DOM nodes are missing."
+    },
     {
       "version": "v0.15.115",
       "date": "2026-04-18 09:00:00",
