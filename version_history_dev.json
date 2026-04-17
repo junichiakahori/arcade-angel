@@ -1,12 +1,17 @@
 {
-  "current_version": "v15.3.0",
-  "last_updated": "2026-04-17 13:00:00",
+  "current_version": "v1.6.0",
+  "last_updated": "2026-04-17 13:05:00",
   "status": "DEVELOPMENT",
   "history": [
     {
-      "version": "v15.3.0",
-      "date": "2026-04-17 13:00:00",
-      "notes": "Experimental Vowel Lip-Sync & Debug HUD."
+      "version": "v1.6.0",
+      "date": "2026-04-17 13:05:00",
+      "notes": "Lip-sync engine v2 development."
+    },
+    {
+      "version": "v1.5.0",
+      "date": "2026-04-17 13:05:00",
+      "notes": "Base stable version."
     }
   ]
 }

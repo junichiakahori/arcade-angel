@@ -1,12 +1,17 @@
 {
-  "current_version": "v15.2.2",
-  "last_updated": "2026-04-17 12:41:00",
+  "current_version": "v1.5.0",
+  "last_updated": "2026-04-17 13:05:00",
   "status": "STABLE",
   "history": [
     {
-      "version": "v15.2.2",
-      "date": "2026-04-17 12:41:00",
-      "notes": "Stable release with verified artifact cleanup."
+      "version": "v1.5.0",
+      "date": "2026-04-17 13:05:00",
+      "notes": "Grand restoration & stable facial assets release."
+    },
+    {
+      "version": "v1.0.0",
+      "date": "2026-04-15 00:00:00",
+      "notes": "Legacy origin."
     }
   ]
 }
