@@ -24,7 +24,7 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.96 (2026-04-18 06:30:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.97 (2026-04-18 06:35:00)</div>
 
     <div class="settings-panel">
 <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -310,7 +310,7 @@
                               `A:${check(Math.round(state.thresA*100))}|E:${check(Math.round(state.thresE*100))}|I:${check(Math.round(state.thresI*100))}<br>` +
                               `O:${check(Math.round(state.thresO*100))}|U:${check(Math.round(state.thresU*100))}<br>` +
                               `DET: <span style="color:#FF00FF">${state.detectedVowel}</span><br>` +
-                              `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (RAW:${state.smileRaw.toFixed(2)}/SENS:${(state.smileSens/100).toFixed(2)})<br>` +
+                              `SMILE: <span style="color:#FFAA00">${Math.round(state.smileDegree*100)}%</span> (RAW:${state.smileRaw.toFixed(2)}/SENS:${state.smileSens.toFixed(2)})<br>` +
                               `EYES: INDEPENDENT (WINK-READY)`;
             }
         }
@@ -349,7 +349,7 @@
                         const mouthWidth = Math.abs(lm[61].x - lm[291].x);
                         const eyeDist = Math.abs(lm[33].x - lm[263].x);
                         state.smileRaw = mouthWidth / eyeDist;
-                        state.smileDegree = Math.max(0, Math.min(1, (state.smileRaw - (state.smileSens/100)) / 0.2));
+                        state.smileDegree = Math.max(0, Math.min(1, (state.smileRaw - state.smileSens) / 0.2));
                         if (state.autoSmile) state.isHappy = state.smileDegree > 0.5;
                     }
                 });
