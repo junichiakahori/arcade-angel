@@ -238,20 +238,24 @@
             
             
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFrame = 0;
+            let detected = "CLOSED";
             
             if (v > 0.05) {
                 const ratio = state.mouthRatio;
-                // Ratio Mapping
-                if (ratio > 1.2) mFrame = 6;      // U (Very Narrow)
-                else if (ratio > 0.8) mFrame = 7; // O (Tall)
-                else if (ratio < 0.4) mFrame = 4; // I (Very Wide)
-                else if (v > 0.4) mFrame = 2;     // A (Wide Open)
-                else mFrame = 1;                  // E (Medium)
+                // Looser Ratio Mapping
+                if (ratio > 0.9) { mFrame = 6; detected = "U"; }    // U (Narrow)
+                else if (ratio > 0.65) { mFrame = 7; detected = "O"; } // O (Mid-Tall)
+                else if (ratio < 0.5) { mFrame = 4; detected = "I"; }  // I (Wide)
+                else if (v > 0.3) { mFrame = 2; detected = "A"; }     // A (Wide Open)
+                else { mFrame = 1; detected = "E"; }                  // E (Flat)
             } else {
                 mFrame = state.isHappy ? 3 : 0;
             }
+            state.detectedVowel = detected; // Store for HUD
+    
     
             
             let mScale = state.isHappy ? 0.48 : 0.45;
@@ -276,11 +280,14 @@
                         const hud = document.querySelector('.hud');
                         if (hud) {
                             setInterval(() => {
+                                
                                 const v = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
                                 const ratio = state.mouthRatio.toFixed(2);
+                                const vowel = state.detectedVowel || "None";
                                 hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
-                                              `V: ${v} | Ratio: ${ratio}<br>` +
+                                              `V: ${v} | Ratio: ${ratio} | VOWEL: <b>${vowel}</b><br>` +
                                               `[H] KEY: SMILE TOGGLE`;
+    
                             }, 50);
                         }
                     });
