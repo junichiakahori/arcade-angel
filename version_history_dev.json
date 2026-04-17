@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.86",
-  "last_updated": "2026-04-18 00:35:00",
+  "current_version": "v0.15.87",
+  "last_updated": "2026-04-18 00:40:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.87",
+      "date": "2026-04-18 00:40:00",
+      "notes": "POSITION RECOVERY (v0.15.87): Fixed a calculation error where redundant translation commands moved the ears off-screen. Re-aligned ears with the head while preserving the color matching filters."
+    },
     {
       "version": "v0.15.86",
       "date": "2026-04-18 00:35:00",
