@@ -1,16 +1,12 @@
 {
-  "current_version": "v15.3.0",
-  "last_updated": "2026-04-17 12:48:00",
+  "current_version": "v15.2.2",
+  "last_updated": "2026-04-17 12:41:00",
+  "status": "STABLE",
   "history": [
-    {
-      "version": "v15.3.0",
-      "date": "2026-04-17 12:48:00",
-      "notes": "Final cleanup and logic optimization."
-    },
     {
       "version": "v15.2.2",
       "date": "2026-04-17 12:41:00",
-      "notes": "Unified versioning system."
+      "notes": "Stable release with verified artifact cleanup."
     }
   ]
 }

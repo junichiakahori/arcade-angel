@@ -270,7 +270,7 @@
                 const response = await fetch('assets.json?v=' + Date.now());
                 const assets = await response.json();
                 // [CLEAN HUD] Real-time Version & Debug Display
-                fetch('version_history.json?v=' + Date.now())
+                fetch('version_history_dev.json?v=' + Date.now())
                     .then(r => r.json())
                     .then(v_data => {
                         const hud = document.querySelector('.hud');

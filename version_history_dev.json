@@ -1,0 +1,12 @@
+{
+  "current_version": "v15.3.0",
+  "last_updated": "2026-04-17 13:00:00",
+  "status": "DEVELOPMENT",
+  "history": [
+    {
+      "version": "v15.3.0",
+      "date": "2026-04-17 13:00:00",
+      "notes": "Experimental Vowel Lip-Sync & Debug HUD."
+    }
+  ]
+}
