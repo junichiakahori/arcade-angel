@@ -132,9 +132,13 @@
             if (v >= state.thresA) { mf = 2; det = "A"; }
             else if (v >= state.thresE) { mf = 1; det = "E"; }
             else if (v >= state.thresI) { mf = 4; det = "I"; }
-            else if (v >= state.thresO) { mf = 6; det = "O"; } // Use frame 6 for O
-            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.75; } // Use frame 6 for U but 25% smaller
+            else if (v >= state.thresO) { mf = 6; det = "O"; } 
+            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.75; } 
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
+            
+            if (state.forceFrame !== undefined && state.forceFrame !== null) {
+                mf = state.forceFrame; det = "FORCED:" + mf;
+            }
             state.detectedVowel = det;
             
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
@@ -157,10 +161,20 @@
             };
             ['eyeY', 'eyeX', 'eyeSize', 'mouthY', 'skinTone'].forEach(id => bind(id, id));
             ['thresA', 'thresE', 'thresI', 'thresO', 'thresU'].forEach(id => bind(id, id, 100));
-            document.getElementById('smileBtn').onclick = () => { state.isHappy = !state.isHappy; document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL"; };
-            document.getElementById('resetBtn').onclick = () => { if (confirm("Reset?")) { localStorage.removeItem('arcade_angel_dev_settings'); location.reload(); } };
-            document.getElementById('exportBtn').onclick = () => { const p = { eyeX: state.eyeX, eyeY: state.eyeY, eyeSize: state.eyeSize, mouthY: state.mouthY, skinTone: state.skinTone }; navigator.clipboard.writeText(JSON.stringify(p)); alert("COPIED"); };
-            document.getElementById('importBtn').onclick = () => { const t = prompt("PASTE:"); if (t) { try { const p = JSON.parse(t); Object.assign(state, p); saveSettings(); location.reload(); } catch(e) { alert("FAIL"); } } };
+            window.addEventListener('keydown', (e) => {
+                if (e.key.toLowerCase() === 'h') {
+                    state.isHappy = !state.isHappy;
+                    document.getElementById('smileBtn').innerText = state.isHappy ? "MODE: SMILE" : "MODE: NORMAL";
+                }
+                if (e.key >= '0' && e.key <= '8') {
+                    state.forceFrame = parseInt(e.key);
+                    console.log("Forced Frame:", state.forceFrame);
+                }
+                if (e.key === 'r') {
+                    state.forceFrame = null;
+                    console.log("Frame override reset");
+                }
+            });
 
             setInterval(() => {
                 const h = document.getElementById('hud');
