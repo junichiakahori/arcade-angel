@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.34",
-  "last_updated": "2026-04-17 17:37:00",
+  "current_version": "v0.15.35",
+  "last_updated": "2026-04-17 17:42:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.35",
+      "date": "2026-04-17 17:42:00",
+      "notes": "REVOLUTIONARY: Implemented 'Software Layer Splitting'. The face image is now dynamically split into a static shoulder layer and a rotating head layer for absolute torso stability."
+    },
     {
       "version": "v0.15.34",
       "date": "2026-04-17 17:37:00",

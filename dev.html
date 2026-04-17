@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.34</title>
+    <title>Arcade Angel - Portable Puppet v0.15.35</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -26,7 +26,7 @@
         }
     </script>
     <div class="hud">
-        UNIT: ARCADE_ANGEL v0.15.34 (Updated: 2026-04-17 17:37:00)<br>
+        UNIT: ARCADE_ANGEL v0.15.35 (Updated: 2026-04-17 17:42:00)<br>
         VOICE: <span id="vStatus">OFFLINE</span><br>
         [H] KEY: SMILE TOGGLE
     </div>
@@ -157,6 +157,41 @@
             if (!img || !img.complete) return;
             const ctx = document.getElementById('stage').getContext('2d');
             const gs = state.globalScale;
+
+            if (options.isFace) {
+                // --- SOFTWARE SPLIT DRAW (v0.15.35) ---
+                // Lower the body movement factor even more
+                let bx = state.curX * gs * 0.1;
+                let by = state.curY * gs * 0.1;
+                let neckLine = 120; // The virtual cut line on the face texture
+                
+                // PASS 1: DRAW THE SHOULDERS (FIXED)
+                ctx.save();
+                ctx.translate(400 + bx, 400 + by);
+                ctx.scale(gs, gs);
+                // Draw bottom half only. sx,sy,sw,sh -> dx,dy,dw,dh
+                // Note: clipping the bottom part of img
+                ctx.drawImage(img, 0, img.height/2 + neckLine, img.width, img.height/2 - neckLine, 
+                              -img.width/2, neckLine, img.width, img.height/2 - neckLine);
+                ctx.restore();
+
+                // PASS 2: DRAW THE HEAD (ROTATING)
+                ctx.save();
+                let pY = state.pivotY || 450;
+                ctx.translate(400 + bx, 400 + by + pY * gs);
+                ctx.rotate(state.curRot);
+                ctx.translate(0, -pY * gs);
+                ctx.scale(gs, gs);
+                // Draw top half with overlap to hide the seam
+                ctx.drawImage(img, 0, 0, img.width, img.height/2 + neckLine + 5, 
+                              -img.width/2, -img.height/2, img.width, img.height/2 + neckLine + 5);
+                ctx.restore();
+                return; // End drawPart for face
+            }
+
+            if (!img || !img.complete) return;
+            const ctx = document.getElementById('stage').getContext('2d');
+            const gs = state.globalScale;
             let sw, sh, sx, sy;
 
             if (options.isEyes) {
@@ -249,7 +284,7 @@
             state.detectedVowel = det; // --- FINAL LINK: Update debug display ---
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
 
-            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.34) ---
+            // --- SAFE DIAGNOSTIC HUD UPDATE (v0.15.35) ---
             const hud = document.querySelector('.hud');
             if (hud && typeof v_data !== 'undefined' && v_data.current_version) {
                 let v_val = state.voiceVol.toFixed(2);
@@ -347,7 +382,7 @@
                 console.error("Initialization failed:", error);
             }
         
-        // --- ADVANCED UI BINDING (v0.15.34) ---
+        // --- ADVANCED UI BINDING (v0.15.35) ---
         function syncUI(key, val) {
             state[key] = parseFloat(val);
             if (key.startsWith('thres')) state[key] /= 100;
