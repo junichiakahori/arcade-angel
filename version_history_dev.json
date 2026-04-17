@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.52",
-  "last_updated": "2026-04-17 19:16:00",
+  "current_version": "v0.15.53",
+  "last_updated": "2026-04-17 19:20:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.53",
+      "date": "2026-04-17 19:20:00",
+      "notes": "BESPOKE ASSETS: Implemented a dynamic vector-based 'Happy Eye' component. When in Happy mode, the standard eye sprites are bypassed and replaced with a custom-drawn, high-fidelity curved eyelash pattern (^ ^) for a truly authentic anime smile."
+    },
     {
       "version": "v0.15.52",
       "date": "2026-04-17 19:16:00",

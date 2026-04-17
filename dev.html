@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.52</title>
+    <title>Arcade Angel - Portable Puppet v0.15.53</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -25,7 +25,7 @@
             document.write('<style>.dev-only { display: block; }</style>');
         }
     </script>
-    <div class="hud">UNIT: ARCADE_ANGEL v0.15.52 (Loading...)</div>
+    <div class="hud">UNIT: ARCADE_ANGEL v0.15.53 (Loading...)</div>
 
     <div class="settings-panel">
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
@@ -142,6 +142,36 @@
             ctx.restore();
         }
 
+        
+        function drawHappyEye(ctx, x, y, gs, flip) {
+            ctx.save();
+            ctx.translate(400 + state.curX * gs * 0.15, 400 + state.curY * gs * 0.15 + (state.pivotY || 450) * gs);
+            ctx.rotate(state.curRot * 0.8);
+            ctx.translate(x * gs, (y - (state.pivotY || 450)) * gs);
+            ctx.scale(gs * (flip ? -1 : 1), gs);
+            
+            // --- HIGH-FIDELITY CUSTOM SMILE EYE (v0.15.53) ---
+            // Instead of a sprite, we draw a beautiful curved vector eyelash
+            ctx.beginPath();
+            ctx.lineWidth = 12 * state.eyeSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#222'; // Dark eyelash color
+            
+            // Curve points for a beautiful ^ shape
+            const w = 100 * state.eyeSize;
+            const h = 30 * state.eyeSize;
+            ctx.moveTo(-w/2, h/4);
+            ctx.quadraticCurveTo(0, -h, w/2, h/4); 
+            ctx.stroke();
+            
+            // Subtle shadow for depth
+            ctx.strokeStyle = 'rgba(255, 175, 145, 0.4)';
+            ctx.lineWidth = 4 * state.eyeSize;
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+
         function render() {
             const ctx = document.getElementById('stage').getContext('2d');
             ctx.clearRect(0, 0, 800, 800);
@@ -160,8 +190,8 @@
             }
             drawPart(images.face, { isFace: true });
             const getEyeFrame = (o, h) => h ? (o>0.3?6:15) : (o>0.8?0:o>0.6?1:o>0.4?2:o>0.2?3:15);
-            drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize * (state.isHappy ? 0.55 : 1.0), frame: getEyeFrame(state.eyeL, state.isHappy), isEyes: true, flip: true });
-            drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize * (state.isHappy ? 0.55 : 1.0), frame: getEyeFrame(state.eyeR, state.isHappy), isEyes: true });
+            if (state.isHappy) { drawHappyEye(ctx, -state.eyeX, state.eyeY, state.globalScale, true); } else { drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFrame(state.eyeL, state.isHappy), isEyes: true, flip: true }); }
+            if (state.isHappy) { drawHappyEye(ctx, state.eyeX, state.eyeY, state.globalScale, false); } else { drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getEyeFrame(state.eyeR, state.isHappy), isEyes: true }); }
             
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mf = 0, det = "CLOSED", ms = state.isHappy ? (0.43 + state.smileDegree * 0.04) : 0.41;
