@@ -242,21 +242,23 @@
             
             
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFrame = 0;
             let detected = "CLOSED";
             
-            // Direct V-mapping based on user-provided values
-            if (v >= 0.30) { mFrame = 2; detected = "A"; }
-            else if (v >= 0.20) { mFrame = 1; detected = "E"; }
+            // Refined V-mapping
+            if (v >= 0.25) { mFrame = 2; detected = "A"; }
+            else if (v >= 0.16) { mFrame = 1; detected = "E"; }
             else if (v >= 0.10) { mFrame = 4; detected = "I"; }
-            else if (v >= 0.06) { mFrame = 6; detected = "U"; }
-            else if (v >= 0.03) { mFrame = 7; detected = "O"; }
+            else if (v >= 0.06) { mFrame = 7; detected = "O"; }
+            else if (v >= 0.02) { mFrame = 6; detected = "U"; }
             else {
                 mFrame = state.isHappy ? 3 : 0;
                 detected = "CLOSED";
             }
             state.detectedVowel = detected;
+    
     
     
      // Store for HUD
