@@ -239,22 +239,28 @@
             
             
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
             let mFrame = 0;
             let detected = "CLOSED";
             
             if (v > 0.05) {
                 const ratio = state.mouthRatio;
-                // Looser Ratio Mapping
-                if (ratio > 0.9) { mFrame = 6; detected = "U"; }    // U (Narrow)
-                else if (ratio > 0.65) { mFrame = 7; detected = "O"; } // O (Mid-Tall)
-                else if (ratio < 0.5) { mFrame = 4; detected = "I"; }  // I (Wide)
-                else if (v > 0.3) { mFrame = 2; detected = "A"; }     // A (Wide Open)
-                else { mFrame = 1; detected = "E"; }                  // E (Flat)
+                // Keep track of min/max ratios for debugging
+                if (!state.rMin || ratio < state.rMin) state.rMin = ratio;
+                if (!state.rMax || ratio > state.rMax) state.rMax = ratio;
+
+                // Ultra Loose Thresholds
+                if (ratio > 0.8) { mFrame = 6; detected = "U"; }    // U (Dramatically narrower than O)
+                else if (ratio > 0.6) { mFrame = 7; detected = "O"; } // O (Noticeably taller than neutral)
+                else if (ratio < 0.55) { mFrame = 4; detected = "I"; } // I (Noticeably wider than neutral)
+                else if (v > 0.4) { mFrame = 2; detected = "A"; }     // A (Normal wide)
+                else { mFrame = 1; detected = "E"; }                  // E (Resting open)
             } else {
                 mFrame = state.isHappy ? 3 : 0;
             }
-            state.detectedVowel = detected; // Store for HUD
+            state.detectedVowel = detected;
+     // Store for HUD
     
     
             
@@ -280,12 +286,15 @@
                         const hud = document.querySelector('.hud');
                         if (hud) {
                             setInterval(() => {
+                                
                                 const v_val = Math.max(state.mouthOpen, state.voiceVol).toFixed(2);
                                 const r_val = state.mouthRatio ? state.mouthRatio.toFixed(2) : "0.00";
+                                const r_range = `(min:${(state.rMin||0).toFixed(2)} max:${(state.rMax||0).toFixed(2)})`;
                                 const vowel = state.detectedVowel || "None";
                                 hud.innerHTML = `UNIT: ARCADE_ANGEL ${v_data.current_version} (Updated: ${v_data.last_updated})<br>` +
-                                              `V: ${v_val} | Ratio: ${r_val} | VOWEL: <b>${vowel}</b><br>` +
-                                              `[H] KEY: SMILE TOGGLE`;
+                                              `V: ${v_val} | Ratio: ${r_val} ${r_range}<br>` +
+                                              `VOWEL: <b>${vowel}</b> | [H] KEY: SMILE TOGGLE`;
+    
                             }, 50);
                         }
                     });
