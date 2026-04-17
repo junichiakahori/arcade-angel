@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.28",
-  "last_updated": "2026-04-17 16:21:00",
+  "current_version": "v0.15.29",
+  "last_updated": "2026-04-17 16:24:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.29",
+      "date": "2026-04-17 16:24:00",
+      "notes": "CRITICAL SYNTAX FIX: Resolved broken braces hidden in comments. Restored character rendering and UI synchronization."
+    },
     {
       "version": "v0.15.28",
       "date": "2026-04-17 16:21:00",
