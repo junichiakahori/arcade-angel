@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.106",
-  "last_updated": "2026-04-18 07:45:00",
+  "current_version": "v0.15.107",
+  "last_updated": "2026-04-18 07:55:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.107",
+      "date": "2026-04-18 07:55:00",
+      "notes": "FULL PORTABILITY (v0.15.107): Embedded all Base64 assets (body, hair, costumes) directly into dev.html. No external asset fetch required. This completely fixes the 'white/invisible puppet' bug on local file:// access."
+    },
     {
       "version": "v0.15.106",
       "date": "2026-04-18 07:45:00",
