@@ -236,12 +236,25 @@
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameL, isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:ew, scaleY:ew, frame: eyeFrameR, isEyes: true, flip: false });
             
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mouthCol = v > 0.3 ? 2 : (v > 0.1 ? 1 : 0);
-            let mouthRow = state.isHappy ? 1 : 0;
-            let mFrame = mouthRow * 3 + mouthCol;
+            let mFrame = 0; // Default Closed
+            
+            if (v > 0.05) {
+                const wh = state.mouthWh;
+                // Vowel Mapping based on mouth shape
+                if (v > 0.4 && wh < 0.25) mFrame = 7; // O (Round/Tall)
+                else if (wh < 0.18) mFrame = 6;      // U (Pouty/Narrow)
+                else if (wh > 0.3) mFrame = 4;       // I (Wide/Smiling)
+                else if (v > 0.5) mFrame = 2;        // A (Wide Open)
+                else mFrame = 1;                     // E (Medium)
+            } else {
+                mFrame = state.isHappy ? 3 : 0;
+            }
+            
             let mScale = state.isHappy ? 0.48 : 0.45;
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:mScale, scaleY:mScale, frame: mFrame, isMouth: true });
+    
         }
 
         function animate() {
