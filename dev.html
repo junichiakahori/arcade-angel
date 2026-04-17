@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Angel - Portable Puppet v0.15.78</title>
+    <title>Arcade Angel - Portable Puppet v0.15.92</title>
     <style>
         body { margin: 0; background: #050515; color: #00F0FF; font-family: 'Outfit', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         #stage { background: #050515; border: 2px solid #00F0FF; box-shadow: 0 0 50px #00F0FF33; border-radius: 12px; }
@@ -23,9 +23,10 @@
         const isDev = window.location.pathname.includes('dev.html');
         if (isDev) { document.write('<style>.dev-only { display: block; }</style>'); }
     </script>
-    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.78 (2026-04-17 23:05:00)</div>
+    <div class="hud">${state.foxMode ? 'DIVINE: TENKO (天狐)' : 'UNIT: ARCADE_ANGEL' } v0.15.92 (2026-04-17 23:05:00)</div>
 
     <div class="settings-panel">
+        <div class="btn" style="background: #0088FF44; font-weight: bold;" onclick="switchVersion()">SWITCH VERSION (To Stable)</div>
         <div class="control-group"><label>EYE POS Y</label><input type="range" id="eyeY" min="-300" max="100" value="-79" oninput="updateState('eyeY', this.value)"></div>
         <div class="control-group"><label>EYE DISTANCE</label><input type="range" id="eyeX" min="30" max="250" value="112" oninput="updateState('eyeX', this.value)"></div>
         <div class="control-group"><label>EYE SIZE</label><input type="range" id="eyeSize" min="0.3" max="1.5" step="0.01" value="0.76" oninput="updateState('eyeSize', this.value)"></div>
@@ -56,7 +57,7 @@
             <div class="btn" onclick="setCostume('gothic')">COSTUME: GOTHIC</div>
             <div id="startBtn" class="btn" onclick="initVoice()">ENABLE VOICE</div>
         </div>
-        <div class="btn" style="background: #ffffff11; color: #888; font-size: 10px" onclick="switchVersion()">SWITCH VERSION</div>
+        
     </div>
 
     <canvas id="stage" width="800" height="800"></canvas>
@@ -86,6 +87,8 @@
 
         function updateState(k, v) { state[k] = parseFloat(v); syncUI(k, v); }
         
+        function switchVersion() { window.location.href = "index.html"; }
+
         function toggleFoxMode() {
             state.foxMode = !state.foxMode;
             const btn = document.getElementById('tenkoBtn');
