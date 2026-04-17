@@ -125,17 +125,20 @@
             };
             drawPart(images.eyeUni, { x: -state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeL, state.isHappy), isEyes: true, flip: true });
             drawPart(images.eyeUni, { x: state.eyeX, y: state.eyeY, scaleX:state.eyeSize, scaleY:state.eyeSize, frame: getE(state.eyeR, state.isHappy), isEyes: true, flip: false });
+            
             let v = Math.max(state.mouthOpen, state.voiceVol);
-            let mf = 0, det = "CLOSED";
+            let mf = 0, det = "CLOSED", ms = state.isHappy ? 0.48 : 0.45;
+            
             if (v >= state.thresA) { mf = 2; det = "A"; }
             else if (v >= state.thresE) { mf = 1; det = "E"; }
             else if (v >= state.thresI) { mf = 4; det = "I"; }
-            else if (v >= state.thresO) { mf = 7; det = "O"; }
-            else if (v >= state.thresU) { mf = 6; det = "U"; }
+            else if (v >= state.thresO) { mf = 6; det = "O"; } // Use frame 6 for O
+            else if (v >= state.thresU) { mf = 6; det = "U"; ms *= 0.75; } // Use frame 6 for U but 25% smaller
             else { mf = state.isHappy ? 3 : 0; det = "CLOSED"; }
             state.detectedVowel = det;
-            let ms = state.isHappy ? 0.48 : 0.45;
+            
             drawPart(images.mouthUni, { y: state.mouthY, scaleX:ms, scaleY:ms, frame: mf, isMouth: true });
+    
         }
 
         function animate() {
