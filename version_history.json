@@ -1,16 +1,21 @@
 {
-  "current_version": "v0.15.68",
-  "last_updated": "2026-04-17 21:03:00",
+  "current_version": "v0.15.118",
+  "last_updated": "2026-04-18 09:30:00",
   "history": [
+    {
+      "version": "v0.15.118",
+      "date": "2026-04-18 09:30:00",
+      "notes": "STABLE DEPLOYMENT (v0.15.118): Verified stable build with synchronized 16-slider UI. Standardized mouth thresholds (U=2, I=14) and ensured consistent facial geometry proportions. This version is the current stable baseline."
+    },
     {
       "version": "v0.15.68",
       "date": "2026-04-17 21:03:00",
-      "notes": "STABLE DEPLOYMENT (v0.15.68): Integrated real-time Breathing Animation and significantly improved Smile sensitivity (calibrated for mobile cameras). The puppet now feels more alive and responsive across all devices."
+      "notes": "STABLE DEPLOYMENT (v0.15.68): Integrated real-time Breathing Animation and significantly improved Smile sensitivity."
     },
     {
       "version": "v0.15.66",
       "date": "2026-04-17 20:25:00",
-      "notes": "STABLE DEPLOYMENT (v0.15.66): Backported high-fidelity features from dev: Independent winks, crescent smile assets with eyebrow adjustments, Scientific HUD, and Deep Pivot shoulder-lock. Costume switching remains dev-only, but core engine is now fully upgraded."
+      "notes": "STABLE DEPLOYMENT (v0.15.66): Backported high-fidelity features from dev: Independent winks, crescent smile assets, and Scientific HUD."
     },
     {
       "version": "v0.15.10",
