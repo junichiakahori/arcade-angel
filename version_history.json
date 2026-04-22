@@ -1,7 +1,12 @@
 {
-  "current_version": "v0.15.118",
-  "last_updated": "2026-04-18 09:30:00",
+  "current_version": "v0.15.126",
+  "last_updated": "2026-04-23 02:16:00",
   "history": [
+    {
+      "version": "v0.15.126",
+      "date": "2026-04-23 02:16:00",
+      "notes": "MAJOR UPDATE (v0.15.126): Ported 'Miko Edition' from dev. New sidebar UI, Tenko Mode (fox ears), high-fidelity hair physics, and optimized breathing rhythms. This version now serves as the unified stable baseline."
+    },
     {
       "version": "v0.15.118",
       "date": "2026-04-18 09:30:00",
