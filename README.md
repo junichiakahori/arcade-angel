@@ -1,55 +1,41 @@
-# 🎮 Arcade Angel - Portable Puppet System
+# Arcade Angel - Portable Anime Puppet
 
-![Version](https://img.shields.io/badge/version-v0.15.124-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Arcade Angel](https://img.shields.io/badge/Version-v0.15.118_%28Stable%29-00F0FF?style=for-the-badge)
+![Unit Status](https://img.shields.io/badge/Status-Restored_&_Aesthetic-ff69b4?style=for-the-badge)
 
-**Arcade Angel** は、ブラウザ1つで動作する、高機能・高画質なアニメスタイル・デジタルパペットシステムです。
+High-fidelity, browser-based anime puppet with real-time facial tracking and physics. Built for streamers and interactive experiences.
 
-## 🌟 特徴 (Features)
+## ✨ Features
 
-- 📦 **完全ポータブル設計**: 画像・音声アセットをすべてBase64でHTMLに埋め込み済み。インターネット環境や外部サーバーがなくとも、HTMLファイル1つでどこでも起動可能です。
-- 🧬 **高度なフェイストレッキング**: MediaPipe FaceMeshを採用し、滑らかな口パク（母音追従）、ウィンク、首の回転をリアルタイムで実現。
-- 🎀 **独自開発 髪の物理演算**: 静止画パペットでありながら、ツインテールが頭の動きに合わせて揺れる「物理演算風遅延システム」を搭載。
-- 🦊 **天狐 (Tenko) モード**: 北九州・魚町の守り神、天狐ちゃんへの変身機能を搭載。
-- 🎥 **OBS配信特化**: クロマキー（グリーンバック）および透過背景モードをワンクリックで切り替え可能。OBSブラウザソースで背景透過のままストリーミングができます。
+- **Real-time Face Tracking**: Powered by MediaPipe Face Mesh for fluid expressions and movement.
+- **Independent Eye Logic**: Supports asymmetrical winks and gaze tracking.
+- **Dynamic Physics**: Natural hair lag and breathing animations.
+- **Portable & Lightweight**: Single-file HTML execution with Base64 embedded assets.
+- **Streamer Ready**: Integrated Chroma Key (Green Screen) and Transparency modes for OBS.
+- **Costume Switching**: Includes Standard, Gothic, and the new **Uomachi Tenko Miko Edition**.
 
-## 🚀 クイックスタート (Quick Start)
+## 🚀 Quick Start
 
-1.  `dev.html` をブラウザ（Chrome推奨）で開きます。
-2.  画面中央のオーバーレイをクリックして、カメラとマイクの使用を許可してください。
-3.  カメラが正常に読み込まれると、あなたに合わせてパペットが動き出します。
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/junichiakahori/arcade-angel.git
+    ```
+2.  **Run a local server**:
+    ```bash
+    python3 -m http.server
+    ```
+3.  **Open in Browser**:
+    Visit `http://localhost:8000/index.html` for the stable version, or `dev.html` for the latest features.
 
-> **Note**: ローカルファイルのセキュリティ制限により、カメラが起動しない場合は、以下のコマンドでローカルサーバーを立ち上げてください。
-> ```bash
-> python3 -m http.server
-> ```
-> その後、 `http://localhost:8000/dev.html` にアクセスしてください。
+## 🛠 Calibration Guide
 
-## ⚙️ 調整パネル (Control Panel)
+- **Golden Ratio**: The default proportions (v0.15.118) are optimized for a "Cute" aesthetic. Use the **EMERGENCY RESET** button in `dev.html` to return to these values.
+- **Smile Sensitivity**: Adjust the SMILE SENS slider to calibrate the auto-happy expression based on your camera quality.
+- **OBS Integration**: Use "Window Capture" in OBS with the Chroma Key filter or direct transparency support.
 
-右側の設定パネルから以下の調整が可能です：
-- **GLOBAL SCALE**: パペットの表示サイズ
-- **HAIR LAG**: ツインテールの揺れ具合（物理演算）の強度
-- **SMILE SENS**: 笑顔の反応感度
-- **BG MODE**: 通常背景 / クロマキー / 透過の切り替え（OBS用）
+## 📜 Version History
 
-## 🛠 テクノロジー (Tech Stack)
-
-- **Logic**: JavaScript (ES6+)
-- **Tracking**: [MediaPipe FaceMesh](https://google.github.io/mediapipe/solutions/face_mesh)
-- **Styling**: Vanilla CSS / Glassmorphism UI
-- **Portability**: Base64 Asset Embedding System
+See [version_history.json](version_history.json) for the stable production log and [version_history_dev.json](version_history_dev.json) for the experimental development track.
 
 ---
-
-## 🎨 キャラクターについて (Character)
-
-**魚町天狐 (Uomachi Tenko)**
-北九州市小倉北区「魚町」周辺を守護する天狐をモチーフにしたデジタルパペット。アーケードの守護天使として、あなたの配信活動をサポートします。
-
----
-
-## ⚖️ ライセンス (License)
-
-Copyright © 2026 junichiakahori.
-This project is licensed under the MIT License.
+*Created by Antigravity AI for the Arcade Angel project.*
