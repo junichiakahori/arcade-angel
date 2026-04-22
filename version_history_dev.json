@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.128",
-  "last_updated": "2026-04-23 06:45:00",
-  "status": "DEVELOPMENT",
+  "current_version": "v0.16.0",
+  "last_updated": "2026-04-23 08:15:00",
+  "status": "PRODUCTION_READY",
   "history": [
+    {
+      "version": "v0.16.0",
+      "date": "2026-04-23 08:15:00",
+      "notes": "MILESTONE RELEASE (v0.16.0): Completed Arcade Angel Physics & Rendering baseline. Finalized inertial hair physics (stiffness: 0.08, damping: 0.85), migrated to full RGBA PNG pipeline, and promoted Miko Edition to production baseline. Repositories pruned of legacy maintenance scripts."
+    },
     {
       "version": "v0.15.128",
       "date": "2026-04-23 06:45:00",
