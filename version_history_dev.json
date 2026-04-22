@@ -1,8 +1,13 @@
 {
-  "current_version": "v0.15.126",
-  "last_updated": "2026-04-23 01:28:00",
+  "current_version": "v0.15.128",
+  "last_updated": "2026-04-23 06:45:00",
   "status": "DEVELOPMENT",
   "history": [
+    {
+      "version": "v0.15.128",
+      "date": "2026-04-23 06:45:00",
+      "notes": "PHYSICS FINALIZATION (v0.15.128): Calibrated inertial hair physics with stiffness (0.08) and damping (0.85) baselines. Completed migration to full RGBA PNG assets, eliminating legacy color-keyed JPEG shaders. Performed repository hygiene by pruning the scratch directory and promoting the stable Miko Edition to production."
+    },
     {
       "version": "v0.15.126",
       "date": "2026-04-23 01:28:00",
