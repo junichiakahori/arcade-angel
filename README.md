@@ -1,6 +1,6 @@
 # Arcade Angel - Portable Anime Puppet
 
-![Arcade Angel](https://img.shields.io/badge/Version-v0.16.0_%28Stable%29-00F0FF?style=for-the-badge)
+![Arcade Angel](https://img.shields.io/badge/Version-v0.16.1_%28Stable%29-00F0FF?style=for-the-badge)
 ![Unit Status](https://img.shields.io/badge/Status-Restored_&_Aesthetic-ff69b4?style=for-the-badge)
 
 High-fidelity, browser-based anime puppet with real-time facial tracking and physics. Built for streamers and interactive experiences.
