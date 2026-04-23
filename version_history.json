@@ -5,7 +5,7 @@
     {
       "version": "v0.16.3",
       "date": "2026-04-24 00:45:0",
-      "notes": "STABLE DEPLOYMENT (v0.16.3): Synchronized with latest dev features."
+      "notes": "母音検知統合 (v0.16.3): 周波数解析によるAIUEO母音検知を実装。リアルタイム・リップシンクの精度を大幅に向上し、HUDによるキャリブレーション機能を追加。"
     },
     {
       "version": "v0.16.1",
