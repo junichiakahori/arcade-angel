@@ -1,8 +1,23 @@
 {
-  "current_version": "v0.16.0",
-  "last_updated": "2026-04-23 08:15:00",
-  "status": "PRODUCTION_READY",
+  "current_version": "v0.16.3",
+  "last_updated": "2026-04-23 16:45:00",
+  "status": "STABLE",
   "history": [
+    {
+      "version": "v0.16.3",
+      "date": "2026-04-23 16:45:00",
+      "notes": "母音検知 (AIUEO) の統合 (v0.16.3): 周波数解析によるリアルタイム母音検知ロジックを復元し、口の形（mouthUni）にマッピング。HUDに母音ごとの周波数値を表示し、キャリブレーションを容易にした。"
+    },
+    {
+      "version": "v0.16.2",
+      "date": "2026-04-23 16:35:00",
+      "notes": "頭部の傾き修正と日本語化対応 (v0.16.2): index.htmlのFaceMesh同期ロジックから不要なオフセット(+0.16)を削除。開発コミュニケーションおよびドキュメント更新の言語を日本語へ移行。"
+    },
+    {
+      "version": "v0.16.1",
+      "date": "2026-04-23 09:00:00",
+      "notes": "COSTUME FINE-TUNING (v0.16.1): Optimized 'cyber' and 'gothic' costume configurations. Adjusted Y-offset to 240 and scale to 1.1 to ensure perfect head-to-body alignment and visual parity with the 'miko' baseline."
+    },
     {
       "version": "v0.16.0",
       "date": "2026-04-23 08:15:00",
