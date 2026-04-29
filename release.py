@@ -24,8 +24,14 @@ def release():
 
     # 2. Backup current index.html
     if os.path.exists('index.html'):
-        # Get version of old index.html (rough check)
-        backup_name = f"index_backup_last.html"
+        # Get version of old index.html
+        try:
+            with open('version_history.json', 'r', encoding='utf-8') as f:
+                old_history = json.load(f)
+                old_version = old_history.get('current_version', 'unknown')
+        except:
+            old_version = 'unknown'
+        backup_name = f"index_backup_{old_version}.html"
         shutil.copy('index.html', backup_name)
         print(f"📦 Backed up current index.html to {backup_name}")
 
@@ -65,7 +71,8 @@ def release():
 
     # 6. Git Push
     print("📤 Pushing to GitHub...")
-    if run_cmd("git add index.html version_history.json README.md index_backup_last.html"):
+    # Add everything including the new backup file
+    if run_cmd("git add index.html version_history.json README.md index_backup_*.html"):
         if run_cmd(f'git commit -m "Auto-Release {current_version}"'):
             run_cmd("git push origin main")
             print("🚀 Pushed to GitHub successfully!")
